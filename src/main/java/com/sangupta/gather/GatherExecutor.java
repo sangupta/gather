@@ -36,11 +36,7 @@ import java.util.regex.Pattern;
  */
 class GatherExecutor {
 	
-	static <T> List<T> getResults(Collection<T> collection, Gather gather) {
-		return getResults(collection, gather, 0);
-	}
-
-	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults) {
+	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount) {
 		if(collection == null) {
 			return null;
 		}
@@ -51,8 +47,16 @@ class GatherExecutor {
 		}
 		
 		// run filtering criteria first
+		int skipped = 0;
 		for(T item : collection) {
 			if(matches(item, gather)) {
+				// skip elements asked for
+				if(skipCount > 0 && skipped < skipCount) {
+					skipped++;
+					continue;
+				}
+				
+				// add the result - we need this item
 				results.add(item);
 				
 				// break if we have accumulated enough results

@@ -206,15 +206,23 @@ public class Gather {
 	 * @return
 	 */
 	public <T> List<T> find(Collection<T> collection) {
-		return GatherExecutor.getResults(collection, this);
+		return GatherExecutor.getResults(collection, this, 0, 0);
 	}
 	
 	public <T> List<T> find(Collection<T> collection, int numResults) {
-		return GatherExecutor.getResults(collection, this, numResults);
+		return GatherExecutor.getResults(collection, this, numResults, 0);
+	}
+	
+	public <T> List<T> find(Collection<T> collection, int numResults, int skipCount) {
+		return GatherExecutor.getResults(collection, this, numResults, skipCount);
 	}
 	
 	public <T> T findOne(Collection<T> collection) {
-		List<T> results = GatherExecutor.getResults(collection, this, 1);
+		return findOne(collection, 0);
+	}
+	
+	public <T> T findOne(Collection<T> collection, int skipCount) {
+		List<T> results = GatherExecutor.getResults(collection, this, 1, skipCount);
 		if(results == null || results.isEmpty()) {
 			return null;
 		}
