@@ -135,6 +135,16 @@ public class Gather {
 	}
 	
 	/**
+	 * Check if the attribute value is <code>null</code>.
+	 * 
+	 * @return
+	 */
+	public Gather isNotNull() {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin, true));
+		return this;
+	}
+	
+	/**
 	 * Check if the attribute value equals to the given value ignoring case.
 	 * 
 	 * @param value
