@@ -36,6 +36,9 @@ query.findOne(employees);
 
 // find limited instances
 query.find(employees, 5);
+
+// find 5 instances, but skip the first 10 instances
+query.find(employees, 5, 10);
 ```
 
 ## Features
