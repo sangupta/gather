@@ -72,7 +72,7 @@ public class Gather {
 	}
 	
 	// ***************************************
-	// INSTANCE METHODS FOLLOW
+	// PUBLIC INSTANCE METHODS FOLLOW
 	// ***************************************
 	
 	private Gather(String key) {
@@ -84,9 +84,8 @@ public class Gather {
 			throw new IllegalArgumentException("Add a comparison condition to previous key first");
 		}
 		
-		this.key = key;
 		this.siblingJoin = GatherSiblingJoin.AND;
-		return this;
+		return fluent();
 	}
 	
 	public Gather not() {
@@ -103,9 +102,8 @@ public class Gather {
 			throw new IllegalArgumentException("Add a comparison condition to previous key first");
 		}
 		
-		this.key = key;
 		this.siblingJoin = GatherSiblingJoin.OR;
-		return this;
+		return fluent();
 	}
 
 	/**
@@ -120,8 +118,7 @@ public class Gather {
 		}
 		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.Equals, value, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -131,7 +128,7 @@ public class Gather {
 	 */
 	public Gather isNull() {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin, this.inverse));
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -141,7 +138,7 @@ public class Gather {
 	 */
 	public Gather isNotNull() {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin, true));
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -152,8 +149,7 @@ public class Gather {
 	 */
 	public Gather isIgnoreCase(String value) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.EqualsIgnoreCase, value, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -164,8 +160,7 @@ public class Gather {
 	 */
 	public Gather like(String pattern) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.WildcardMatch, pattern, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -176,8 +171,7 @@ public class Gather {
 	 */
 	public Gather regex(String pattern) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -188,32 +182,27 @@ public class Gather {
 	 */
 	public Gather regex(Pattern pattern) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	public Gather greaterThan(Object value) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThan, value, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	public Gather greaterThanOrEquals(Object value) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThanOrEquals, value, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	public Gather lessThan(Object value) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.LessThan, value, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	public Gather lessThanOrEquals(Object value) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.LessThanOrEquals, value, this.siblingJoin, this.inverse));
-		this.key = null;
-		return this;
+		return fluent();
 	}
 	
 	/**
@@ -246,6 +235,16 @@ public class Gather {
 		}
 		
 		return results.get(0);
+	}
+	
+	// ***************************************
+	// INTERNAL INSTANCE METHODS FOLLOW
+	// ***************************************
+	
+	Gather fluent() {
+		this.key = null;
+		this.inverse = false;
+		return this;
 	}
 	
 }
