@@ -1,6 +1,6 @@
 # Gather
 
-`Gather` is a library to fire SQL like queries on Java objects in a collection.
+`Gather` is a library to fire SQL like queries on Java collections.
 
 The library is tested on the following JDK versions:
 
@@ -48,7 +48,7 @@ For more information on SemVer, please visit http://semver.org/.
 ## License
 
 ```
- gather: SQL queries on Java objects in a collection
+ gather: SQL queries for Java collections
  Copyright (c) 2017, Sandeep Gupta
  
  https://sangupta.com/projects/gather
