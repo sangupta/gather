@@ -37,11 +37,14 @@ class GatherCriteria {
 	
 	public final GatherSiblingJoin join;
 	
-	public GatherCriteria(String key, GatherOperation operation, Object value, GatherSiblingJoin siblingJoin) {
+	public final boolean inverse;
+	
+	public GatherCriteria(String key, GatherOperation operation, Object value, GatherSiblingJoin siblingJoin, boolean inverse) {
 		this.key = key;
 		this.operation = operation;
 		this.value = value;
 		this.join = siblingJoin;
+		this.inverse = inverse;
 	}
 	
 }

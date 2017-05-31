@@ -23,7 +23,20 @@ List<Employee> filtered = query.execute(employees);
 List<Manager> managers = this.employeeService.getAllManagersFromDatabase();
 
 List<Manager> filteredManagers = query.execute(managers);
+
+// null check and not operator
+query = Gather.where("name").isNull();
+query = Gather.where("name").isNotNull();
+
+query = Gather.where("name").not().is("sandeep");
 ```
+
+## Features
+
+* Supported operations
+  * `is` - equals match
+  * `isIgnoreCase` - equals match ignoring case
+  * `like` - wildcard match
 
 ## Versioning
 

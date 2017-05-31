@@ -24,6 +24,7 @@ package com.sangupta.gather;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * Gather is the main query class that a callee deals with. Once the query is
@@ -48,14 +49,36 @@ public class Gather {
 	 */
 	private GatherSiblingJoin siblingJoin = GatherSiblingJoin.OR;
 	
-	private Gather(String key) {
-		this.key = key;
-	}
-
+	private boolean inverse = false;
+	
+	// ***************************************
+	// STATIC METHODS FOLLOW
+	// ***************************************
+	
 	public static Gather where(String name) {
 		return new Gather(name);
 	}
 	
+	public static Number min(String key) {
+		return null;
+	}
+	
+	public static Number max(String key) {
+		return null;
+	}
+	
+	public static Double average(String key) {
+		return null;
+	}
+	
+	// ***************************************
+	// INSTANCE METHODS FOLLOW
+	// ***************************************
+	
+	private Gather(String key) {
+		this.key = key;
+	}
+
 	public Gather and(String key) {
 		if(this.key != null) {
 			throw new IllegalArgumentException("Add a comparison condition to previous key first");
@@ -63,6 +86,15 @@ public class Gather {
 		
 		this.key = key;
 		this.siblingJoin = GatherSiblingJoin.AND;
+		return this;
+	}
+	
+	public Gather not() {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Define a key first");
+		}
+		
+		this.inverse = true;
 		return this;
 	}
 
@@ -87,7 +119,7 @@ public class Gather {
 			throw new IllegalArgumentException("Operation needs a key to work upon");
 		}
 		
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.Equals, value, this.siblingJoin));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.Equals, value, this.siblingJoin, this.inverse));
 		this.key = null;
 		return this;
 	}
@@ -98,7 +130,7 @@ public class Gather {
 	 * @return
 	 */
 	public Gather isNull() {
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin, this.inverse));
 		return this;
 	}
 	
@@ -109,7 +141,7 @@ public class Gather {
 	 * @return
 	 */
 	public Gather isIgnoreCase(String value) {
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.EqualsIgnoreCase, value, this.siblingJoin));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.EqualsIgnoreCase, value, this.siblingJoin, this.inverse));
 		this.key = null;
 		return this;
 	}
@@ -121,7 +153,7 @@ public class Gather {
 	 * @return
 	 */
 	public Gather like(String pattern) {
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.WildcardMatch, pattern, this.siblingJoin));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.WildcardMatch, pattern, this.siblingJoin, this.inverse));
 		this.key = null;
 		return this;
 	}
@@ -133,13 +165,25 @@ public class Gather {
 	 * @return
 	 */
 	public Gather regex(String pattern) {
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin, this.inverse));
+		this.key = null;
+		return this;
+	}
+	
+	/**
+	 * Check if the attribute value matches the given value as a regular-expression match.
+	 * 
+	 * @param pattern
+	 * @return
+	 */
+	public Gather regex(Pattern pattern) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin, this.inverse));
 		this.key = null;
 		return this;
 	}
 	
 	public Gather greaterThan(Object value) {
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThan, value, this.siblingJoin));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThan, value, this.siblingJoin, this.inverse));
 		this.key = null;
 		return this;
 	}

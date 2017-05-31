@@ -21,6 +21,8 @@ public class GatherTest {
 		// start actual testing
 		Gather query = Gather.where("name").is("sandeep").and("age").greaterThan(80);
 		
+		query = Gather.where("name").like("sandeep?");
+		 
 		// query = query.and("age").lessThan(40);
 		// query = query.and("age").between(40, 60);
 		// query = query.and("age").lessThan(40).or().greaterThan(60);
@@ -57,7 +59,7 @@ public class GatherTest {
 					this.age = 99;
 				}
 				
-				this.name = "sandeep";
+				this.name = "sandeep" + changed;
 				changed++;
 			}
 		}

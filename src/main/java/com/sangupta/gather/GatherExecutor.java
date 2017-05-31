@@ -25,6 +25,7 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.regex.Pattern;
 
 /**
  * The query executor that takes a {@link Gather} query and fires it against a given
@@ -64,28 +65,27 @@ class GatherExecutor {
 			return true;
 		}
 		
-		boolean fulfilled = false;
+		boolean finalResult = false;
 		for(GatherCriteria criteria : gather.criteria) {
-			boolean result = matchCriteria(item, criteria);
+			boolean criteriaResult = matchCriteria(item, criteria);
 			
-//			Employee e = (Employee) item;
-//			if(e.name.equals("sandeep")) {
-//				System.out.println("found item");
-//			}
+			if(criteria.inverse) {
+				criteriaResult = !criteriaResult;
+			}
 			
 			switch(criteria.join) {
 				case OR:
-					fulfilled = result | fulfilled;
+					finalResult = criteriaResult | finalResult;
 					break;
 					
 				case AND:
-					fulfilled = result & fulfilled;
+					finalResult = criteriaResult & finalResult;
 					break;
 					
 			}
 		}
 		
-		return fulfilled;
+		return finalResult;
 	}
 
 	/**
@@ -153,14 +153,46 @@ class GatherExecutor {
 		}
 	}
 
+	/**
+	 * Handle wildcard match between field and the value.
+	 * 
+	 * @param fieldValue
+	 * @param requiredValue
+	 * @return
+	 */
 	private static boolean handleWildcardMatch(Object fieldValue, Object requiredValue) {
-		// TODO Auto-generated method stub
-		return false;
+		if(fieldValue == null) {
+			return false;
+		}
+		
+		if(requiredValue == null) {
+			return false;
+		}
+		
+		String value = fieldValue.toString();
+		String pattern = requiredValue.toString();
+		
+		return GatherUtils.wildcardMatch(value, pattern);	
 	}
 
 	private static boolean handleRegexMatch(Object fieldValue, Object requiredValue) {
-		// TODO Auto-generated method stub
-		return false;
+		if(fieldValue == null) {
+			return false;
+		}
+		
+		if(requiredValue == null) {
+			return false;
+		}
+		
+		String value = fieldValue.toString();
+		
+		if(requiredValue instanceof Pattern) {
+			return GatherUtils.regexMatch(value, (Pattern) requiredValue);
+		}
+		
+		String pattern = requiredValue.toString();
+		
+		return GatherUtils.regexMatch(value, pattern);
 	}
 
 	private static boolean handleNot(Object fieldValue, Object requiredValue) {
@@ -262,6 +294,7 @@ class GatherExecutor {
 		if(fieldValue.equals(requiredValue)) {
 			return true;
 		}
+		
 		return false;
 	}
 
