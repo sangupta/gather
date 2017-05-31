@@ -28,7 +28,7 @@ public class GatherTest {
 		// query = query.and("age").lessThan(40).or().greaterThan(60);
 		// query = Gather.where("name").in("sandeep");
 		
-		List<Employee> results = query.execute(list);
+		List<Employee> results = query.find(list);
 		if(results == null) {
 			System.out.println("Results instance is NULL - SOME BUG");
 			return;

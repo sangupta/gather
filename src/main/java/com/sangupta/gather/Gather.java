@@ -195,7 +195,8 @@ public class Gather {
 	 * @param classOfT
 	 * @return
 	 */
-	public <T> List<T> execute(Collection<T> collection) {
+	public <T> List<T> find(Collection<T> collection) {
 		return GatherExecutor.getResults(collection, this);
 	}
+	
 }

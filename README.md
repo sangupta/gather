@@ -17,12 +17,12 @@ List<Employee> employees = this.employeeService.getAllEmployeesFromDatabase();
 Gather query = Gather.where("age").greaterThan(50).and("status").is("active");
 
 // fire query
-List<Employee> filtered = query.execute(employees);
+List<Employee> filtered = query.find(employees);
 
 // reuse the query for another collection
 List<Manager> managers = this.employeeService.getAllManagersFromDatabase();
 
-List<Manager> filteredManagers = query.execute(managers);
+List<Manager> filteredManagers = query.find(managers);
 
 // null check and not operator
 query = Gather.where("name").isNull();
