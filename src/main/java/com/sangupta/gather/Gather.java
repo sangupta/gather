@@ -198,6 +198,24 @@ public class Gather {
 		return this;
 	}
 	
+	public Gather greaterThanOrEquals(Object value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThanOrEquals, value, this.siblingJoin, this.inverse));
+		this.key = null;
+		return this;
+	}
+	
+	public Gather lessThan(Object value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.LessThan, value, this.siblingJoin, this.inverse));
+		this.key = null;
+		return this;
+	}
+	
+	public Gather lessThanOrEquals(Object value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.LessThanOrEquals, value, this.siblingJoin, this.inverse));
+		this.key = null;
+		return this;
+	}
+	
 	/**
 	 * Execute the query over the given collection of objects.
 	 * 

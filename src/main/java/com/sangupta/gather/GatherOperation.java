@@ -35,10 +35,12 @@ enum GatherOperation {
 	
 	LessThan,
 	
+	LessThanOrEquals,
+	
 	GreaterThan,
 	
-	In,
+	GreaterThanOrEquals,
 	
-	Not;
+	In;
 	
 }

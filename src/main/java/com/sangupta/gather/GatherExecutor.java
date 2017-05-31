@@ -36,6 +36,64 @@ import java.util.regex.Pattern;
  */
 class GatherExecutor {
 	
+	static interface CompareOperation {
+		
+		public boolean test(int value);
+		
+	}
+	
+	static final CompareOperation LESS_THAN = new CompareOperation() {
+		
+		@Override
+		public boolean test(int value) {
+			if(value < 0) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+	};
+	
+	static final CompareOperation LESS_THAN_OR_EQUALS = new CompareOperation() {
+		
+		@Override
+		public boolean test(int value) {
+			if(value <= 0) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+	};
+	
+	static final CompareOperation GREATER_THAN = new CompareOperation() {
+		
+		@Override
+		public boolean test(int value) {
+			if(value > 0) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+	};
+	
+	static final CompareOperation GREATER_THAN_OR_EQUALS = new CompareOperation() {
+		
+		@Override
+		public boolean test(int value) {
+			if(value >= 0) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+	};
+	
 	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount) {
 		if(collection == null) {
 			return null;
@@ -142,6 +200,9 @@ class GatherExecutor {
 			case GreaterThan:
 				return handleGreaterThan(fieldValue, requiredValue);
 			
+			case GreaterThanOrEquals:
+				return handleGreaterThanOrEquals(fieldValue, requiredValue);
+			
 			case In:
 				return handleValueIn(fieldValue, requiredValue);
 			
@@ -151,8 +212,8 @@ class GatherExecutor {
 			case LessThan:
 				return handleLessThan(fieldValue, requiredValue);
 			
-			case Not:
-				return handleNot(fieldValue, requiredValue);
+			case LessThanOrEquals:
+				return handleLessThanOrEquals(fieldValue, requiredValue);
 			
 			case RegexMatch:
 				return handleRegexMatch(fieldValue, requiredValue);
@@ -208,12 +269,23 @@ class GatherExecutor {
 		return GatherUtils.regexMatch(value, pattern);
 	}
 
-	private static boolean handleNot(Object fieldValue, Object requiredValue) {
-		// TODO Auto-generated method stub
-		return false;
+	private static boolean handleLessThan(Object fieldValue, Object requiredValue) {
+		return handleNumericComparison(fieldValue, requiredValue, LESS_THAN);
+	}
+	
+	private static boolean handleGreaterThan(Object fieldValue, Object requiredValue) {
+		return handleNumericComparison(fieldValue, requiredValue, GREATER_THAN);
 	}
 
-	private static boolean handleLessThan(Object fieldValue, Object requiredValue) {
+	private static boolean handleLessThanOrEquals(Object fieldValue, Object requiredValue) {
+		return handleNumericComparison(fieldValue, requiredValue, LESS_THAN_OR_EQUALS);
+	}
+	
+	private static boolean handleGreaterThanOrEquals(Object fieldValue, Object requiredValue) {
+		return handleNumericComparison(fieldValue, requiredValue, GREATER_THAN_OR_EQUALS);
+	}
+
+	private static boolean handleNumericComparison(Object fieldValue, Object requiredValue, CompareOperation compareOperation) {
 		if(fieldValue == null) {
 			return false;
 		}
@@ -223,9 +295,7 @@ class GatherExecutor {
 			Comparable<Object> comparable = (Comparable<Object>) fieldValue;
 			
 			int result = comparable.compareTo(requiredValue);
-			if(result < 0) {
-				return true;
-			}
+			return compareOperation.test(result);
 		}
 		
 		// TODO: handle when comparable is not implemented
@@ -256,25 +326,6 @@ class GatherExecutor {
 			return GatherUtils.contains(array, fieldValue);
 		}
 		
-		return false;
-	}
-
-	private static boolean handleGreaterThan(Object fieldValue, Object requiredValue) {
-		if(fieldValue == null) {
-			return false;
-		}
-		
-		if(fieldValue instanceof Comparable) {
-			@SuppressWarnings("unchecked")
-			Comparable<Object> comparable = (Comparable<Object>) fieldValue;
-			
-			int result = comparable.compareTo(requiredValue);
-			if(result > 0) {
-				return true;
-			}
-		}
-		
-		// TODO: handle when comparable is not implemented
 		return false;
 	}
 
