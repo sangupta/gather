@@ -188,7 +188,29 @@ class GatherExecutor {
 	}
 
 	private static boolean handleValueIn(Object fieldValue, Object requiredValue) {
-		// TODO Auto-generated method stub
+		if(fieldValue == null) {
+			return false;
+		}
+		
+		if(requiredValue == null) {
+			return false;
+		}
+		
+		if(requiredValue instanceof Collection) {
+			Collection<?> collection = (Collection<?>) requiredValue;
+			if(collection.isEmpty()) {
+				return false;
+			}
+			
+			return collection.contains(fieldValue);
+		}
+		
+		if(requiredValue instanceof Object[]) {
+			Object[] array = (Object[]) requiredValue;
+			
+			return GatherUtils.contains(array, fieldValue);
+		}
+		
 		return false;
 	}
 
