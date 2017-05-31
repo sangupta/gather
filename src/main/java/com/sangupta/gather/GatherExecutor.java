@@ -35,8 +35,12 @@ import java.util.regex.Pattern;
  *
  */
 class GatherExecutor {
-
+	
 	static <T> List<T> getResults(Collection<T> collection, Gather gather) {
+		return getResults(collection, gather, 0);
+	}
+
+	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults) {
 		if(collection == null) {
 			return null;
 		}
@@ -50,6 +54,11 @@ class GatherExecutor {
 		for(T item : collection) {
 			if(matches(item, gather)) {
 				results.add(item);
+				
+				// break if we have accumulated enough results
+				if(numResults > 0 && results.size() == numResults) {
+					return results;
+				}
 			}
 		}
 		

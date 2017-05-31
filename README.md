@@ -24,11 +24,18 @@ List<Manager> managers = this.employeeService.getAllManagersFromDatabase();
 
 List<Manager> filteredManagers = query.find(managers);
 
-// null check and not operator
+// null check operations
 query = Gather.where("name").isNull();
 query = Gather.where("name").isNotNull();
 
+// not operator
 query = Gather.where("name").not().is("sandeep");
+
+// find a single instance
+query.findOne(employees);
+
+// find limited instances
+query.find(employees, 5);
 ```
 
 ## Features

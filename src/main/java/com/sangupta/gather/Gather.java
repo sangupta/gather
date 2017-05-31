@@ -199,4 +199,17 @@ public class Gather {
 		return GatherExecutor.getResults(collection, this);
 	}
 	
+	public <T> List<T> find(Collection<T> collection, int numResults) {
+		return GatherExecutor.getResults(collection, this, numResults);
+	}
+	
+	public <T> T findOne(Collection<T> collection) {
+		List<T> results = GatherExecutor.getResults(collection, this, 1);
+		if(results == null || results.isEmpty()) {
+			return null;
+		}
+		
+		return results.get(0);
+	}
+	
 }
