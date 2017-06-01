@@ -67,7 +67,12 @@ class GatherExecutor {
 				}
 				
 				// add the result - we need this item
-				resultsOrCount.add(item);
+				// either as count or as an actual result
+				if(countMode) {
+					resultsOrCount.count++;
+				} else {
+					resultsOrCount.add(item);
+				}
 				
 				// break if we have accumulated enough results
 				if(numResults > 0 && resultsOrCount.size() == numResults) {
@@ -119,7 +124,7 @@ class GatherExecutor {
 	 * @param classOfT
 	 * @return
 	 */
-	private static <T> boolean matchCriteria(T item, GatherCriteria criteria) {
+	static <T> boolean matchCriteria(T item, GatherCriteria criteria) {
 		Field field = GatherReflect.getField(item, criteria.key);
 		
 		if(criteria.operation == GatherOperation.HasProperty) {
@@ -149,7 +154,7 @@ class GatherExecutor {
 		return valueMatchesCriteria(value, criteria.operation, criteria.value);
 	}
 
-	private static boolean valueMatchesCriteria(Object fieldValue, GatherOperation operation, Object requiredValue) {
+	static boolean valueMatchesCriteria(Object fieldValue, GatherOperation operation, Object requiredValue) {
 		switch(operation) {
 			case Equals:
 				return handleEquals(fieldValue, requiredValue);
@@ -197,7 +202,7 @@ class GatherExecutor {
 	 * @param requiredValue
 	 * @return
 	 */
-	private static boolean handleWildcardMatch(Object fieldValue, Object requiredValue) {
+	static boolean handleWildcardMatch(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return false;
 		}
@@ -212,7 +217,7 @@ class GatherExecutor {
 		return GatherUtils.wildcardMatch(value, pattern);	
 	}
 
-	private static boolean handleRegexMatch(Object fieldValue, Object requiredValue) {
+	static boolean handleRegexMatch(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return false;
 		}
@@ -232,23 +237,23 @@ class GatherExecutor {
 		return GatherUtils.regexMatch(value, pattern);
 	}
 
-	private static boolean handleLessThan(Object fieldValue, Object requiredValue) {
+	static boolean handleLessThan(Object fieldValue, Object requiredValue) {
 		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.LESS_THAN);
 	}
 	
-	private static boolean handleGreaterThan(Object fieldValue, Object requiredValue) {
+	static boolean handleGreaterThan(Object fieldValue, Object requiredValue) {
 		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.GREATER_THAN);
 	}
 
-	private static boolean handleLessThanOrEquals(Object fieldValue, Object requiredValue) {
+	static boolean handleLessThanOrEquals(Object fieldValue, Object requiredValue) {
 		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.LESS_THAN_OR_EQUALS);
 	}
 	
-	private static boolean handleGreaterThanOrEquals(Object fieldValue, Object requiredValue) {
+	static boolean handleGreaterThanOrEquals(Object fieldValue, Object requiredValue) {
 		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.GREATER_THAN_OR_EQUALS);
 	}
 
-	private static boolean handleNumericComparison(Object fieldValue, Object requiredValue, GatherNumericComparison compareOperation) {
+	static boolean handleNumericComparison(Object fieldValue, Object requiredValue, GatherNumericComparison compareOperation) {
 		if(fieldValue == null) {
 			return false;
 		}
@@ -265,7 +270,7 @@ class GatherExecutor {
 		return false;
 	}
 
-	private static boolean handleValueIn(Object fieldValue, Object requiredValue) {
+	static boolean handleValueIn(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return false;
 		}
@@ -292,7 +297,7 @@ class GatherExecutor {
 		return false;
 	}
 
-	private static boolean handleNull(Object fieldValue, Object requiredValue) {
+	static boolean handleNull(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return true;
 		}
@@ -300,7 +305,7 @@ class GatherExecutor {
 		return false;
 	}
 
-	private static boolean handleEqualsIgnoreCase(Object fieldValue, Object requiredValue) {
+	static boolean handleEqualsIgnoreCase(Object fieldValue, Object requiredValue) {
 		if(requiredValue == null) {
 			return false;
 		}
@@ -313,7 +318,7 @@ class GatherExecutor {
 		return handleEquals(fieldValue, requiredValue);
 	}
 
-	private static boolean handleEquals(Object fieldValue, Object requiredValue) {
+	static boolean handleEquals(Object fieldValue, Object requiredValue) {
 		if(requiredValue == null) {
 			return false;
 		}

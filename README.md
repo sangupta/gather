@@ -39,6 +39,10 @@ query.find(employees, 5);
 
 // find 5 instances, but skip the first 10 instances
 query.find(employees, 5, 10);
+
+// count the number of results rather than accumulating them
+// this is much faster and memory efficient
+int numResults = query.count(employees);
 ```
 
 ## Features
