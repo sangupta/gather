@@ -5,6 +5,12 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility functions for the Gather library.
+ *  
+ * @author sangupta
+ *
+ */
 class GatherUtils {
 	
 	final static Map<String, Pattern> COMPILED_PATTERNS = new HashMap<>(); 
