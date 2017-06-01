@@ -121,6 +121,12 @@ public class Gather {
 		return fluent();
 	}
 	
+	public static Gather hasProperty(String name) {
+		Gather instance = new Gather(name);
+		instance.existsProperty();
+		return instance;
+	}
+	
 	public Gather existsProperty() {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.HasProperty, null, this.siblingJoin, false));
 		return fluent();

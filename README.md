@@ -31,6 +31,11 @@ query = Gather.where("name").isNotNull();
 // not operator
 query = Gather.where("name").not().is("sandeep");
 
+// find instances that have a property
+// one of the two ways can be employed
+gather = Gather.where("name").existsProperty();
+gather = Gather.hasProperty("name");
+
 // find a single instance
 query.findOne(employees);
 
