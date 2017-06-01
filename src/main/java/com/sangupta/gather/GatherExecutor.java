@@ -36,64 +36,6 @@ import java.util.regex.Pattern;
  */
 class GatherExecutor {
 	
-	static interface CompareOperation {
-		
-		public boolean test(int value);
-		
-	}
-	
-	static final CompareOperation LESS_THAN = new CompareOperation() {
-		
-		@Override
-		public boolean test(int value) {
-			if(value < 0) {
-				return true;
-			}
-			
-			return false;
-		}
-		
-	};
-	
-	static final CompareOperation LESS_THAN_OR_EQUALS = new CompareOperation() {
-		
-		@Override
-		public boolean test(int value) {
-			if(value <= 0) {
-				return true;
-			}
-			
-			return false;
-		}
-		
-	};
-	
-	static final CompareOperation GREATER_THAN = new CompareOperation() {
-		
-		@Override
-		public boolean test(int value) {
-			if(value > 0) {
-				return true;
-			}
-			
-			return false;
-		}
-		
-	};
-	
-	static final CompareOperation GREATER_THAN_OR_EQUALS = new CompareOperation() {
-		
-		@Override
-		public boolean test(int value) {
-			if(value >= 0) {
-				return true;
-			}
-			
-			return false;
-		}
-		
-	};
-	
 	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount) {
 		if(collection == null) {
 			return null;
@@ -281,22 +223,22 @@ class GatherExecutor {
 	}
 
 	private static boolean handleLessThan(Object fieldValue, Object requiredValue) {
-		return handleNumericComparison(fieldValue, requiredValue, LESS_THAN);
+		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.LESS_THAN);
 	}
 	
 	private static boolean handleGreaterThan(Object fieldValue, Object requiredValue) {
-		return handleNumericComparison(fieldValue, requiredValue, GREATER_THAN);
+		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.GREATER_THAN);
 	}
 
 	private static boolean handleLessThanOrEquals(Object fieldValue, Object requiredValue) {
-		return handleNumericComparison(fieldValue, requiredValue, LESS_THAN_OR_EQUALS);
+		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.LESS_THAN_OR_EQUALS);
 	}
 	
 	private static boolean handleGreaterThanOrEquals(Object fieldValue, Object requiredValue) {
-		return handleNumericComparison(fieldValue, requiredValue, GREATER_THAN_OR_EQUALS);
+		return handleNumericComparison(fieldValue, requiredValue, GatherNumericComparison.GREATER_THAN_OR_EQUALS);
 	}
 
-	private static boolean handleNumericComparison(Object fieldValue, Object requiredValue, CompareOperation compareOperation) {
+	private static boolean handleNumericComparison(Object fieldValue, Object requiredValue, GatherNumericComparison compareOperation) {
 		if(fieldValue == null) {
 			return false;
 		}
