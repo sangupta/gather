@@ -59,15 +59,38 @@ int numResults = query.count(employees);
 
 ## Features
 
+* Gathering operations
+  * `find` - find all matching objects, with options to skip elements and/or limit number of matches
+  * `findOne` - find the first matching object
+  * `count` - count the total number of matching objects
 * Supported operations
   * `is` - equals match
-  * `isIgnoreCase` - equals match ignoring case
-  * `like` - wildcard match
+  * `isIgnoreCase` - equals match ignoring case on strings
+  * `isNull` - check if a property is null
+  * `isNotNull` - check if a property is not null
+  * `like` - wildcard match on strings
+  * `regex` - Java regular expression match on strings
+  * `has` - check if value is contained in a collection or an array
+  * `hasAll` - check if all values are contained in a collection or an array
+  * `hasAny` - check if any of the value are present in a collection or an array
+  * `not` - negate the match expression
+  * `existsProperty` - check if property exists on object
+  * `notExistsProperty` - check if property does not exists on object
+  * `lessThan` - if a value is less than property value
+  * `lessThanOrEquals` - if a value is equal or less than property value
+  * `greaterThan` - if a value is greater than property value
+  * `greaterThanOrEquals` - if a value is equal or greater than property value
+* Boolean operations supported
+  * `and` - Boolean AND between two clauses
+  * `or` - Boolean OR between two clauses
+* Aggregation operations
+  * `avg` - find average value of a field
+  * `min` - find minimum value of a field
+  * `max` - find maximum value of a field
+  * `sum` - find SUM of all values for a field
   
 ## TODO
 
-* hasAny
-* hasAll
 * composed object handling
 * type conversion
 
