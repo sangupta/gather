@@ -21,7 +21,7 @@ public class GatherTest {
 		// start actual testing
 		Gather query = Gather.where("name").is("sandeep").and("age").greaterThan(80);
 		
-		query = Gather.where("name").like("sandeep?");
+		query = Gather.where("name1").existsProperty();
 		 
 		// query = query.and("age").lessThan(40);
 		// query = query.and("age").between(40, 60);

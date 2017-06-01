@@ -23,6 +23,8 @@ package com.sangupta.gather;
 
 enum GatherOperation {
 	
+	HasProperty,
+	
 	IsNull,
 
 	Equals,

@@ -47,6 +47,15 @@ query.find(employees, 5, 10);
   * `is` - equals match
   * `isIgnoreCase` - equals match ignoring case
   * `like` - wildcard match
+  
+## TODO
+
+* has - for collection check
+* hasAny
+* hasAll
+* composed object handling
+* count method
+* type conversion
 
 ## Versioning
 

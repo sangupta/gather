@@ -121,6 +121,16 @@ public class Gather {
 		return fluent();
 	}
 	
+	public Gather existsProperty() {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.HasProperty, null, this.siblingJoin, false));
+		return fluent();
+	}
+	
+	public Gather notExistsProperty() {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.HasProperty, null, this.siblingJoin, true));
+		return fluent();
+	}
+	
 	/**
 	 * Check if the attribute value is <code>null</code>.
 	 * 

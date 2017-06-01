@@ -170,6 +170,14 @@ class GatherExecutor {
 	private static <T> boolean matchCriteria(T item, GatherCriteria criteria) {
 		Field field = GatherReflect.getField(item, criteria.key);
 		
+		if(criteria.operation == GatherOperation.HasProperty) {
+			if(field != null) {
+				return true;
+			}
+			
+			return false;
+		}
+		
 		if(field == null) {
 			return false;
 		}
@@ -220,7 +228,10 @@ class GatherExecutor {
 			
 			case WildcardMatch:
 				return handleWildcardMatch(fieldValue, requiredValue);
-			
+				
+			case HasProperty:
+				throw new IllegalStateException("This operation should have been taken care of before");
+				
 			default:
 				throw new IllegalStateException("Unknown operation in criteria: " + operation);
 		
