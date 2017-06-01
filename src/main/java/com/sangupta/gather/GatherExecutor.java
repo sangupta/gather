@@ -227,10 +227,6 @@ class GatherExecutor {
 				return GatherUtils.contains((Object[]) fieldValue, requiredValue); 
 			}
 			
-			if(fieldValue instanceof byte[]) {
-				return GatherUtils.contains((byte[]) fieldValue, requiredValue);
-			}
-			
 			if(fieldValue instanceof char[]) {
 				return GatherUtils.contains((char[]) fieldValue, requiredValue);
 			}
@@ -239,24 +235,35 @@ class GatherExecutor {
 				return GatherUtils.contains((boolean[]) fieldValue, requiredValue);
 			}
 			
+			// primitive number arrays can only contain numbers
+			if(!(requiredValue instanceof Number)) {
+				return false;
+			}
+			
+			final Number number = (Number) requiredValue;
+			
+			if(fieldValue instanceof byte[]) {
+				return GatherUtils.contains((byte[]) fieldValue, number);
+			}
+			
 			if(fieldValue instanceof int[]) {
-				return GatherUtils.contains((int[]) fieldValue, requiredValue);
+				return GatherUtils.contains((int[]) fieldValue, number);
 			}
 			
 			if(fieldValue instanceof short[]) {
-				return GatherUtils.contains((short[]) fieldValue, requiredValue);
+				return GatherUtils.contains((short[]) fieldValue, number);
 			}
 			
 			if(fieldValue instanceof long[]) {
-				return GatherUtils.contains((long[]) fieldValue, requiredValue);
+				return GatherUtils.contains((long[]) fieldValue, number);
 			}
 			
 			if(fieldValue instanceof float[]) {
-				return GatherUtils.contains((float[]) fieldValue, requiredValue);
+				return GatherUtils.contains((float[]) fieldValue, number);
 			}
 			
 			if(fieldValue instanceof double[]) {
-				return GatherUtils.contains((double[]) fieldValue, requiredValue);
+				return GatherUtils.contains((double[]) fieldValue, number);
 			}
 		}
 		

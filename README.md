@@ -36,6 +36,13 @@ query = Gather.where("name").not().is("sandeep");
 gather = Gather.where("name").existsProperty();
 gather = Gather.hasProperty("name");
 
+// query if an attribute which is a collection or an array contains a given value
+// converting between various primitive value types is supported
+gather = Gather.where("someFloatArray").has(new Double(123));
+
+// run over collections as well
+gather = Gather.where("collection").has(objectInstance);
+
 // find a single instance
 query.findOne(employees);
 
@@ -59,7 +66,6 @@ int numResults = query.count(employees);
   
 ## TODO
 
-* has - for collection check
 * hasAny
 * hasAll
 * composed object handling

@@ -15,27 +15,6 @@ class GatherUtils {
 	
 	final static Map<String, Pattern> COMPILED_PATTERNS = new HashMap<>(); 
 
-	static boolean contains(byte[] array, Object value) {
-		if(array == null) {
-			return false;
-		}
-		
-		if(value == null) {
-			return false;
-		}
-		
-		if(value instanceof Byte) {
-			byte val = (Byte) value;
-			for(byte item : array) {
-				if(item == val) {
-					return true;
-				}
-			}
-		}
-		
-		return false;
-	}
-	
 	static boolean contains(char[] array, Object value) {
 		if(array == null) {
 			return false;
@@ -76,9 +55,7 @@ class GatherUtils {
 		}
 		
 		return false;
-	}
-	
-	static boolean contains(short[] array, Object value) {
+	}	static boolean contains(byte[] array, Number value) {
 		if(array == null) {
 			return false;
 		}
@@ -87,19 +64,17 @@ class GatherUtils {
 			return false;
 		}
 		
-		if(value instanceof Short) {
-			short val = (Short) value;
-			for(short item : array) {
-				if(item == val) {
-					return true;
-				}
+		byte val = value.byteValue();
+		for(byte item : array) {
+			if(item == val) {
+				return true;
 			}
 		}
 		
 		return false;
 	}
 	
-	static boolean contains(int[] array, Object value) {
+	static boolean contains(short[] array, Number value) {
 		if(array == null) {
 			return false;
 		}
@@ -108,19 +83,17 @@ class GatherUtils {
 			return false;
 		}
 		
-		if(value instanceof Integer) {
-			int val = (Integer) value;
-			for(int item : array) {
-				if(item == val) {
-					return true;
-				}
+		short val = value.shortValue();
+		for(short item : array) {
+			if(item == val) {
+				return true;
 			}
 		}
 		
 		return false;
 	}
 	
-	static boolean contains(long[] array, Object value) {
+	static boolean contains(int[] array, Number value) {
 		if(array == null) {
 			return false;
 		}
@@ -129,19 +102,17 @@ class GatherUtils {
 			return false;
 		}
 		
-		if(value instanceof Long) {
-			long val = (Long) value;
-			for(long item : array) {
-				if(item == val) {
-					return true;
-				}
+		int val = value.intValue();
+		for(int item : array) {
+			if(item == val) {
+				return true;
 			}
 		}
 		
 		return false;
 	}
 	
-	static boolean contains(float[] array, Object value) {
+	static boolean contains(long[] array, Number value) {
 		if(array == null) {
 			return false;
 		}
@@ -150,19 +121,17 @@ class GatherUtils {
 			return false;
 		}
 		
-		if(value instanceof Float) {
-			float val = (Float) value;
-			for(float item : array) {
-				if(item == val) {
-					return true;
-				}
+		long val = value.longValue();
+		for(long item : array) {
+			if(item == val) {
+				return true;
 			}
 		}
 		
 		return false;
 	}
 	
-	static boolean contains(double[] array, Object value) {
+	static boolean contains(float[] array, Number value) {
 		if(array == null) {
 			return false;
 		}
@@ -171,12 +140,29 @@ class GatherUtils {
 			return false;
 		}
 		
-		if(value instanceof Double) {
-			double val = (Double) value;
-			for(double item : array) {
-				if(item == val) {
-					return true;
-				}
+		float val = value.floatValue();
+		for(float item : array) {
+			if(item == val) {
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(double[] array, Number value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		double val = value.doubleValue();
+		for(double item : array) {
+			if(item == val) {
+				return true;
 			}
 		}
 		
