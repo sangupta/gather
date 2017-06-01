@@ -36,14 +36,24 @@ import java.util.regex.Pattern;
  */
 class GatherExecutor {
 	
+	static <T> int count(final Collection<T> collection, final Gather gather) {
+		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, 0, 0, true);
+		return resultsOrCount.count;
+	}
+	
 	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount) {
+		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, 0, 0, false);
+		return resultsOrCount.list;
+	}
+	
+	static <T> ResultsOrCount<T> getResultsInternal(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount, final boolean countMode) {
 		if(collection == null) {
 			return null;
 		}
 		
-		List<T> results = new ArrayList<>();
+		ResultsOrCount<T> resultsOrCount = new ResultsOrCount<T>();
 		if(collection.isEmpty()) {
-			return results;
+			return resultsOrCount;
 		}
 		
 		// run filtering criteria first
@@ -57,16 +67,16 @@ class GatherExecutor {
 				}
 				
 				// add the result - we need this item
-				results.add(item);
+				resultsOrCount.add(item);
 				
 				// break if we have accumulated enough results
-				if(numResults > 0 && results.size() == numResults) {
-					return results;
+				if(numResults > 0 && resultsOrCount.size() == numResults) {
+					return resultsOrCount;
 				}
 			}
 		}
 		
-		return results;
+		return resultsOrCount;
 	}
 
 	static <T> boolean matches(T item, Gather gather) {
@@ -315,4 +325,18 @@ class GatherExecutor {
 		return false;
 	}
 
+	private static class ResultsOrCount<T> {
+		
+		final List<T> list = new ArrayList<>();;
+		
+		int count = 0;
+		
+		public void add(T item) {
+			this.list.add(item);
+		}
+		
+		public int size() {
+			return this.list.size();
+		}
+	}
 }

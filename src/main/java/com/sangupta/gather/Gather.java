@@ -215,6 +215,10 @@ public class Gather {
 		return fluent();
 	}
 	
+	public <T> int count(Collection<T> collection) {
+		return GatherExecutor.count(collection, this);
+	}
+	
 	/**
 	 * Execute the query over the given collection of objects.
 	 * 

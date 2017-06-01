@@ -54,7 +54,6 @@ query.find(employees, 5, 10);
 * hasAny
 * hasAll
 * composed object handling
-* count method
 * type conversion
 
 ## Versioning
