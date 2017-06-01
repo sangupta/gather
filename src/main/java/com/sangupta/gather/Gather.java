@@ -137,6 +137,11 @@ public class Gather {
 		return fluent();
 	}
 	
+	public Gather has(Object value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.CollectionHasValue, value, this.siblingJoin, this.inverse));
+		return fluent();
+	}
+	
 	/**
 	 * Check if the attribute value is <code>null</code>.
 	 * 

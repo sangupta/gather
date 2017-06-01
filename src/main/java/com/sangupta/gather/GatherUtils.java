@@ -15,7 +15,175 @@ class GatherUtils {
 	
 	final static Map<String, Pattern> COMPILED_PATTERNS = new HashMap<>(); 
 
-	static boolean contains(Object[] array, Object fieldValue) {
+	static boolean contains(byte[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Byte) {
+			byte val = (Byte) value;
+			for(byte item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(char[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Character) {
+			char val = (Character) value;
+			for(char item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(boolean[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Boolean) {
+			boolean val = (Boolean) value;
+			for(boolean item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(short[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Short) {
+			short val = (Short) value;
+			for(short item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(int[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Integer) {
+			int val = (Integer) value;
+			for(int item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(long[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Long) {
+			long val = (Long) value;
+			for(long item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(float[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Float) {
+			float val = (Float) value;
+			for(float item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(double[] array, Object value) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Double) {
+			double val = (Double) value;
+			for(double item : array) {
+				if(item == val) {
+					return true;
+				}
+			}
+		}
+		
+		return false;
+	}
+	
+	static boolean contains(Object[] array, Object valueToCheck) {
 		if(array == null) {
 			return false;
 		}
@@ -29,7 +197,7 @@ class GatherUtils {
 				continue;
 			}
 			
-			if(item.equals(fieldValue)) {
+			if(item.equals(valueToCheck)) {
 				return true;
 			}
 		}
@@ -106,5 +274,5 @@ class GatherUtils {
 		
 		return matcher.matches();
 	}
-	
+
 }

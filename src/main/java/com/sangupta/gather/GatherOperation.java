@@ -23,6 +23,12 @@ package com.sangupta.gather;
 
 enum GatherOperation {
 	
+	CollectionHasValue,
+	
+	CollectionHasAllValues,
+	
+	CollectionHasAnyValue,
+	
 	HasProperty,
 	
 	IsNull,

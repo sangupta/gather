@@ -173,6 +173,9 @@ class GatherExecutor {
 			
 			case IsNull:
 				return handleNull(fieldValue, requiredValue);
+				
+			case CollectionHasValue:
+				return handleCollectionHasValue(fieldValue, requiredValue);
 			
 			case LessThan:
 				return handleLessThan(fieldValue, requiredValue);
@@ -193,6 +196,72 @@ class GatherExecutor {
 				throw new IllegalStateException("Unknown operation in criteria: " + operation);
 		
 		}
+	}
+
+	/**
+	 * Check if the given collection or array has the value provided.
+	 * 
+	 * @param fieldValue
+	 * @param requiredValue
+	 * @return
+	 */
+	static boolean handleCollectionHasValue(Object fieldValue, Object requiredValue) {
+		if(fieldValue == null) {
+			return false;
+		}
+		
+		if(requiredValue == null) {
+			return false;
+		}
+		
+		// check for collection
+		if(fieldValue instanceof Collection) {
+			Collection<?> collection = (Collection<?>) fieldValue;
+			
+			return collection.contains(requiredValue);
+		}
+		
+		// check for array
+		if(fieldValue.getClass().isArray()) {
+			if(fieldValue instanceof Object[]) {
+				return GatherUtils.contains((Object[]) fieldValue, requiredValue); 
+			}
+			
+			if(fieldValue instanceof byte[]) {
+				return GatherUtils.contains((byte[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof char[]) {
+				return GatherUtils.contains((char[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof boolean[]) {
+				return GatherUtils.contains((boolean[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof int[]) {
+				return GatherUtils.contains((int[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof short[]) {
+				return GatherUtils.contains((short[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof long[]) {
+				return GatherUtils.contains((long[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof float[]) {
+				return GatherUtils.contains((float[]) fieldValue, requiredValue);
+			}
+			
+			if(fieldValue instanceof double[]) {
+				return GatherUtils.contains((double[]) fieldValue, requiredValue);
+			}
+		}
+		
+		// not sure what to do
+		return false;
 	}
 
 	/**

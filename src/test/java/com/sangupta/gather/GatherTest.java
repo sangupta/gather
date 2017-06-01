@@ -22,7 +22,8 @@ public class GatherTest {
 		Gather query = Gather.where("name").is("sandeep").and("age").greaterThan(80);
 		
 		query = Gather.where("name1").existsProperty();
-		 
+		query = Gather.where("array").has(99);
+		
 		// query = query.and("age").lessThan(40);
 		// query = query.and("age").between(40, 60);
 		// query = query.and("age").lessThan(40).or().greaterThan(60);
@@ -47,6 +48,8 @@ public class GatherTest {
 		
 		static int changed = 0;
 		
+		public int[] array = new int[10];
+		
 		public Employee() {
 			this.name = UUID.randomUUID().toString();
 			this.age = RANDOM.nextInt(50) + 20;
@@ -57,6 +60,7 @@ public class GatherTest {
 				
 				if(changed < 4) {
 					this.age = 99;
+					this.array[RANDOM.nextInt(10)] = 99;
 				}
 				
 				this.name = "sandeep" + changed;
