@@ -88,6 +88,28 @@ int numResults = query.count(employees);
   * `min` - find minimum value of a field
   * `max` - find maximum value of a field
   * `sum` - find SUM of all values for a field
+
+## Clause chaining and Evaluation
+
+When more than one clause is added to the query and Boolean operations like `AND` or `OR` are used
+to connect them, the evaluation happens from left to right. The first clause is evaluated first and
+then the result is boolean `AND`/`OR` with the result of next clause depending on connecting operation
+type.
+
+For example:
+
+```java
+Gather.where("name").like("sandeep*").and("age").lessThan(50).or("status").is("active");
+```
+
+The evaluation happens in the order:
+
+```java
+boolean first = evaluate("name like 'sandeep*'");
+boolean second = evaluate("age < 50");
+boolean third = evaluate("status == 'active');
+return first & second | third;
+```
   
 ## TODO
 
