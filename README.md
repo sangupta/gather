@@ -107,7 +107,7 @@ The evaluation happens in the order:
 ```java
 boolean first = evaluate("name like 'sandeep*'");
 boolean second = evaluate("age < 50");
-boolean third = evaluate("status == 'active');
+boolean third = evaluate("status == 'active'");
 return first & second | third;
 ```
   
