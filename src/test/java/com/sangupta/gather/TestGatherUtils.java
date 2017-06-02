@@ -48,5 +48,13 @@ public class TestGatherUtils {
 		Assert.assertTrue(GatherUtils.contains(new char[] { 'a', 'b', 'c' }, new Character('a')));
 		Assert.assertFalse(GatherUtils.contains(new char[] { 'a', 'b', 'c' }, new Character('x')));
 	}
+	
+	@Test
+	public void testBooleanArray() {
+		Assert.assertFalse(GatherUtils.contains((boolean[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((boolean[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, new Object()));
+	}
 
 }
