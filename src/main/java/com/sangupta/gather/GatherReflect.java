@@ -29,6 +29,14 @@ import java.util.List;
 class GatherReflect {
 
 	static <T> Field getField(T item, String key) {
+		if(item == null) {
+			return null;
+		}
+		
+		if(key == null || key.trim().isEmpty()) {
+			return null;
+		}
+		
 		Class<?> classOfT = item.getClass();
 		List<Field> fields = getAllFields(classOfT);
 		if(fields == null || fields.isEmpty()) {
@@ -47,7 +55,7 @@ class GatherReflect {
 
 	static List<Field> getAllFields(Class<?> clazz) {
 		if(clazz == null) {
-			throw new IllegalArgumentException("Class to read fields from cannot be null");
+			return null;
 		}
 		
 		// TODO: implement caching for faster retrievals
@@ -59,6 +67,10 @@ class GatherReflect {
     static void populateAllFields(Class<?> clazz, List<Field> fields) {
         if(clazz == null) {
             return;
+        }
+        
+        if(fields == null) {
+        	throw new IllegalArgumentException("List to store fields in cannot be null");
         }
         
         Field[] array = clazz.getDeclaredFields();

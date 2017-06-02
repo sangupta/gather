@@ -55,6 +55,31 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((boolean[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, true));
+		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, false));
+		Assert.assertTrue(GatherUtils.contains(new boolean[] { true }, true));
+		Assert.assertFalse(GatherUtils.contains(new boolean[] { true }, false));
+		Assert.assertTrue(GatherUtils.contains(new boolean[] { false }, false));
+		Assert.assertFalse(GatherUtils.contains(new boolean[] { false }, true));
 	}
 
+	@Test
+	public void testWildcardMatch() {
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "*"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "*.w?v"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "*b?.wav"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "*.wav"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "*abc.wav"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "???.wav"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "???.???"));
+		Assert.assertTrue(GatherUtils.wildcardMatch("abc.wav", "???.???"));
+
+		Assert.assertFalse(GatherUtils.wildcardMatch("abc.wav", "*.html"));
+		Assert.assertFalse(GatherUtils.wildcardMatch("abc.wav", "?.wav"));
+		Assert.assertFalse(GatherUtils.wildcardMatch("abc.wav", "??.wav"));
+		Assert.assertFalse(GatherUtils.wildcardMatch("abc.wav", "abc.wi?"));
+
+		Assert.assertTrue(GatherUtils.wildcardMatch("http://sangupta.com/tech/page10/index.html", "*tech/page*"));
+	}
 }
