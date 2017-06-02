@@ -1,5 +1,8 @@
 # Gather
 
+[![Build Status](https://travis-ci.org/sangupta/gather.svg?branch=master)](https://travis-ci.org/sangupta/gather)
+[![Coverage Status](https://coveralls.io/repos/sangupta/gather/badge.png)](https://coveralls.io/r/sangupta/gather)
+
 `Gather` is a library to fire SQL like queries on Java collections.
 
 The library is tested on the following JDK versions:
