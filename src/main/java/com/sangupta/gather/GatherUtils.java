@@ -274,12 +274,7 @@ class GatherUtils {
 			COMPILED_PATTERNS.put(pattern, compiled);
 		}
 		
-		Matcher matcher = compiled.matcher(value);
-		if(matcher == null) {
-			return false;
-		}
-		
-		return matcher.matches();
+		return regexMatch(value, pattern);
 	}
 
 }

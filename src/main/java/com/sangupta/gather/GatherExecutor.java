@@ -505,6 +505,10 @@ class GatherExecutor {
 	}
 
 	static boolean handleEqualsIgnoreCase(Object fieldValue, Object requiredValue) {
+		if(fieldValue == null) {
+			return false;
+		}
+		
 		if(requiredValue == null) {
 			return false;
 		}
