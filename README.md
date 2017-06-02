@@ -84,10 +84,16 @@ int numResults = query.count(employees);
   * `and` - Boolean AND between two clauses
   * `or` - Boolean OR between two clauses
 * Aggregation operations
-  * `avg` - find average value of a field
-  * `min` - find minimum value of a field
-  * `max` - find maximum value of a field
-  * `sum` - find SUM of all values for a field
+  * `averageAsLong`
+  * `averageAsDouble`
+  * `minAsLong` - find minimum value of a field which has no decimal part
+  * `minAsDouble` - find minimum value of a field which has a decimal part
+  * `maxAsLong`
+  * `maxAsDouble`
+  * `sumAsLong`
+  * `sumAsDouble`
+  * `count`
+  * `unique`
 
 ## Clause chaining and Evaluation
 

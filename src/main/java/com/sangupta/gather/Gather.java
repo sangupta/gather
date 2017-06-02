@@ -24,6 +24,7 @@ package com.sangupta.gather;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 /**
@@ -59,16 +60,57 @@ public class Gather {
 		return new Gather(name);
 	}
 	
-	public static Number min(String key) {
-		return null;
+	public static Gather hasProperty(String name) {
+		Gather instance = new Gather(name);
+		instance.existsProperty();
+		return instance;
 	}
 	
-	public static Number max(String key) {
-		return null;
+	// ***************************************
+	// AGGREGATION METHODS FOLLOW
+	// ***************************************
+	
+	public static <T> Set<Object> unique(Collection<T> collection, String key) {
+		GatherAggregator.UniqueAggregator aggregator = new GatherAggregator.UniqueAggregator();
+		GatherExecutor.aggregate(collection, key, aggregator);
+		
+		return aggregator.set;
 	}
 	
-	public static Double average(String key) {
-		return null;
+	public static <T> Number count(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.CountingAggregator());
+	}
+	
+	public static <T> Number sumAsLong(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongSumAggregator());
+	}
+	
+	public static <T> Number sumAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleSumAggregator());
+	}
+	
+	public static <T> Number minAsLong(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongMinAggregator());
+	}
+	
+	public static <T> Number minAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleMinAggregator());
+	}
+	
+	public static <T> Number maxAsLong(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongMaxAggregator());
+	}
+	
+	public static <T> Number maxAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleMaxAggregator());
+	}
+	
+	public static <T> Number averageAsLong(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongAverageAggregator());
+	}
+	
+	public static <T> Number averageAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleAverageAggregator());
 	}
 	
 	// ***************************************
@@ -121,12 +163,6 @@ public class Gather {
 		return fluent();
 	}
 	
-	public static Gather hasProperty(String name) {
-		Gather instance = new Gather(name);
-		instance.existsProperty();
-		return instance;
-	}
-	
 	public Gather existsProperty() {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.HasProperty, null, this.siblingJoin, false));
 		return fluent();
@@ -144,6 +180,21 @@ public class Gather {
 	
 	public Gather hasAll(Collection<?> value) {
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.CollectionHasAllValues, value, this.siblingJoin, this.inverse));
+		return fluent();
+	}
+	
+	public Gather hasAll(Object[] value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.CollectionHasAllValues, value, this.siblingJoin, this.inverse));
+		return fluent();
+	}
+	
+	public Gather hasAny(Collection<?> value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.CollectionHasAnyValue, value, this.siblingJoin, this.inverse));
+		return fluent();
+	}
+	
+	public Gather hasAny(Object[] value) {
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.CollectionHasAnyValue, value, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	

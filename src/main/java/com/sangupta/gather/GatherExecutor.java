@@ -36,6 +36,37 @@ import java.util.regex.Pattern;
  */
 class GatherExecutor {
 	
+	static <T> Number aggregate(Collection<T> collection, String key, GatherAggregator aggregator) {
+		if(collection == null) {
+			return null;
+		}
+		
+		if(collection.isEmpty()) {
+			return null;
+		}
+		
+		int found = 0;
+		for(T item : collection) {
+			Field field = GatherReflect.getField(item, key);
+			if(field == null) {
+				continue;
+			}
+			
+			found++;
+			Object value;
+			
+			try {
+				value = field.get(item);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				throw new RuntimeException("Unable to read value of field", e);
+			}
+			
+			aggregator.aggregate(found, value);
+		}
+		
+		return aggregator.getResult(found);
+	}
+
 	static <T> int count(final Collection<T> collection, final Gather gather) {
 		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, 0, 0, true);
 		return resultsOrCount.count;
@@ -176,6 +207,12 @@ class GatherExecutor {
 				
 			case CollectionHasValue:
 				return handleCollectionHasValue(fieldValue, requiredValue);
+				
+			case CollectionHasAllValues:
+				return handleCollectionHasAllValues(fieldValue, requiredValue);
+			
+			case CollectionHasAnyValue:
+				return handleCollectionHasAnyValue(fieldValue, requiredValue);
 			
 			case LessThan:
 				return handleLessThan(fieldValue, requiredValue);
@@ -196,6 +233,70 @@ class GatherExecutor {
 				throw new IllegalStateException("Unknown operation in criteria: " + operation);
 		
 		}
+	}
+
+	private static boolean handleCollectionHasAnyValue(Object fieldValue, Object requiredValue) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	private static boolean handleCollectionHasAllValues(Object fieldValue, Object requiredValue) {
+		if(fieldValue == null) {
+			return false;
+		}
+		
+		if(requiredValue == null) {
+			return false;
+		}
+		
+//		// check for collection
+//		if(fieldValue instanceof Collection) {
+//			Collection<?> collection = (Collection<?>) fieldValue;
+//			
+//			return GatherUtils.containsAll(collection, requiredValue);
+//		}
+//		
+//		// check for array
+//		if(fieldValue.getClass().isArray()) {
+//			if(fieldValue instanceof Object[]) {
+//				return GatherUtils.containsAll((Object[]) fieldValue, requiredValue); 
+//			}
+//			
+//			if(fieldValue instanceof char[]) {
+//				return GatherUtils.containsAll((char[]) fieldValue, requiredValue);
+//			}
+//			
+//			if(fieldValue instanceof boolean[]) {
+//				return GatherUtils.containsAll((boolean[]) fieldValue, requiredValue);
+//			}
+//			
+//			if(fieldValue instanceof byte[]) {
+//				return GatherUtils.containsAll((byte[]) fieldValue, number);
+//			}
+//			
+//			if(fieldValue instanceof int[]) {
+//				return GatherUtils.containsAll((int[]) fieldValue, number);
+//			}
+//			
+//			if(fieldValue instanceof short[]) {
+//				return GatherUtils.containsAll((short[]) fieldValue, number);
+//			}
+//			
+//			if(fieldValue instanceof long[]) {
+//				return GatherUtils.containsAll((long[]) fieldValue, number);
+//			}
+//			
+//			if(fieldValue instanceof float[]) {
+//				return GatherUtils.containsAll((float[]) fieldValue, number);
+//			}
+//			
+//			if(fieldValue instanceof double[]) {
+//				return GatherUtils.containsAll((double[]) fieldValue, number);
+//			}
+//		}
+		
+		// not sure what to do
+		return false;
 	}
 
 	/**
