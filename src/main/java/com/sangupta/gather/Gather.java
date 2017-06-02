@@ -77,7 +77,18 @@ public class Gather {
 		return aggregator.set;
 	}
 	
+	public static <T> Set<Object> unique(Object[] collection, String key) {
+		GatherAggregator.UniqueAggregator aggregator = new GatherAggregator.UniqueAggregator();
+		GatherExecutor.aggregate(collection, key, aggregator);
+		
+		return aggregator.set;
+	}
+	
 	public static <T> Number count(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.CountingAggregator());
+	}
+	
+	public static <T> Number count(Object[] collection, String key) {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.CountingAggregator());
 	}
 	
@@ -85,7 +96,15 @@ public class Gather {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongSumAggregator());
 	}
 	
+	public static <T> Number sumAsLong(Object[] collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongSumAggregator());
+	}
+	
 	public static <T> Number sumAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleSumAggregator());
+	}
+	
+	public static <T> Number sumAsDouble(Object[] collection, String key) {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleSumAggregator());
 	}
 	
@@ -93,7 +112,15 @@ public class Gather {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongMinAggregator());
 	}
 	
+	public static <T> Number minAsLong(Object[] collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongMinAggregator());
+	}
+	
 	public static <T> Number minAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleMinAggregator());
+	}
+	
+	public static <T> Number minAsDouble(Object[] collection, String key) {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleMinAggregator());
 	}
 	
@@ -101,7 +128,15 @@ public class Gather {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongMaxAggregator());
 	}
 	
+	public static <T> Number maxAsLong(Object[] collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongMaxAggregator());
+	}
+	
 	public static <T> Number maxAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleMaxAggregator());
+	}
+	
+	public static <T> Number maxAsDouble(Object[] collection, String key) {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleMaxAggregator());
 	}
 	
@@ -109,7 +144,15 @@ public class Gather {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongAverageAggregator());
 	}
 	
+	public static <T> Number averageAsLong(Object[] collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.LongAverageAggregator());
+	}
+	
 	public static <T> Number averageAsDouble(Collection<T> collection, String key) {
+		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleAverageAggregator());
+	}
+	
+	public static <T> Number averageAsDouble(Object[] collection, String key) {
 		return GatherExecutor.aggregate(collection, key, new GatherAggregator.DoubleAverageAggregator());
 	}
 	

@@ -47,24 +47,46 @@ class GatherExecutor {
 		
 		int found = 0;
 		for(T item : collection) {
-			Field field = GatherReflect.getField(item, key);
-			if(field == null) {
-				continue;
-			}
-			
-			found++;
-			Object value;
-			
-			try {
-				value = field.get(item);
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				throw new RuntimeException("Unable to read value of field", e);
-			}
-			
-			aggregator.aggregate(found, value);
+			found = aggregateOnItem(item, key, aggregator, found);
 		}
 		
 		return aggregator.getResult(found);
+	}
+	
+	static <T> Number aggregate(Object[] array, String key, GatherAggregator aggregator) {
+		if(array == null) {
+			return null;
+		}
+		
+		if(array.length == 0) {
+			return null;
+		}
+		
+		int found = 0;
+		for(Object item : array) {
+			found = aggregateOnItem(item, key, aggregator, found);
+		}
+		
+		return aggregator.getResult(found);
+	}
+	
+	static <T> int aggregateOnItem(T item, String key, GatherAggregator aggregator, int found) {
+		Field field = GatherReflect.getField(item, key);
+		if(field == null) {
+			return found;
+		}
+		
+		found++;
+		Object value;
+		
+		try {
+			value = field.get(item);
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw new RuntimeException("Unable to read value of field", e);
+		}
+		
+		aggregator.aggregate(found, value);
+		return found;
 	}
 
 	static <T> int count(final Collection<T> collection, final Gather gather) {
