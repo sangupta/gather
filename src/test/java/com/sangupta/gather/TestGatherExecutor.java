@@ -22,10 +22,13 @@
 package com.sangupta.gather;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import org.junit.Assert;
 import org.junit.Test;
+
+import com.sangupta.gather.GatherAggregator.CountingAggregator;
 
 /**
  * Unit tests for {@link GatherExecutor}.
@@ -34,6 +37,21 @@ import org.junit.Test;
  *
  */
 public class TestGatherExecutor {
+	
+	@Test
+	public void testAggregate() {
+		Assert.assertNull(GatherExecutor.aggregate((Collection<?>) null, null, null));
+		Assert.assertNull(GatherExecutor.aggregate((Object[]) null, null, null));
+		
+		Assert.assertNull(GatherExecutor.aggregate(new ArrayList<>(), null, null));
+		Assert.assertNull(GatherExecutor.aggregate(new Object[] {}, null, null));
+		
+		Assert.assertNull(GatherExecutor.aggregate(new ArrayList<>(), "age", null));
+		Assert.assertNull(GatherExecutor.aggregate(new Object[] {}, "age", null));
+		
+		Assert.assertNull(GatherExecutor.aggregate(new ArrayList<>(), "age", new CountingAggregator()));
+		Assert.assertNull(GatherExecutor.aggregate(new Object[] {}, "age", new CountingAggregator()));
+	}
 
 	@Test
 	public void testHandleEquals() {

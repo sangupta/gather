@@ -41,6 +41,14 @@ abstract class GatherExecutor {
 			return null;
 		}
 		
+		if(key == null) {
+			return null;
+		}
+		
+		if(aggregator == null) {
+			return null;
+		}
+		
 		if(collection.isEmpty()) {
 			return null;
 		}
@@ -55,6 +63,14 @@ abstract class GatherExecutor {
 	
 	static <T> Number aggregate(Object[] array, String key, GatherAggregator aggregator) {
 		if(array == null) {
+			return null;
+		}
+		
+		if(key == null) {
+			return null;
+		}
+		
+		if(aggregator == null) {
 			return null;
 		}
 		

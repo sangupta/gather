@@ -2,6 +2,7 @@ package com.sangupta.gather;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -77,6 +78,19 @@ public class TestGather {
 		testGatherQuery(0, Gather.where("salary").greaterThan(100l));
 		testGatherQuery(1, Gather.where("salary").lessThan(50l));
 		testGatherQuery(3, Gather.where("salary").lessThanOrEquals(50l));
+		
+		testGatherQuery(0, Gather.where("salary").regex("S*g"));
+		testGatherQuery(0, Gather.where("salary").regex(Pattern.compile("S*g")));
+		testGatherQuery(4, Gather.where("salary").not().regex("S*g"));
+		
+		testGatherQuery(0, Gather.where("name").isNull());
+		testGatherQuery(4, Gather.where("name").not().isNull());
+		testGatherQuery(4, Gather.where("name").isNotNull());
+		
+		testGatherQuery(4, Gather.hasProperty("name"));
+		testGatherQuery(0, Gather.hasProperty("sex"));
+		
+		testGatherQuery(0, Gather.where("sex").is(Gender.Male));
 	}
 	
 	private boolean testGatherQuery(int expected, Gather query) {
@@ -124,6 +138,13 @@ public class TestGather {
 			this.salary = salary;
 		}
 		
+	}
+	
+	static enum Gender {
+		
+		Male,
+		
+		Female;
 	}
 
 }

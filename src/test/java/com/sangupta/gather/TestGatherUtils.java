@@ -181,6 +181,23 @@ public class TestGatherUtils {
 		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 16));
 		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 32));
 	}
+	
+	@Test
+	public void testContainsObjectArray() {
+		Assert.assertFalse(GatherUtils.contains((Object[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((Object[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new Object[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new Object[] {}, new Object()));
+		
+		Assert.assertTrue(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, 'a'));
+		Assert.assertTrue(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, 'b'));
+		Assert.assertTrue(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, 'c'));
+		Assert.assertFalse(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, 'x'));
+		Assert.assertFalse(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, 'y'));
+		Assert.assertFalse(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, 'z'));
+		Assert.assertTrue(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, new Character('a')));
+		Assert.assertFalse(GatherUtils.contains(new Object[] { 'a', 'b', 'c' }, new Character('x')));
+	}
 
 	@Test
 	public void testWildcardMatch() {
@@ -237,6 +254,7 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.regexMatch(null, (Pattern) null));
 		Assert.assertFalse(GatherUtils.regexMatch("hello world", (Pattern) null));
 		Assert.assertFalse(GatherUtils.regexMatch(null, "\\d"));
+		Assert.assertFalse(GatherUtils.regexMatch(null, Pattern.compile("\\d")));
 		
 		Assert.assertTrue(GatherUtils.regexMatch("hello world", "^[^\\d].*"));
 		Assert.assertFalse(GatherUtils.regexMatch("1hello world", "^[^\\d].*"));
