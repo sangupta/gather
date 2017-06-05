@@ -18,60 +18,46 @@ public class TestGather {
 		Assert.assertEquals(0, query.count(new ArrayList<>()));
 		Assert.assertEquals(0, query.count(workers));
 		
-		query = Gather.where("noAttribute").existsProperty();
-		Assert.assertEquals(0, query.count(workers));
+		testGatherQuery(0, Gather.where("noAttribute").existsProperty());
+		testGatherQuery(4, Gather.where("noAttribute").notExistsProperty());
 		
-		query = Gather.where("noAttribute").notExistsProperty();
-		Assert.assertEquals(4, query.count(workers));
+		testGatherQuery(0, Gather.where("name").is("sandeep gupta"));
+		testGatherQuery(1, Gather.where("name").isIgnoreCase("sandeep gupta"));
 		
-		query = Gather.where("name").is("sandeep gupta");
-		Assert.assertEquals(0, query.count(workers));
+		testGatherQuery(0, Gather.where("name").like("*gupta"));
+		testGatherQuery(2, Gather.where("name").like("S*Gupta"));
+		testGatherQuery(2, Gather.where("name").not().like("S*Gupta"));
+		
+		testGatherQuery(1, query.and("active").is(true));
+		testGatherQuery(1, Gather.where("name").like("S*Gupta").and("active").is(false));
 
+		testGatherQuery(3, Gather.where("salary").greaterThan(40l));
+		testGatherQuery(1, Gather.where("salary").greaterThan(50l));
+		testGatherQuery(3, Gather.where("salary").greaterThanOrEquals(50l));
+		testGatherQuery(1, Gather.where("salary").greaterThanOrEquals(50l).and("active").is(true));
+		testGatherQuery(2, Gather.where("salary").greaterThanOrEquals(50l).and("active").is(false));
+
+		testGatherQuery(4, Gather.where("salary").greaterThan(10l));
+		testGatherQuery(0, Gather.where("salary").greaterThan(100l));
+		testGatherQuery(1, Gather.where("salary").lessThan(50l));
+		testGatherQuery(3, Gather.where("salary").lessThanOrEquals(50l));
+	}
 	
-		query = Gather.where("name").isIgnoreCase("sandeep gupta");
-		Assert.assertEquals(1, query.count(workers));
+	private boolean testGatherQuery(int expected, Gather query) {
+		List<Worker> result = query.find(this.getWorkers());
+		if(expected == 0) {
+			if(result == null || result.size() == 0) {
+				return true;
+			}
+			
+			return false;
+		}
 		
-		query = Gather.where("name").like("*gupta");
-		Assert.assertEquals(0, query.count(workers));
+		if(expected != result.size()) {
+			return false;
+		}
 		
-		query = Gather.where("name").like("S*Gupta");
-		Assert.assertEquals(2, query.count(workers));
-		
-		query = Gather.where("name").not().like("S*Gupta");
-		Assert.assertEquals(2, query.count(workers));
-		
-		query = query.and("active").is(true);
-		Assert.assertEquals(1, query.count(workers));
-		
-		query = Gather.where("name").like("S*Gupta").and("active").is(false);
-		Assert.assertEquals(1, query.count(workers));
-		
-		query = Gather.where("salary").greaterThan(40l);
-		Assert.assertEquals(3, query.count(workers));
-		
-		query = Gather.where("salary").greaterThan(50l);
-		Assert.assertEquals(1, query.count(workers));
-		
-		query = Gather.where("salary").greaterThanOrEquals(50l);
-		Assert.assertEquals(3, query.count(workers));
-		
-		query = Gather.where("salary").greaterThanOrEquals(50l).and("active").is(true);
-		Assert.assertEquals(1, query.count(workers));
-		
-		query = Gather.where("salary").greaterThanOrEquals(50l).and("active").is(false);
-		Assert.assertEquals(2, query.count(workers));
-		
-		query = Gather.where("salary").greaterThan(10l);
-		Assert.assertEquals(4, query.count(workers));
-		
-		query = Gather.where("salary").greaterThan(100l);
-		Assert.assertEquals(0, query.count(workers));
-		
-		query = Gather.where("salary").lessThan(50l);
-		Assert.assertEquals(1, query.count(workers));
-		
-		query = Gather.where("salary").lessThanOrEquals(50l);
-		Assert.assertEquals(3, query.count(workers));
+		return expected == query.count(this.getWorkers());
 	}
 	
 	private List<Worker> getWorkers() {
