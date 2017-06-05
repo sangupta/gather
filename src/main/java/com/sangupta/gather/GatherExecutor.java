@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * @author sangupta
  *
  */
-class GatherExecutor {
+abstract class GatherExecutor {
 	
 	static <T> Number aggregate(Collection<T> collection, String key, GatherAggregator aggregator) {
 		if(collection == null) {

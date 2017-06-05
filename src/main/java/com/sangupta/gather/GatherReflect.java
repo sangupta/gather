@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-class GatherReflect {
+abstract class GatherReflect {
 
 	static <T> Field getField(T item, String key) {
 		if(item == null) {

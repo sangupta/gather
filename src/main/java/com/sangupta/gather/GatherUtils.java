@@ -34,7 +34,7 @@ import java.util.regex.Pattern;
  * @author sangupta
  *
  */
-class GatherUtils {
+abstract class GatherUtils {
 	
 	final static Map<String, Pattern> COMPILED_PATTERNS = new HashMap<>();
 	
