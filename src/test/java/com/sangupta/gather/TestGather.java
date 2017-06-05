@@ -9,6 +9,42 @@ import org.junit.Test;
 public class TestGather {
 	
 	@Test
+	public void testGatherAggregation() {
+		final List<Worker> workers = getWorkers();
+		final Worker[] arrayOfWorkers = workers.toArray(new Worker[] {});
+		
+		// on list first
+		Assert.assertEquals(150l, Gather.sumAsLong(workers, "age"));
+		Assert.assertEquals(150d, Gather.sumAsDouble(workers, "age"));
+		
+		Assert.assertEquals(32l, Gather.minAsLong(workers, "age"));
+		Assert.assertEquals(32d, Gather.minAsDouble(workers, "age"));
+		
+		Assert.assertEquals(46l, Gather.maxAsLong(workers, "age"));
+		Assert.assertEquals(46d, Gather.maxAsDouble(workers, "age"));
+
+		Assert.assertEquals(37l, Gather.averageAsLong(workers, "age"));
+		Assert.assertEquals(37.5d, Gather.averageAsDouble(workers, "age"));
+		
+		Assert.assertEquals(4, Gather.count(workers, "age"));
+
+		// on array next
+		Assert.assertEquals(150l, Gather.sumAsLong(arrayOfWorkers, "age"));
+		Assert.assertEquals(150d, Gather.sumAsDouble(arrayOfWorkers, "age"));
+		
+		Assert.assertEquals(32l, Gather.minAsLong(arrayOfWorkers, "age"));
+		Assert.assertEquals(32d, Gather.minAsDouble(arrayOfWorkers, "age"));
+		
+		Assert.assertEquals(46l, Gather.maxAsLong(arrayOfWorkers, "age"));
+		Assert.assertEquals(46d, Gather.maxAsDouble(arrayOfWorkers, "age"));
+
+		Assert.assertEquals(37l, Gather.averageAsLong(arrayOfWorkers, "age"));
+		Assert.assertEquals(37.5d, Gather.averageAsDouble(arrayOfWorkers, "age"));
+		
+		Assert.assertEquals(4, Gather.count(arrayOfWorkers, "age"));
+	}
+	
+	@Test
 	public void testGather() {
 		final List<Worker> workers = getWorkers();
 		
@@ -66,7 +102,7 @@ public class TestGather {
 		workers.add(new Worker("Sandeep Gupta", 36, true, 40l));
 		workers.add(new Worker("Abhishek Gupta", 32, true, 50l));
 		workers.add(new Worker("Amit Modi", 36, false, 50l));
-		workers.add(new Worker("Sushant Gupta", 36, false, 70l));
+		workers.add(new Worker("Sushant Gupta", 46, false, 70l));
 		
 		return workers;
 	}

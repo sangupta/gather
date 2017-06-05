@@ -80,6 +80,9 @@ abstract class GatherExecutor {
 		Object value;
 		
 		try {
+			// allow field to be read
+			field.setAccessible(true);
+			
 			value = field.get(item);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw new RuntimeException("Unable to read value of field", e);
