@@ -169,8 +169,10 @@ public class Gather {
 			throw new IllegalArgumentException("Add a comparison condition to previous key first");
 		}
 		
+		this.key = key;
 		this.siblingJoin = GatherSiblingJoin.AND;
-		return fluent();
+		this.inverse = false;
+		return this;
 	}
 	
 	public Gather not() {
@@ -187,8 +189,10 @@ public class Gather {
 			throw new IllegalArgumentException("Add a comparison condition to previous key first");
 		}
 		
+		this.key = key;
 		this.siblingJoin = GatherSiblingJoin.OR;
-		return fluent();
+		this.inverse = false;
+		return this;
 	}
 
 	/**
@@ -326,6 +330,14 @@ public class Gather {
 	}
 	
 	public <T> int count(Collection<T> collection) {
+		if(collection == null) {
+			return 0;
+		}
+		
+		if(collection.isEmpty()) {
+			return 0;
+		}
+		
 		return GatherExecutor.count(collection, this);
 	}
 	

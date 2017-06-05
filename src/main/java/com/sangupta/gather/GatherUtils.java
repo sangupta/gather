@@ -23,6 +23,8 @@ package com.sangupta.gather;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -34,7 +36,11 @@ import java.util.regex.Pattern;
  */
 class GatherUtils {
 	
-	final static Map<String, Pattern> COMPILED_PATTERNS = new HashMap<>(); 
+	final static Map<String, Pattern> COMPILED_PATTERNS = new HashMap<>();
+	
+	final static Object[] NUMBER_TYPES = new Object[] { Integer.class, Long.class, Byte.class, Short.class,
+														Float.class, Double.class, AtomicLong.class, AtomicInteger.class
+	};
 
 	static boolean contains(char[] array, Object value) {
 		if(array == null) {
@@ -277,4 +283,31 @@ class GatherUtils {
 		return regexMatch(value, pattern);
 	}
 
+	public static boolean isNumberType(Object object) {
+		if(object == null) {
+			return false;
+		}
+		
+		return contains(NUMBER_TYPES, object.getClass());
+	}
+	
+	public static Number asNumber(Object object) {
+		if(object == null) {
+			return null;
+		}
+		
+		if(!isNumberType(object)) {
+			return null;
+		}
+		
+		if(object instanceof Number) {
+			return (Number) object;
+		} else if(object instanceof AtomicLong) {
+			return ((AtomicLong) object).get();
+		} else if(object instanceof AtomicInteger) {
+			return ((AtomicInteger) object).get();
+		}
+		
+		return null;
+	}
 }

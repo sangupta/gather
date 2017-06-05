@@ -21,6 +21,9 @@
 
 package com.sangupta.gather;
 
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -81,5 +84,33 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.wildcardMatch("abc.wav", "abc.wi?"));
 
 		Assert.assertTrue(GatherUtils.wildcardMatch("http://sangupta.com/tech/page10/index.html", "*tech/page*"));
+	}
+	
+	@Test
+	public void testIsNumberType() {
+		Assert.assertFalse(GatherUtils.isNumberType(null));
+		Assert.assertFalse(GatherUtils.isNumberType(new Object()));
+		
+		Assert.assertTrue(GatherUtils.isNumberType((byte) 123));
+		Assert.assertTrue(GatherUtils.isNumberType(123));
+		Assert.assertTrue(GatherUtils.isNumberType(123l));
+		Assert.assertTrue(GatherUtils.isNumberType(123f));
+		Assert.assertTrue(GatherUtils.isNumberType(123d));
+		Assert.assertTrue(GatherUtils.isNumberType(new AtomicLong(123)));
+		Assert.assertTrue(GatherUtils.isNumberType(new AtomicInteger(123)));
+	}
+	
+	@Test
+	public void testAsNumber() {
+		Assert.assertNull(GatherUtils.asNumber(null));
+		Assert.assertNull(GatherUtils.asNumber(new Object()));
+		
+		Assert.assertNotNull(GatherUtils.asNumber((byte) 123));
+		Assert.assertNotNull(GatherUtils.asNumber(123));
+		Assert.assertNotNull(GatherUtils.asNumber(123l));
+		Assert.assertNotNull(GatherUtils.asNumber(123f));
+		Assert.assertNotNull(GatherUtils.asNumber(123d));
+		Assert.assertNotNull(GatherUtils.asNumber(new AtomicLong(123)));
+		Assert.assertNotNull(GatherUtils.asNumber(new AtomicInteger(123)));
 	}
 }

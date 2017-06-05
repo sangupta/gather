@@ -464,6 +464,17 @@ class GatherExecutor {
 			int result = comparable.compareTo(requiredValue);
 			return compareOperation.test(result);
 		}
+
+//		if(GatherUtils.isNumberType(fieldValue)) {
+//			Number field = GatherUtils.asNumber(fieldValue);
+//			Number required = GatherUtils.asNumber(requiredValue);
+//			
+//			if(field != null) {
+//				if(required == null) {
+//					return false;
+//				}
+//			}
+//		}
 		
 		// TODO: handle when comparable is not implemented
 		return false;
