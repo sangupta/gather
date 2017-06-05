@@ -1,7 +1,8 @@
 # Gather
 
-[![Build Status](https://travis-ci.org/sangupta/gather.svg?branch=master)](https://travis-ci.org/sangupta/gather)
-[![Coverage Status](https://coveralls.io/repos/sangupta/gather/badge.png)](https://coveralls.io/r/sangupta/gather)
+[![Travis](https://img.shields.io/travis/sangupta/gather.svg)]()
+[![Coveralls](https://img.shields.io/coveralls/sangupta/gather.svg)]()
+[![license](https://img.shields.io/github/license/sangupta/gather.svg)]()
 
 `Gather` is a library to fire SQL like queries on Java collections.
 
