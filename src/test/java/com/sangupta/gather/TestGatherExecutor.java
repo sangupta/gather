@@ -21,6 +21,9 @@
 
 package com.sangupta.gather;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -75,5 +78,94 @@ public class TestGatherExecutor {
 
 		Assert.assertTrue(GatherExecutor.handleNull(null, null));
 		Assert.assertFalse(GatherExecutor.handleNull(new Object(), null));
+	}
+	
+	@Test
+	public void testHandleValueIn() {
+		Assert.assertFalse(GatherExecutor.handleValueIn(null, null));
+		Assert.assertFalse(GatherExecutor.handleValueIn(new Object(), null));
+		
+		List<String> list = new ArrayList<>();
+		Assert.assertFalse(GatherExecutor.handleValueIn(list, null));
+		Assert.assertFalse(GatherExecutor.handleValueIn(list, "hello"));
+		Assert.assertFalse(GatherExecutor.handleValueIn(null, list));
+		Assert.assertFalse(GatherExecutor.handleValueIn("hello", list));
+		
+		list.add("hello");
+		list.add("world");
+		list.add("life");
+		list.add("is");
+		list.add("sunny");
+		Assert.assertFalse(GatherExecutor.handleValueIn("hello world", list));
+		Assert.assertTrue(GatherExecutor.handleValueIn("hello", list));
+		Assert.assertTrue(GatherExecutor.handleValueIn("world", list));
+		Assert.assertTrue(GatherExecutor.handleValueIn("life", list));
+		Assert.assertTrue(GatherExecutor.handleValueIn("is", list));
+		Assert.assertTrue(GatherExecutor.handleValueIn("sunny", list));
+		
+		Integer[] array = new Integer[] { 2, 3, 5, 7, 9, 11, 13, 17, 19 };
+		Assert.assertFalse(GatherExecutor.handleValueIn(0, array));
+		Assert.assertFalse(GatherExecutor.handleValueIn(1, array));
+		Assert.assertFalse(GatherExecutor.handleValueIn(4, array));
+		
+		Assert.assertTrue(GatherExecutor.handleValueIn(2, array));
+		Assert.assertTrue(GatherExecutor.handleValueIn(13, array));
+		Assert.assertTrue(GatherExecutor.handleValueIn(19, array));
+	}
+	
+	@Test
+	public void testHandleCollectionHasValue() {
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(null, null));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new Object(), null));
+		
+		List<String> list = new ArrayList<>();
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(list, null));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(list, "hello"));
+		
+		list.add("hello");
+		list.add("world");
+		list.add("life");
+		list.add("is");
+		list.add("sunny");
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(list, "hello world"));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "hello"));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "world"));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "life"));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "is"));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "sunny"));
+		
+		Integer[] array = new Integer[] { 2, 3, 5, 7, 9, 11, 13, 17, 19 };
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(array, 0));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(array, 1));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(array, 4));
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(array, 2));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(array, 13));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(array, 19));
+	}
+	
+	@Test
+	public void testHandleWildcardMatch() {
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch(null, null));
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch(null, "*"));
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch("abc", null));
+		
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch("one more", ""));
+		
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "*"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "*.w?v"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "*b?.wav"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "*.wav"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "*abc.wav"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "???.wav"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "???.???"));
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("abc.wav", "???.???"));
+
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch("abc.wav", "*.html"));
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch("abc.wav", "?.wav"));
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch("abc.wav", "??.wav"));
+		Assert.assertFalse(GatherExecutor.handleWildcardMatch("abc.wav", "abc.wi?"));
+
+		Assert.assertTrue(GatherExecutor.handleWildcardMatch("http://sangupta.com/tech/page10/index.html", "*tech/page*"));
 	}
 }
