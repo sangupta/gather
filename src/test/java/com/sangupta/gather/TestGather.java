@@ -18,11 +18,11 @@ public class TestGather {
 		Assert.assertEquals(0, query.count(new ArrayList<>()));
 		Assert.assertEquals(0, query.count(workers));
 		
-		query = Gather.where("noAttribute").isNull();
+		query = Gather.where("noAttribute").existsProperty();
 		Assert.assertEquals(0, query.count(workers));
 		
-		query = Gather.where("noAttribute").isNotNull();
-		Assert.assertEquals(0, query.count(workers));
+		query = Gather.where("noAttribute").notExistsProperty();
+		Assert.assertEquals(4, query.count(workers));
 		
 		query = Gather.where("name").is("sandeep gupta");
 		Assert.assertEquals(0, query.count(workers));
