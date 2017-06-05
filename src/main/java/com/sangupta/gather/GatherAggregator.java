@@ -21,11 +21,8 @@
 
 package com.sangupta.gather;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.atomic.AtomicLong;
 
 interface GatherAggregator {
 	
@@ -86,12 +83,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).doubleValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).doubleValue();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -117,12 +108,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).doubleValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).doubleValue();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -148,12 +133,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).doubleValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).doubleValue();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -182,12 +161,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).doubleValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).doubleValue();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -213,12 +186,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).longValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).longValueExact();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -244,12 +211,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).longValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).longValueExact();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -275,12 +236,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).longValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).longValueExact();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
@@ -306,12 +261,6 @@ interface GatherAggregator {
 			
 			if(value instanceof Number) {
 				fieldValue = ((Number) value).longValue();
-			} else if(value instanceof AtomicInteger) {
-				fieldValue = ((AtomicInteger) value).get();
-			} else if(value instanceof AtomicLong) {
-				fieldValue = ((AtomicLong) value).get();
-			} else if(value instanceof BigDecimal) {
-				fieldValue = ((BigDecimal) value).longValueExact();
 			} else {
 				throw new IllegalArgumentException("Field type is not numeric");
 			}
