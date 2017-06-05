@@ -326,7 +326,7 @@ interface GatherAggregator {
 				return 0d;
 			}
 			
-			return (double) this.result / (double) this.count;
+			return this.result / this.count;
 		}
 	}
 }
