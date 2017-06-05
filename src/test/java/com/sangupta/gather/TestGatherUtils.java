@@ -74,6 +74,17 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((byte[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new byte[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new byte[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 1));
+		Assert.assertFalse(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 3));
+		Assert.assertFalse(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 9));
+		Assert.assertFalse(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 27));
+		
+		Assert.assertTrue(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 2));
+		Assert.assertTrue(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 4));
+		Assert.assertTrue(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 8));
+		Assert.assertTrue(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 16));
+		Assert.assertTrue(GatherUtils.contains(new byte[] { 2, 4, 8, 16, 32 }, 32));
 	}
 	
 	@Test
@@ -82,6 +93,17 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((short[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new short[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new short[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 1));
+		Assert.assertFalse(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 3));
+		Assert.assertFalse(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 9));
+		Assert.assertFalse(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 27));
+		
+		Assert.assertTrue(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 2));
+		Assert.assertTrue(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 4));
+		Assert.assertTrue(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 8));
+		Assert.assertTrue(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 16));
+		Assert.assertTrue(GatherUtils.contains(new short[] { 2, 4, 8, 16, 32 }, 32));
 	}
 	
 	@Test
@@ -90,6 +112,17 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((int[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new int[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new int[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 1));
+		Assert.assertFalse(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 3));
+		Assert.assertFalse(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 9));
+		Assert.assertFalse(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 27));
+		
+		Assert.assertTrue(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 2));
+		Assert.assertTrue(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 4));
+		Assert.assertTrue(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 8));
+		Assert.assertTrue(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 16));
+		Assert.assertTrue(GatherUtils.contains(new int[] { 2, 4, 8, 16, 32 }, 32));
 	}
 	
 	@Test
@@ -98,6 +131,17 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((long[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new long[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new long[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 1));
+		Assert.assertFalse(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 3));
+		Assert.assertFalse(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 9));
+		Assert.assertFalse(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 27));
+		
+		Assert.assertTrue(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 2));
+		Assert.assertTrue(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 4));
+		Assert.assertTrue(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 8));
+		Assert.assertTrue(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 16));
+		Assert.assertTrue(GatherUtils.contains(new long[] { 2, 4, 8, 16, 32 }, 32));
 	}
 	
 	@Test
@@ -106,6 +150,17 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((float[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new float[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new float[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 1));
+		Assert.assertFalse(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 3));
+		Assert.assertFalse(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 9));
+		Assert.assertFalse(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 27));
+		
+		Assert.assertTrue(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 2));
+		Assert.assertTrue(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 4));
+		Assert.assertTrue(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 8));
+		Assert.assertTrue(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 16));
+		Assert.assertTrue(GatherUtils.contains(new float[] { 2, 4, 8, 16, 32 }, 32));
 	}
 	
 	@Test
@@ -114,6 +169,17 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains((double[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new double[] {}, null));
 		Assert.assertFalse(GatherUtils.contains(new double[] {}, new Object()));
+		
+		Assert.assertFalse(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 1));
+		Assert.assertFalse(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 3));
+		Assert.assertFalse(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 9));
+		Assert.assertFalse(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 27));
+		
+		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 2));
+		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 4));
+		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 8));
+		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 16));
+		Assert.assertTrue(GatherUtils.contains(new double[] { 2, 4, 8, 16, 32 }, 32));
 	}
 
 	@Test
