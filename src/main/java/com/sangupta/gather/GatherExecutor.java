@@ -493,6 +493,7 @@ class GatherExecutor {
 			return GatherUtils.contains(array, fieldValue);
 		}
 		
+		// TODO: handle primitive arrays
 		return false;
 	}
 
@@ -522,6 +523,10 @@ class GatherExecutor {
 	}
 
 	static boolean handleEquals(Object fieldValue, Object requiredValue) {
+		if(fieldValue == null) {
+			return false;
+		}
+		
 		if(requiredValue == null) {
 			return false;
 		}
