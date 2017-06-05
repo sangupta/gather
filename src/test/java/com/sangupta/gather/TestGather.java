@@ -17,7 +17,13 @@ public class TestGather {
 		Assert.assertEquals(0, query.count(null));
 		Assert.assertEquals(0, query.count(new ArrayList<>()));
 		Assert.assertEquals(0, query.count(workers));
-
+		
+		query = Gather.where("noAttribute").isNull();
+		Assert.assertEquals(0, query.count(workers));
+		
+		query = Gather.where("noAttribute").isNotNull();
+		Assert.assertEquals(0, query.count(workers));
+		
 		query = Gather.where("name").is("sandeep gupta");
 		Assert.assertEquals(0, query.count(workers));
 
@@ -29,6 +35,9 @@ public class TestGather {
 		Assert.assertEquals(0, query.count(workers));
 		
 		query = Gather.where("name").like("S*Gupta");
+		Assert.assertEquals(2, query.count(workers));
+		
+		query = Gather.where("name").not().like("S*Gupta");
 		Assert.assertEquals(2, query.count(workers));
 		
 		query = query.and("active").is(true);

@@ -23,6 +23,7 @@ package com.sangupta.gather;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
+import java.util.regex.Pattern;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -36,7 +37,7 @@ import org.junit.Test;
 public class TestGatherUtils {
 	
 	@Test
-	public void testCharArray() {
+	public void testContainsCharArray() {
 		Assert.assertFalse(GatherUtils.contains((char[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((char[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new char[] {}, null));
@@ -53,7 +54,7 @@ public class TestGatherUtils {
 	}
 	
 	@Test
-	public void testBooleanArray() {
+	public void testContainsBooleanArray() {
 		Assert.assertFalse(GatherUtils.contains((boolean[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((boolean[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new boolean[] {}, null));
@@ -65,6 +66,54 @@ public class TestGatherUtils {
 		Assert.assertFalse(GatherUtils.contains(new boolean[] { true }, false));
 		Assert.assertTrue(GatherUtils.contains(new boolean[] { false }, false));
 		Assert.assertFalse(GatherUtils.contains(new boolean[] { false }, true));
+	}
+	
+	@Test
+	public void testContainsByteArray() {
+		Assert.assertFalse(GatherUtils.contains((byte[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((byte[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new byte[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new byte[] {}, new Object()));
+	}
+	
+	@Test
+	public void testContainsShortArray() {
+		Assert.assertFalse(GatherUtils.contains((short[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((short[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new short[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new short[] {}, new Object()));
+	}
+	
+	@Test
+	public void testContainsIntegerArray() {
+		Assert.assertFalse(GatherUtils.contains((int[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((int[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new int[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new int[] {}, new Object()));
+	}
+	
+	@Test
+	public void testContainsLongArray() {
+		Assert.assertFalse(GatherUtils.contains((long[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((long[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new long[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new long[] {}, new Object()));
+	}
+	
+	@Test
+	public void testContainsFloatArray() {
+		Assert.assertFalse(GatherUtils.contains((float[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((float[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new float[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new float[] {}, new Object()));
+	}
+	
+	@Test
+	public void testContainsDoubleArray() {
+		Assert.assertFalse(GatherUtils.contains((double[]) null, null));
+		Assert.assertFalse(GatherUtils.contains((double[]) null, new Object()));
+		Assert.assertFalse(GatherUtils.contains(new double[] {}, null));
+		Assert.assertFalse(GatherUtils.contains(new double[] {}, new Object()));
 	}
 
 	@Test
@@ -112,5 +161,18 @@ public class TestGatherUtils {
 		Assert.assertNotNull(GatherUtils.asNumber(123d));
 		Assert.assertNotNull(GatherUtils.asNumber(new AtomicLong(123)));
 		Assert.assertNotNull(GatherUtils.asNumber(new AtomicInteger(123)));
+	}
+
+	@Test
+	public void testRegexMatch() {
+		Assert.assertFalse(GatherUtils.regexMatch(null, (String) null));
+		Assert.assertFalse(GatherUtils.regexMatch("hello world", (String) null));
+		
+		Assert.assertFalse(GatherUtils.regexMatch(null, (Pattern) null));
+		Assert.assertFalse(GatherUtils.regexMatch("hello world", (Pattern) null));
+		Assert.assertFalse(GatherUtils.regexMatch(null, "\\d"));
+		
+		Assert.assertTrue(GatherUtils.regexMatch("hello world", "^[^\\d].*"));
+		Assert.assertFalse(GatherUtils.regexMatch("1hello world", "^[^\\d].*"));
 	}
 }

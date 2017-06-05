@@ -82,7 +82,13 @@ abstract class GatherUtils {
 		}
 		
 		return false;
-	}	static boolean contains(byte[] array, Number value) {
+	}
+	
+	static boolean contains(byte[] array, Object value) {
+		return false;
+	}
+	
+	static boolean contains(byte[] array, Number value) {
 		if(array == null) {
 			return false;
 		}
@@ -98,6 +104,10 @@ abstract class GatherUtils {
 			}
 		}
 		
+		return false;
+	}
+	
+	static boolean contains(short[] array, Object value) {
 		return false;
 	}
 	
@@ -120,6 +130,10 @@ abstract class GatherUtils {
 		return false;
 	}
 	
+	static boolean contains(int[] array, Object value) {
+		return false;
+	}
+	
 	static boolean contains(int[] array, Number value) {
 		if(array == null) {
 			return false;
@@ -136,6 +150,10 @@ abstract class GatherUtils {
 			}
 		}
 		
+		return false;
+	}
+	
+	static boolean contains(long[] array, Object value) {
 		return false;
 	}
 	
@@ -158,6 +176,10 @@ abstract class GatherUtils {
 		return false;
 	}
 	
+	static boolean contains(float[] array, Object value) {
+		return false;
+	}
+	
 	static boolean contains(float[] array, Number value) {
 		if(array == null) {
 			return false;
@@ -174,6 +196,10 @@ abstract class GatherUtils {
 			}
 		}
 		
+		return false;
+	}
+	
+	static boolean contains(double[] array, Object value) {
 		return false;
 	}
 	
@@ -280,7 +306,7 @@ abstract class GatherUtils {
 			COMPILED_PATTERNS.put(pattern, compiled);
 		}
 		
-		return regexMatch(value, pattern);
+		return regexMatch(value, compiled);
 	}
 
 	public static boolean isNumberType(Object object) {
@@ -300,12 +326,12 @@ abstract class GatherUtils {
 			return null;
 		}
 		
-		if(object instanceof Number) {
-			return (Number) object;
-		} else if(object instanceof AtomicLong) {
+		if(object instanceof AtomicLong) {
 			return ((AtomicLong) object).get();
 		} else if(object instanceof AtomicInteger) {
 			return ((AtomicInteger) object).get();
+		} else if(object instanceof Number) {
+			return (Number) object;
 		}
 		
 		return null;
