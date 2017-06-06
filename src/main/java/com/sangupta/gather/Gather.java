@@ -278,7 +278,7 @@ public class Gather {
 			throw new IllegalArgumentException("Operation needs a key to work upon");
 		}
 		
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.In, collection, this.siblingJoin, true));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.In, collection, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	
@@ -287,7 +287,7 @@ public class Gather {
 			throw new IllegalArgumentException("Operation needs a key to work upon");
 		}
 		
-		this.criteria.add(new GatherCriteria(this.key, GatherOperation.In, array, this.siblingJoin, true));
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.In, array, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	

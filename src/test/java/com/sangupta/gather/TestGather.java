@@ -10,6 +10,11 @@ import org.junit.Test;
 
 public class TestGather {
 	
+	public static void main(String[] args) {
+		Gather query = Gather.where("name").in(new Object[] { "Amit Modi", "Sandeep Gupta" }).and("salary").lessThan(50l);
+		System.out.println(query.find(getWorkers()).size());
+	}
+	
 	@Test
 	public void testGatherLimitedResults() {
 		final List<Worker> workers = getWorkers();
@@ -206,7 +211,7 @@ public class TestGather {
 		return expected == query.count(this.getWorkers());
 	}
 	
-	private List<Worker> getWorkers() {
+	private static List<Worker> getWorkers() {
 		List<Worker> workers = new ArrayList<>();
 		
 		workers.add(new Worker("Sandeep Gupta", 36, true, 40l));
