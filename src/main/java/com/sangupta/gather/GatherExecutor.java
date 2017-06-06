@@ -284,7 +284,7 @@ abstract class GatherExecutor {
 		return handleCollectionHasAllOrAnyValues(fieldValue, requiredValue, true);
 	}
 	
-	private static boolean handleCollectionHasAllOrAnyValues(Object fieldValue, Object requiredValue, boolean usingAllClause) {
+	static boolean handleCollectionHasAllOrAnyValues(Object fieldValue, Object requiredValue, boolean usingAllClause) {
 		if(fieldValue == null) {
 			return false;
 		}

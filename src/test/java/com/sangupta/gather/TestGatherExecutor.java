@@ -255,4 +255,70 @@ public class TestGatherExecutor {
 
 		Assert.assertTrue(GatherExecutor.handleWildcardMatch("http://sangupta.com/tech/page10/index.html", "*tech/page*"));
 	}
+	
+	@Test
+	public void testHandleCollectionHasAllOrAnyValues() {
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(null, null, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(null, null, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new int[] {}, null, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new int[] {}, null, false));
+		
+		// char array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new char[] { 'a', 'b', 'c' }, new char[] { 'a', 'b' }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new char[] { 'a', 'b', 'c' }, new char[] { 'a', 'd' }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new char[] { 'a', 'b', 'c' }, new char[] { 'a', 'd' }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new char[] { 'a', 'b', 'c' }, new char[] { 'd', 'e' }, false));
+		
+		// boolean array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new boolean[] { true }, new boolean[] { true, true }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new boolean[] { true }, new boolean[] { true, false }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new boolean[] { true }, new boolean[] { false, false, true }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new boolean[] { true }, new boolean[] { false, false }, false));
+		
+		// byte array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new byte[] { 2, 4, 8, 16 }, new byte[] { 4, 8, 16 }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new byte[] { 2, 4, 8, 16 }, new byte[] { 8, 16, 32 }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new byte[] { 2, 4, 8, 16 }, new byte[] { 4, 8, 16, 32 }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new byte[] { 2, 4, 8, 16 }, new byte[] { 32, 64, 1 }, false));
+		
+		// short array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new short[] { 2, 4, 8, 16 }, new short[] { 4, 8, 16 }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new short[] { 2, 4, 8, 16 }, new short[] { 8, 16, 32 }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new short[] { 2, 4, 8, 16 }, new short[] { 4, 8, 16, 32 }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new short[] { 2, 4, 8, 16 }, new short[] { 32, 64, 1 }, false));
+		
+		// int array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new int[] { 2, 4, 8, 16 }, new int[] { 4, 8, 16 }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new int[] { 2, 4, 8, 16 }, new int[] { 8, 16, 32 }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new int[] { 2, 4, 8, 16 }, new int[] { 4, 8, 16, 32 }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new int[] { 2, 4, 8, 16 }, new int[] { 32, 64, 1 }, false));
+			
+		// long array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new long[] { 2, 4, 8, 16 }, new long[] { 4, 8, 16 }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new long[] { 2, 4, 8, 16 }, new long[] { 8, 16, 32 }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new long[] { 2, 4, 8, 16 }, new long[] { 4, 8, 16, 32 }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new long[] { 2, 4, 8, 16 }, new long[] { 32, 64, 1 }, false));	
+		
+		
+		// float array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new float[] { 2, 4, 8, 16 }, new float[] { 4, 8, 16 }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new float[] { 2, 4, 8, 16 }, new float[] { 8, 16, 32 }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new float[] { 2, 4, 8, 16 }, new float[] { 4, 8, 16, 32 }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new float[] { 2, 4, 8, 16 }, new float[] { 32, 64, 1 }, false));	
+		
+		// double array
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new double[] { 2, 4, 8, 16 }, new double[] { 4, 8, 16 }, true));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasAllOrAnyValues(new double[] { 2, 4, 8, 16 }, new double[] { 8, 16, 32 }, false));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new double[] { 2, 4, 8, 16 }, new double[] { 4, 8, 16, 32 }, true));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new double[] { 2, 4, 8, 16 }, new double[] { 32, 64, 1 }, false));	
+	}
 }

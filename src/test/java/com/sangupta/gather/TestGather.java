@@ -113,6 +113,26 @@ public class TestGather {
 		testGatherQuery(2, Gather.where("list").has(true));
 		testGatherQuery(2, Gather.where("list").has(50));
 		testGatherQuery(1, Gather.where("list").has(40));
+		
+		testGatherQuery(0, Gather.where("list").hasAll(new Integer[] { 40, 60 }));
+		testGatherQuery(1, Gather.where("list").hasAny(new Integer[] { 40, 60 }));
+		
+		testGatherQuery(0, Gather.where("list").hasAll(Arrays.asList(new Integer[] { 40, 60 })));
+		testGatherQuery(1, Gather.where("list").hasAny(Arrays.asList(new Integer[] { 40, 60 })));
+	}
+	
+	@Test
+	public void testGatherArrays() {
+		testGatherQuery(2, Gather.where("array").has(36));
+		testGatherQuery(2, Gather.where("array").has(true));
+		testGatherQuery(2, Gather.where("array").has(50));
+		testGatherQuery(1, Gather.where("array").has(40));
+		
+		testGatherQuery(0, Gather.where("array").hasAll(new Integer[] { 40, 60 }));
+		testGatherQuery(1, Gather.where("array").hasAny(new Integer[] { 40, 60 }));
+		
+		testGatherQuery(0, Gather.where("array").hasAll(Arrays.asList(new Integer[] { 40, 60 })));
+		testGatherQuery(1, Gather.where("array").hasAny(Arrays.asList(new Integer[] { 40, 60 })));
 	}
 	
 	@Test
@@ -192,6 +212,8 @@ public class TestGather {
 		
 		List<String> list = new ArrayList<>();
 		
+		Object[] array;
+		
 		public Worker(String name, int age, boolean active, long salary) {
 			this.name = name;
 			this.age = age;
@@ -202,6 +224,8 @@ public class TestGather {
 			this.list.add(String.valueOf(age));
 			this.list.add(String.valueOf(salary));
 			this.list.add(String.valueOf(active));
+			
+			this.array = this.list.toArray(new Object[] {});
 		}
 		
 	}
