@@ -114,16 +114,26 @@ abstract class GatherExecutor {
 	}
 	
 	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount) {
-		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, 0, 0, false);
+		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, numResults, skipCount, false);
 		return resultsOrCount.list;
 	}
 	
+	/**
+	 * The method never returns a <code>null</code>.
+	 * 
+	 * @param collection
+	 * @param gather
+	 * @param numResults
+	 * @param skipCount
+	 * @param countMode
+	 * @return
+	 */
 	static <T> ResultsOrCount<T> getResultsInternal(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount, final boolean countMode) {
+		ResultsOrCount<T> resultsOrCount = new ResultsOrCount<T>();
 		if(collection == null) {
-			return null;
+			return resultsOrCount;
 		}
 		
-		ResultsOrCount<T> resultsOrCount = new ResultsOrCount<T>();
 		if(collection.isEmpty()) {
 			return resultsOrCount;
 		}

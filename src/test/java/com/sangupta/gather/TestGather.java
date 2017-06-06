@@ -11,6 +11,20 @@ import org.junit.Test;
 public class TestGather {
 	
 	@Test
+	public void testGatherLimitedResults() {
+		final List<Worker> workers = getWorkers();
+		
+		Assert.assertEquals(2, Gather.where("age").is(36).find(workers).size());
+		Assert.assertNotNull(Gather.where("age").is(36).findOne(workers));
+		Assert.assertNotNull(Gather.where("age").is(36).findOne(workers, 1));
+		Assert.assertNull(Gather.where("age").is(36).findOne(workers, 2));
+		Assert.assertNull(Gather.where("age").is(36).findOne(workers, 10));
+		
+		Assert.assertNotNull(Gather.where("age").is(36).find(workers, 1));
+		Assert.assertNotNull(Gather.where("age").is(36).find(workers, 1, 1));
+	}
+	
+	@Test
 	public void testGatherAggregation() {
 		final List<Worker> workers = getWorkers();
 		final Worker[] arrayOfWorkers = workers.toArray(new Worker[] {});
@@ -63,6 +77,9 @@ public class TestGather {
 		Assert.assertEquals(0, query.count(null));
 		Assert.assertEquals(0, query.count(new ArrayList<>()));
 		Assert.assertEquals(0, query.count(workers));
+		
+		Assert.assertEquals(0, query.find(null).size());
+		Assert.assertEquals(0, query.find(new ArrayList<>()).size());
 		
 		testGatherQuery(0, Gather.where("noAttribute").existsProperty());
 		testGatherQuery(4, Gather.where("noAttribute").notExistsProperty());
