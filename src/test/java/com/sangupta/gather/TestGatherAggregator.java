@@ -45,17 +45,21 @@ public class TestGatherAggregator {
 		
 		Object instance = new Object();
 		Assert.assertEquals(0, aggregator.getResult(0));
+		Assert.assertEquals(0, aggregator.getUniqueSet().size());
 		
 		aggregator.aggregate(0, instance);
 		Assert.assertEquals(1, aggregator.getResult(0));
+		Assert.assertEquals(1, aggregator.getUniqueSet().size());
 		
 		aggregator.aggregate(0, instance);
 		aggregator.aggregate(0, instance);
 		aggregator.aggregate(0, instance);
 		Assert.assertEquals(1, aggregator.getResult(0));
+		Assert.assertEquals(1, aggregator.getUniqueSet().size());
 		
 		aggregator.aggregate(0, new Object());
 		Assert.assertEquals(2, aggregator.getResult(0));
+		Assert.assertEquals(2, aggregator.getUniqueSet().size());
 		
 		aggregator.aggregate(0, new Object());
 		aggregator.aggregate(0, null);
@@ -64,6 +68,7 @@ public class TestGatherAggregator {
 		aggregator.aggregate(0, new Object());
 		aggregator.aggregate(0, null);
 		Assert.assertEquals(5, aggregator.getResult(0));
+		Assert.assertEquals(5, aggregator.getUniqueSet().size());
 	}
 
 	@Test

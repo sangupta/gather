@@ -127,6 +127,21 @@ public class TestGather {
 		try { Gather.where("age").is("36").in(new ArrayList<>()); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 	}
 	
+	@Test
+	public void testQueryExecutionErrors() {
+		try { Gather.sumAsLong(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.sumAsDouble(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		
+		try { Gather.maxAsLong(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.maxAsDouble(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		
+		try { Gather.minAsLong(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.minAsDouble(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		
+		try { Gather.averageAsLong(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.averageAsDouble(getWorkers(), "name"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+	}
+	
 	private boolean testGatherQuery(int expected, Gather query) {
 		List<Worker> result = query.find(this.getWorkers());
 		if(expected == 0) {
