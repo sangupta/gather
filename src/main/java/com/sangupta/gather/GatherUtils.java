@@ -86,6 +86,14 @@ abstract class GatherUtils {
 	}
 	
 	static boolean contains(byte[] array, Object value) {
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Number) {
+			return contains(array, (Number) value);
+		}
+		
 		return false;
 	}
 	
@@ -109,6 +117,14 @@ abstract class GatherUtils {
 	}
 	
 	static boolean contains(short[] array, Object value) {
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Number) {
+			return contains(array, (Number) value);
+		}
+		
 		return false;
 	}
 	
@@ -132,6 +148,14 @@ abstract class GatherUtils {
 	}
 	
 	static boolean contains(int[] array, Object value) {
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Number) {
+			return contains(array, (Number) value);
+		}
+		
 		return false;
 	}
 	
@@ -155,6 +179,14 @@ abstract class GatherUtils {
 	}
 	
 	static boolean contains(long[] array, Object value) {
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Number) {
+			return contains(array, (Number) value);
+		}
+		
 		return false;
 	}
 	
@@ -178,6 +210,14 @@ abstract class GatherUtils {
 	}
 	
 	static boolean contains(float[] array, Object value) {
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Number) {
+			return contains(array, (Number) value);
+		}
+		
 		return false;
 	}
 	
@@ -201,6 +241,14 @@ abstract class GatherUtils {
 	}
 	
 	static boolean contains(double[] array, Object value) {
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Number) {
+			return contains(array, (Number) value);
+		}
+		
 		return false;
 	}
 	
