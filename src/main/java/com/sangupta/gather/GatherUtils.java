@@ -21,6 +21,7 @@
 
 package com.sangupta.gather;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -336,4 +337,725 @@ abstract class GatherUtils {
 		
 		return null;
 	}
+	
+	static boolean containsAllOrAny(boolean[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof boolean[]) {
+			boolean[] required = (boolean[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(boolean item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Boolean[]) {
+			Boolean[] required = (Boolean[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(boolean item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Boolean) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(char[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof char[]) {
+			char[] required = (char[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(char item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Character[]) {
+			Character[] required = (Character[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Character item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Character) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(byte[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof byte[]) {
+			byte[] required = (byte[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(byte item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Number[]) {
+			Number[] required = (Number[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Number item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Number) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(short[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof short[]) {
+			short[] required = (short[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(short item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Number[]) {
+			Number[] required = (Number[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Number item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Number) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(int[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof int[]) {
+			int[] required = (int[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(int item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Number[]) {
+			Number[] required = (Number[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Number item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Number) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(long[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof long[]) {
+			long[] required = (long[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(long item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Number[]) {
+			Number[] required = (Number[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Number item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Number) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(float[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof float[]) {
+			float[] required = (float[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(float item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Number[]) {
+			Number[] required = (Number[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Number item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Number) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(double[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof double[]) {
+			double[] required = (double[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(double item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Number[]) {
+			Number[] required = (Number[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Number item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult;
+				if(item instanceof Number) {
+					itemResult = contains(array, item);
+				} else {
+					itemResult = false;
+				}
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
 }

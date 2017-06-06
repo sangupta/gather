@@ -297,44 +297,44 @@ abstract class GatherExecutor {
 //			return GatherUtils.containsAll(collection, requiredValue);
 //		}
 //		
-//		// check for array
-//		if(fieldValue.getClass().isArray()) {
+		// check for array
+		if(fieldValue.getClass().isArray()) {
 //			if(fieldValue instanceof Object[]) {
 //				return GatherUtils.containsAll((Object[]) fieldValue, requiredValue); 
 //			}
 //			
-//			if(fieldValue instanceof char[]) {
-//				return GatherUtils.containsAll((char[]) fieldValue, requiredValue);
-//			}
-//			
-//			if(fieldValue instanceof boolean[]) {
-//				return GatherUtils.containsAll((boolean[]) fieldValue, requiredValue);
-//			}
-//			
-//			if(fieldValue instanceof byte[]) {
-//				return GatherUtils.containsAll((byte[]) fieldValue, number);
-//			}
-//			
-//			if(fieldValue instanceof int[]) {
-//				return GatherUtils.containsAll((int[]) fieldValue, number);
-//			}
-//			
-//			if(fieldValue instanceof short[]) {
-//				return GatherUtils.containsAll((short[]) fieldValue, number);
-//			}
-//			
-//			if(fieldValue instanceof long[]) {
-//				return GatherUtils.containsAll((long[]) fieldValue, number);
-//			}
-//			
-//			if(fieldValue instanceof float[]) {
-//				return GatherUtils.containsAll((float[]) fieldValue, number);
-//			}
-//			
-//			if(fieldValue instanceof double[]) {
-//				return GatherUtils.containsAll((double[]) fieldValue, number);
-//			}
-//		}
+			if(fieldValue instanceof char[]) {
+				return GatherUtils.containsAllOrAny((char[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof boolean[]) {
+				return GatherUtils.containsAllOrAny((boolean[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof byte[]) {
+				return GatherUtils.containsAllOrAny((byte[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof int[]) {
+				return GatherUtils.containsAllOrAny((int[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof short[]) {
+				return GatherUtils.containsAllOrAny((short[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof long[]) {
+				return GatherUtils.containsAllOrAny((long[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof float[]) {
+				return GatherUtils.containsAllOrAny((float[]) fieldValue, requiredValue, true);
+			}
+			
+			if(fieldValue instanceof double[]) {
+				return GatherUtils.containsAllOrAny((double[]) fieldValue, requiredValue, true);
+			}
+		}
 		
 		// not sure what to do
 		return false;
