@@ -1,6 +1,7 @@
 package com.sangupta.gather;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -28,6 +29,10 @@ public class TestGather {
 		Assert.assertEquals(37.5d, Gather.averageAsDouble(workers, "age"));
 		
 		Assert.assertEquals(4, Gather.count(workers, "age"));
+		
+		Assert.assertEquals(3, Gather.unique(workers, "age").size());
+		Assert.assertEquals(2, Gather.unique(workers, "active").size());
+		Assert.assertEquals(3, Gather.unique(workers, "salary").size());
 
 		// on array next
 		Assert.assertEquals(150l, Gather.sumAsLong(arrayOfWorkers, "age"));
@@ -43,6 +48,10 @@ public class TestGather {
 		Assert.assertEquals(37.5d, Gather.averageAsDouble(arrayOfWorkers, "age"));
 		
 		Assert.assertEquals(4, Gather.count(arrayOfWorkers, "age"));
+		
+		Assert.assertEquals(3, Gather.unique(arrayOfWorkers, "age").size());
+		Assert.assertEquals(2, Gather.unique(arrayOfWorkers, "active").size());
+		Assert.assertEquals(3, Gather.unique(arrayOfWorkers, "salary").size());
 	}
 	
 	@Test
@@ -91,6 +100,31 @@ public class TestGather {
 		testGatherQuery(0, Gather.hasProperty("sex"));
 		
 		testGatherQuery(0, Gather.where("sex").is(Gender.Male));
+		
+		testGatherQuery(3, Gather.where("salary").in(new Object[] { 40l, 50l}));
+		testGatherQuery(3, Gather.where("salary").in(Arrays.asList(new Object[] { 40l, 50l})));
+	}
+	
+	@Test
+	public void testQueryBuilderErrors() {
+		try { Gather.where("name").and("age"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").or("age"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").not(); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").is("gupta"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").isNull(); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").isNotNull(); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").isIgnoreCase("gupta"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").like("gupta"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").regex("gupta"); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("name").is("sandeep").regex(Pattern.compile("gupta")); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		
+		try { Gather.where("age").is("36").greaterThan(40); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("age").is("36").greaterThanOrEquals(40); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("age").is("36").lessThan(40); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("age").is("36").lessThanOrEquals(40); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		
+		try { Gather.where("age").is("36").in(new Object[] { 40 }); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
+		try { Gather.where("age").is("36").in(new ArrayList<>()); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 	}
 	
 	private boolean testGatherQuery(int expected, Gather query) {

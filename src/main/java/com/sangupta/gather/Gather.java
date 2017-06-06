@@ -251,6 +251,10 @@ public class Gather {
 	 * @return
 	 */
 	public Gather isNull() {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin, this.inverse));
 		return fluent();
 	}
@@ -261,7 +265,29 @@ public class Gather {
 	 * @return
 	 */
 	public Gather isNotNull() {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.IsNull, null, this.siblingJoin, true));
+		return fluent();
+	}
+	
+	public Gather in(Collection<?> collection) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.In, collection, this.siblingJoin, true));
+		return fluent();
+	}
+	
+	public Gather in(Object[] array) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
+		this.criteria.add(new GatherCriteria(this.key, GatherOperation.In, array, this.siblingJoin, true));
 		return fluent();
 	}
 	
@@ -272,6 +298,10 @@ public class Gather {
 	 * @return
 	 */
 	public Gather isIgnoreCase(String value) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.EqualsIgnoreCase, value, this.siblingJoin, this.inverse));
 		return fluent();
 	}
@@ -283,6 +313,10 @@ public class Gather {
 	 * @return
 	 */
 	public Gather like(String pattern) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.WildcardMatch, pattern, this.siblingJoin, this.inverse));
 		return fluent();
 	}
@@ -294,6 +328,10 @@ public class Gather {
 	 * @return
 	 */
 	public Gather regex(String pattern) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin, this.inverse));
 		return fluent();
 	}
@@ -305,26 +343,46 @@ public class Gather {
 	 * @return
 	 */
 	public Gather regex(Pattern pattern) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.RegexMatch, pattern, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	
 	public Gather greaterThan(Object value) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThan, value, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	
 	public Gather greaterThanOrEquals(Object value) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.GreaterThanOrEquals, value, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	
 	public Gather lessThan(Object value) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.LessThan, value, this.siblingJoin, this.inverse));
 		return fluent();
 	}
 	
 	public Gather lessThanOrEquals(Object value) {
+		if(this.key == null) {
+			throw new IllegalArgumentException("Operation needs a key to work upon");
+		}
+		
 		this.criteria.add(new GatherCriteria(this.key, GatherOperation.LessThanOrEquals, value, this.siblingJoin, this.inverse));
 		return fluent();
 	}
