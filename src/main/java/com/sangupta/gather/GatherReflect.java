@@ -27,6 +27,54 @@ import java.util.Arrays;
 import java.util.List;
 
 abstract class GatherReflect {
+	
+	static class FieldAndInstance {
+		
+		final Field field;
+		
+		final Object instance;
+		
+		FieldAndInstance(Field field, Object instance) {
+			this.field = field;
+			this.instance = instance;
+		}
+	}
+	
+	static <T> FieldAndInstance getFieldAndInstance(T item, String key) {
+		if(!key.contains(".")) {
+			// this is a plain request
+			return new FieldAndInstance(getField(item, key), item);
+		}
+		
+		// this is a composed object
+		String[] tokens = key.split("\\.");
+		
+		Object instance = item;
+		Field field = null;
+		
+		for(int index = 0; index < tokens.length; index++) {
+			String token = tokens[index];
+			field = getField(instance, token);
+			if(field == null) {
+				return null;
+			}
+			
+			if(index == tokens.length - 1) {
+				// this is the last token
+				return new FieldAndInstance(field, instance);
+			}
+			
+			field.setAccessible(true);
+			
+			try {
+				instance = field.get(instance);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				throw new RuntimeException("Unable to get hold of field from class");
+			}
+		}
+		
+		return null;
+	}
 
 	static <T> Field getField(T item, String key) {
 		if(item == null) {
@@ -35,6 +83,10 @@ abstract class GatherReflect {
 		
 		if(key == null || key.trim().isEmpty()) {
 			return null;
+		}
+		
+		if(key.contains(".")) {
+			// TODO: this is a composed object
 		}
 		
 		Class<?> classOfT = item.getClass();

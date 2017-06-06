@@ -61,6 +61,30 @@ query.find(employees, 5, 10);
 int numResults = query.count(employees);
 ```
 
+## Composed Objects and Keys
+
+`Gather` supports composed objects and keys in the `where` clause based on them. For example: the
+following query will search all objects in the collection/array called `children` which have an `age`
+attribute and its value is less than `40`.
+
+```java
+Gather query = Gather.where("children.age").lessThan(10);
+
+query.find(employees);
+
+public class Employee {
+
+	public List<Child> children;
+
+}
+
+public class Child {
+
+	public int age;
+	
+}
+```
+
 ## Features
 
 * Gathering operations
@@ -120,11 +144,11 @@ boolean second = evaluate("age < 50");
 boolean third = evaluate("status == 'active'");
 return first & second | third;
 ```
-  
+
 ## TODO
 
-* composed object handling
-* type conversion
+* More type conversion
+* More unit tests
 
 ## Versioning
 

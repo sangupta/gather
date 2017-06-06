@@ -24,6 +24,8 @@ package com.sangupta.gather;
 import org.junit.Assert;
 import org.junit.Test;
 
+import com.sangupta.gather.GatherReflect.FieldAndInstance;
+
 public class TestGatherReflect {
 
 	
@@ -55,15 +57,46 @@ public class TestGatherReflect {
 		GatherReflect.populateAllFields(Object.class, null);
 	}
 	
+	@Test
+	public void testCompositeKey() throws IllegalArgumentException, IllegalAccessException {
+		FieldAndInstance fi = GatherReflect.getFieldAndInstance(new TestClassB(), "tc.ta.td.age");
+		Assert.assertNotNull(fi);
+		Assert.assertNotNull(fi.field);
+		Assert.assertNotNull(fi.instance);
+		
+		fi.field.setAccessible(true);
+		
+		Object value = fi.field.get(fi.instance);
+		Assert.assertEquals(53, value);
+	}
+	
 	private static class TestClassA {
 		
 		private int intField;
+		
+		private TestClassD td = new TestClassD();
 		
 	}
 	
 	private static class TestClassB extends TestClassA {
 		
 		private int longField;
+		
+		private TestClassC tc = new TestClassC(); 
+		
+	}
+	
+	private static class TestClassC {
+		
+		private int size = 10;
+		
+		private TestClassA ta = new TestClassA();
+		
+	}
+	
+	private static class TestClassD {
+		
+		private int age = 53;
 		
 	}
 }

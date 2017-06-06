@@ -27,6 +27,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import com.sangupta.gather.GatherReflect.FieldAndInstance;
+
 /**
  * The query executor that takes a {@link Gather} query and fires it against a given
  * collection of objects.
@@ -207,27 +209,27 @@ abstract class GatherExecutor {
 	 * @return
 	 */
 	static <T> boolean matchCriteria(T item, GatherCriteria criteria) {
-		Field field = GatherReflect.getField(item, criteria.key);
+		FieldAndInstance fieldAndInstance = GatherReflect.getFieldAndInstance(item, criteria.key);
 		
 		if(criteria.operation == GatherOperation.HasProperty) {
-			if(field != null) {
+			if(fieldAndInstance.field != null) {
 				return true;
 			}
 			
 			return false;
 		}
 		
-		if(field == null) {
+		if(fieldAndInstance.field == null) {
 			return false;
 		}
 		
 		// allow field to be read
-		field.setAccessible(true);
+		fieldAndInstance.field.setAccessible(true);
 		
 		// get the value from the object instance
 		Object value;
 		try {
-			value = field.get(item);
+			value = fieldAndInstance.field.get(fieldAndInstance.instance);
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			throw new RuntimeException("Unable to read value of field", e);
 		}

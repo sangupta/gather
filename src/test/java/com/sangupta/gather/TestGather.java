@@ -11,8 +11,11 @@ import org.junit.Test;
 public class TestGather {
 	
 	public static void main(String[] args) {
-		Gather query = Gather.where("name").in(new Object[] { "Amit Modi", "Sandeep Gupta" }).and("salary").lessThan(50l);
-		System.out.println(query.find(getWorkers()).size());
+		Gather query = Gather.where("name").in(new Object[] { "Amit Modi", "Sandeep Gupta" }).and("salary").lessThanOrEquals(50l);
+		List<Worker> result = query.find(getWorkers());
+		for(Worker worker : result) {
+			System.out.println(worker);
+		}
 	}
 	
 	@Test
@@ -235,6 +238,11 @@ public class TestGather {
 		List<String> list = new ArrayList<>();
 		
 		Object[] array;
+		
+		@Override
+		public String toString() {
+			return this.name + ", age=" + this.age + ", active=" + this.active + ", salary=" + this.salary;
+		}
 		
 		public Worker(String name, int age, boolean active, long salary) {
 			this.name = name;
