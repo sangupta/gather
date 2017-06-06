@@ -152,6 +152,8 @@ public class TestGatherExecutor {
 		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "is"));
 		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(list, "sunny"));
 		
+		// object array
+		
 		Integer[] array = new Integer[] { 2, 3, 5, 7, 9, 11, 13, 17, 19 };
 		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(array, 0));
 		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(array, 1));
@@ -160,6 +162,73 @@ public class TestGatherExecutor {
 		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(array, 2));
 		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(array, 13));
 		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(array, 19));
+		
+		// char array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new char[] { 'a', 'b', 'c' }, 'a'));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new char[] { 'a', 'b', 'c' }, 'b'));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new char[] { 'a', 'b', 'c' }, 'c'));
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new char[] { 'a', 'b', 'c' }, 'A'));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new char[] { 'a', 'b', 'c' }, 'B'));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new char[] { 'a', 'b', 'c' }, 'C'));
+		
+		// boolean array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new boolean[] { false, false }, false));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new boolean[] { false, false }, true));
+		
+		// byte array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new byte[] { 12, 14 }, 12));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new byte[] { 12, 14 }, 14));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new byte[] { 12, 14  }, 11));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new byte[] { 12, 14 }, 13));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new byte[] { 12, 14 }, 15));
+		
+		// short array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new short[] { 12, 14 }, 12));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new short[] { 12, 14 }, 14));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new short[] { 12, 14  }, 11));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new short[] { 12, 14 }, 13));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new short[] { 12, 14 }, 15));
+		
+		// int array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new int[] { 12, 14 }, 12));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new int[] { 12, 14 }, 14));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new int[] { 12, 14  }, 11));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new int[] { 12, 14 }, 13));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new int[] { 12, 14 }, 15));
+		
+		// long array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new long[] { 12, 14 }, 12));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new long[] { 12, 14 }, 14));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new long[] { 12, 14  }, 11));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new long[] { 12, 14 }, 13));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new long[] { 12, 14 }, 15));
+		
+		// float array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new float[] { 12, 14 }, 12));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new float[] { 12, 14 }, 14));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new float[] { 12, 14  }, 11));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new float[] { 12, 14 }, 13));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new float[] { 12, 14 }, 15));
+		
+		// double array
+		
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new double[] { 12, 14 }, 12));
+		Assert.assertTrue(GatherExecutor.handleCollectionHasValue(new double[] { 12, 14 }, 14));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new double[] { 12, 14  }, 11));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new double[] { 12, 14 }, 13));
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new double[] { 12, 14 }, 15));
+		
+		// unknown
+		
+		Assert.assertFalse(GatherExecutor.handleCollectionHasValue(new double[] { 12, 14 }, true));
 	}
 	
 	@Test

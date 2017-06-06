@@ -388,12 +388,12 @@ abstract class GatherExecutor {
 				return GatherUtils.contains((byte[]) fieldValue, number);
 			}
 			
-			if(fieldValue instanceof int[]) {
-				return GatherUtils.contains((int[]) fieldValue, number);
-			}
-			
 			if(fieldValue instanceof short[]) {
 				return GatherUtils.contains((short[]) fieldValue, number);
+			}
+			
+			if(fieldValue instanceof int[]) {
+				return GatherUtils.contains((int[]) fieldValue, number);
 			}
 			
 			if(fieldValue instanceof long[]) {
