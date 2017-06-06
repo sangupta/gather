@@ -21,7 +21,9 @@
 
 package com.sangupta.gather;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Pattern;
@@ -619,5 +621,101 @@ public class TestGatherUtils {
 		
 		Assert.assertFalse(GatherUtils.containsAllOrAny(new double[] { 'a', 'b', 'c' }, new Object(), false));
 		Assert.assertFalse(GatherUtils.containsAllOrAny(new double[] { 'a', 'b', 'c' }, new Object(), false));
+	}
+	
+	@Test
+	public void testContainsAllOrAnyObjectArray() {
+		// basic checks
+		Assert.assertFalse(GatherUtils.containsAllOrAny((Object[]) null, new double[] { 12 }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny((Object[]) null, new double[] { 12 }, false));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { }, new double[] { 12 }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { }, new double[] { 12 }, false));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, null, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, null, false));
+				
+		// all clause
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'a', 'b', 'c' }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'b', 'd' }, true));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'a', 'b', 'c' }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'b', 'd' }, true));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { 'a', 'b', 'c' }), true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { 'b', 'd' }), true));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { new Object() }), true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { new Object() }), true));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object(), true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object(), true));
+		
+		// any clause
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'a', 'b', 'c' }, false));
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'b', 'd' }, false));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'a', 'b', 'c' }, false));
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object[] { 'b', 'd' }, false));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { 'a', 'b', 'c' }), false));
+		Assert.assertTrue(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { 'b', 'd' }), false));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { new Object() }), false));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, Arrays.asList(new Object[] { new Object() }), false));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object(), false));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(new Object[] { 'a', 'b', 'c' }, new Object(), false));
+	}
+	
+	@Test
+	public void testContainsAllOrAnyObjectCollection() {
+		// basic checks
+		Assert.assertFalse(GatherUtils.containsAllOrAny((List<Object>) null, new double[] { 12 }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny((List<Object>) null, new double[] { 12 }, false));
+		
+		List<Character> list = new ArrayList<>();
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new double[] { 12 }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new double[] { 12 }, false));
+		
+		list.add('a');
+		list.add('b');
+		list.add('c');
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, null, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, null, false));
+				
+		// all clause
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, new Object[] { 'a', 'b', 'c' }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object[] { 'b', 'd' }, true));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, new Object[] { 'a', 'b', 'c' }, true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object[] { 'b', 'd' }, true));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { 'a', 'b', 'c' }), true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { 'b', 'd' }), true));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { new Object() }), true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { new Object() }), true));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object(), true));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object(), true));
+		
+		// any clause
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, new Object[] { 'a', 'b', 'c' }, false));
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, new Object[] { 'b', 'd' }, false));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, new Object[] { 'a', 'b', 'c' }, false));
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, new Object[] { 'b', 'd' }, false));
+		
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { 'a', 'b', 'c' }), false));
+		Assert.assertTrue(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { 'b', 'd' }), false));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { new Object() }), false));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, Arrays.asList(new Object[] { new Object() }), false));
+		
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object(), false));
+		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object(), false));
 	}
 }

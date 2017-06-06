@@ -276,12 +276,15 @@ abstract class GatherExecutor {
 		}
 	}
 
-	private static boolean handleCollectionHasAnyValue(Object fieldValue, Object requiredValue) {
-		// TODO Auto-generated method stub
-		return false;
+	static boolean handleCollectionHasAnyValue(Object fieldValue, Object requiredValue) {
+		return handleCollectionHasAllOrAnyValues(fieldValue, requiredValue, false);
 	}
 
-	private static boolean handleCollectionHasAllValues(Object fieldValue, Object requiredValue) {
+	static boolean handleCollectionHasAllValues(Object fieldValue, Object requiredValue) {
+		return handleCollectionHasAllOrAnyValues(fieldValue, requiredValue, true);
+	}
+	
+	private static boolean handleCollectionHasAllOrAnyValues(Object fieldValue, Object requiredValue, boolean usingAllClause) {
 		if(fieldValue == null) {
 			return false;
 		}
@@ -290,49 +293,49 @@ abstract class GatherExecutor {
 			return false;
 		}
 		
-//		// check for collection
-//		if(fieldValue instanceof Collection) {
-//			Collection<?> collection = (Collection<?>) fieldValue;
-//			
-//			return GatherUtils.containsAll(collection, requiredValue);
-//		}
-//		
+		// check for collection
+		if(fieldValue instanceof Collection) {
+			Collection<?> collection = (Collection<?>) fieldValue;
+			
+			return GatherUtils.containsAllOrAny(collection, requiredValue, usingAllClause);
+		}
+		
 		// check for array
 		if(fieldValue.getClass().isArray()) {
-//			if(fieldValue instanceof Object[]) {
-//				return GatherUtils.containsAll((Object[]) fieldValue, requiredValue); 
-//			}
-//			
+			if(fieldValue instanceof Object[]) {
+				return GatherUtils.containsAllOrAny((Object[]) fieldValue, requiredValue, usingAllClause); 
+			}
+			
 			if(fieldValue instanceof char[]) {
-				return GatherUtils.containsAllOrAny((char[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((char[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof boolean[]) {
-				return GatherUtils.containsAllOrAny((boolean[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((boolean[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof byte[]) {
-				return GatherUtils.containsAllOrAny((byte[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((byte[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof int[]) {
-				return GatherUtils.containsAllOrAny((int[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((int[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof short[]) {
-				return GatherUtils.containsAllOrAny((short[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((short[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof long[]) {
-				return GatherUtils.containsAllOrAny((long[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((long[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof float[]) {
-				return GatherUtils.containsAllOrAny((float[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((float[]) fieldValue, requiredValue, usingAllClause);
 			}
 			
 			if(fieldValue instanceof double[]) {
-				return GatherUtils.containsAllOrAny((double[]) fieldValue, requiredValue, true);
+				return GatherUtils.containsAllOrAny((double[]) fieldValue, requiredValue, usingAllClause);
 			}
 		}
 		

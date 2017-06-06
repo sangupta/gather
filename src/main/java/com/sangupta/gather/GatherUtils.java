@@ -1106,4 +1106,128 @@ abstract class GatherUtils {
 		return false;
 	}
 	
+	static boolean containsAllOrAny(Object[] array, Object value, boolean usingAllClause) {
+		if(array == null) {
+			return false;
+		}
+		
+		if(array.length == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Object[]) {
+			Object[] required = (Object[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult = contains(array, item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult = contains(array, item);
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
+	static boolean containsAllOrAny(Collection<?> collection, Object value, boolean usingAllClause) {
+		if(collection == null) {
+			return false;
+		}
+		
+		if(collection.size() == 0) {
+			return false;
+		}
+		
+		if(value == null) {
+			return false;
+		}
+		
+		if(value instanceof Object[]) {
+			Object[] required = (Object[]) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult = collection.contains(item);
+				
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		if(value instanceof Collection<?>) {
+			Collection<?> required = (Collection<?>) value;
+			
+			boolean result;
+			if(usingAllClause) {
+				result = true;
+			} else {
+				result = false;
+			}
+			
+			for(Object item : required) {
+				boolean itemResult = collection.contains(item);
+
+				if(usingAllClause) {
+					result = result & itemResult;
+				} else {
+					result = result | itemResult;
+				}
+			}
+			
+			return result;
+		}
+		
+		return false;
+	}
+	
 }
