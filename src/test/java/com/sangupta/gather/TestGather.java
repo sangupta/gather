@@ -103,6 +103,16 @@ public class TestGather {
 		
 		testGatherQuery(3, Gather.where("salary").in(new Object[] { 40l, 50l}));
 		testGatherQuery(3, Gather.where("salary").in(Arrays.asList(new Object[] { 40l, 50l})));
+		
+		testGatherQuery(2, Gather.where("age").is(32).or("age").is(46));
+	}
+	
+	@Test
+	public void testGatherCollections() {
+		testGatherQuery(2, Gather.where("list").has(36));
+		testGatherQuery(2, Gather.where("list").has(true));
+		testGatherQuery(2, Gather.where("list").has(50));
+		testGatherQuery(1, Gather.where("list").has(40));
 	}
 	
 	@Test
@@ -172,19 +182,26 @@ public class TestGather {
 	
 	static class Worker {
 		
-		private String name;
+		String name;
 		
-		private int age;
+		int age;
 		
-		private boolean active;
+		boolean active;
 		
-		private long salary;
+		long salary;
+		
+		List<String> list = new ArrayList<>();
 		
 		public Worker(String name, int age, boolean active, long salary) {
 			this.name = name;
 			this.age = age;
 			this.active = active;
 			this.salary = salary;
+			
+			this.list.add(name);
+			this.list.add(String.valueOf(age));
+			this.list.add(String.valueOf(salary));
+			this.list.add(String.valueOf(active));
 		}
 		
 	}
