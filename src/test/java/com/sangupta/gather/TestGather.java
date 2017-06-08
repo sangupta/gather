@@ -38,6 +38,10 @@ public class TestGather {
 		final Worker[] arrayOfWorkers = workers.toArray(new Worker[] {});
 		
 		// on list first
+		GatherAggregator aggregator = new GatherAggregator.CountingAggregator();
+		Gather.aggregate(workers, "age", aggregator);
+		Assert.assertEquals(4, aggregator.getResult(0));
+		
 		Assert.assertEquals(150l, Gather.sumAsLong(workers, "age"));
 		Assert.assertEquals(150d, Gather.sumAsDouble(workers, "age"));
 		
@@ -57,6 +61,10 @@ public class TestGather {
 		Assert.assertEquals(3, Gather.unique(workers, "salary").size());
 
 		// on array next
+		aggregator = new GatherAggregator.CountingAggregator();
+		Gather.aggregate(arrayOfWorkers, "age", aggregator);
+		Assert.assertEquals(4, aggregator.getResult(0));
+		
 		Assert.assertEquals(150l, Gather.sumAsLong(arrayOfWorkers, "age"));
 		Assert.assertEquals(150d, Gather.sumAsDouble(arrayOfWorkers, "age"));
 		

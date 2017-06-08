@@ -91,6 +91,7 @@ public class Child {
   * `find` - find all matching objects, with options to skip elements and/or limit number of matches
   * `findOne` - find the first matching object
   * `count` - count the total number of matching objects
+  * `aggregate` - run a custom aggregator on a collection/array for a given field
 * Supported operations
   * `is` - equals match
   * `isIgnoreCase` - equals match ignoring case on strings
@@ -112,17 +113,17 @@ public class Child {
   * `and` - Boolean AND between two clauses
   * `or` - Boolean OR between two clauses
 * Aggregation operations
-  * `averageAsLong`
-  * `averageAsDouble`
+  * `averageAsLong` - find average value of a field which has no decimal part
+  * `averageAsDouble` - find average value of a field which has a decimal part
   * `minAsLong` - find minimum value of a field which has no decimal part
   * `minAsDouble` - find minimum value of a field which has a decimal part
-  * `maxAsLong`
-  * `maxAsDouble`
-  * `sumAsLong`
-  * `sumAsDouble`
-  * `count`
-  * `unique`
-
+  * `maxAsLong` - find maximum value of a field which has no decimal part
+  * `maxAsDouble` - find maximum value of a field which has a decimal part
+  * `sumAsLong` - find total sum of value of a field which has no decimal part
+  * `sumAsDouble` - find total sum of value of a field which has a decimal part
+  * `unique` - find the number of unique objects from the result set
+  * `count` - count objects in a collection/array which have a given field
+  
 ## Clause chaining and Evaluation
 
 When more than one clause is added to the query and Boolean operations like `AND` or `OR` are used
@@ -144,11 +145,6 @@ boolean second = evaluate("age < 50");
 boolean third = evaluate("status == 'active'");
 return first & second | third;
 ```
-
-## TODO
-
-* More type conversion
-* More unit tests
 
 ## Versioning
 

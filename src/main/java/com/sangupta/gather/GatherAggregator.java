@@ -24,7 +24,7 @@ package com.sangupta.gather;
 import java.util.HashSet;
 import java.util.Set;
 
-interface GatherAggregator {
+public interface GatherAggregator {
 	
 	public void aggregate(int index, Object value);
 	

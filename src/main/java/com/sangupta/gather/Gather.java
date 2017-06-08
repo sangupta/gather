@@ -70,6 +70,14 @@ public class Gather {
 	// AGGREGATION METHODS FOLLOW
 	// ***************************************
 	
+	public static <T> void aggregate(Collection<T> collection, String key, GatherAggregator aggregator) {
+		GatherExecutor.aggregate(collection, key, aggregator);
+	}
+	
+	public static <T> void aggregate(Object[] array, String key, GatherAggregator aggregator) {
+		GatherExecutor.aggregate(array, key, aggregator);
+	}
+	
 	public static <T> Set<Object> unique(Collection<T> collection, String key) {
 		GatherAggregator.UniqueAggregator aggregator = new GatherAggregator.UniqueAggregator();
 		GatherExecutor.aggregate(collection, key, aggregator);
