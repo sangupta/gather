@@ -269,9 +269,12 @@ interface GatherAggregator {
 			count++;
 		}
 		
+		/**
+		 * @param counted the parameter value is not used and ignored
+		 */
 		@Override
 		public Number getResult(int counted) {
-			if(count == 0) {
+			if(this.count == 0) {
 				return 0d;
 			}
 			

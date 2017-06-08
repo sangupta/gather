@@ -154,6 +154,7 @@ public class TestGatherAggregator {
 		}
 		
 		Assert.assertEquals(result / counted, aggregator.getResult(counted));
+		Assert.assertEquals(0d, new DoubleAverageAggregator().getResult(0));
 	}
 	
 	@Test
@@ -224,5 +225,8 @@ public class TestGatherAggregator {
 		}
 		
 		Assert.assertEquals(result / counted, aggregator.getResult(counted));
+		Assert.assertEquals(0d, new LongAverageAggregator().getResult(0));
+		
+		try { new LongAverageAggregator().aggregate(1, new Object()); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 	}
 }
