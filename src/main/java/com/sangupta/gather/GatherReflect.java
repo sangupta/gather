@@ -41,6 +41,14 @@ abstract class GatherReflect {
 	}
 	
 	static <T> FieldAndInstance getFieldAndInstance(T item, String key) {
+		if(item == null) {
+			return null;
+		}
+		
+		if(key == null) {
+			return null;
+		}
+		
 		if(!key.contains(".")) {
 			// this is a plain request
 			return new FieldAndInstance(getField(item, key), item);

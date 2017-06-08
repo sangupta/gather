@@ -21,6 +21,7 @@
 
 package com.sangupta.gather;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -729,5 +730,29 @@ public class TestGatherUtils {
 		
 		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object(), false));
 		Assert.assertFalse(GatherUtils.containsAllOrAny(list, new Object(), false));
+	}
+	
+	@Test
+	public void testCompareNumbers() {
+		Assert.assertTrue(GatherUtils.compareNumbers((byte) 32, 64d) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers((short) 32, 64d) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers((int) 32, 64d) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers((long) 32, 64d) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers((float) 32, 64d) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers((double) 32, new AtomicLong(64)) < 0);
+		
+		Assert.assertTrue(GatherUtils.compareNumbers(new AtomicInteger(32), new AtomicLong(64)) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new AtomicLong(32), (short) 64) < 0);
+		
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), new BigDecimal(64)) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), (byte) 64) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), (short) 64) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), (int) 64) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), (long) 64) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), (float) 64) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), (double) 64) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), new AtomicInteger(64)) < 0);
+		Assert.assertTrue(GatherUtils.compareNumbers(new BigDecimal(32), new AtomicLong(64)) < 0);
+		
 	}
 }

@@ -28,6 +28,12 @@ import com.sangupta.gather.GatherReflect.FieldAndInstance;
 
 public class TestGatherReflect {
 
+	@Test
+	public void testGetFieldAndInstance() {
+		Assert.assertNull(GatherReflect.getFieldAndInstance(null, "hello"));
+		Assert.assertNull(GatherReflect.getFieldAndInstance(new Object(), null));
+		Assert.assertNull(GatherReflect.getFieldAndInstance(new TestClassB(), "tc.ta.tc.age"));
+	}
 	
 	@Test
 	public void testGetField() {
