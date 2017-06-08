@@ -39,6 +39,18 @@ import com.sangupta.gather.GatherAggregator.CountingAggregator;
 public class TestGatherExecutor {
 	
 	@Test
+	public void testMatches() {
+		Assert.assertFalse(GatherExecutor.matches(null, Gather.where("name").is("sangupta")));
+		Assert.assertFalse(GatherExecutor.matches(new Object(), null));
+	}
+	
+	@Test
+	public void testHandleRegexMatch() {
+		Assert.assertFalse(GatherExecutor.handleRegexMatch(null, new Object()));
+		Assert.assertFalse(GatherExecutor.handleRegexMatch(new Object(), null));
+	}
+	
+	@Test
 	public void testAggregate() {
 		Assert.assertNull(GatherExecutor.aggregate((Collection<?>) null, null, null));
 		Assert.assertNull(GatherExecutor.aggregate((Object[]) null, null, null));

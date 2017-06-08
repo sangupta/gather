@@ -173,6 +173,10 @@ abstract class GatherExecutor {
 			return false;
 		}
 		
+		if(gather == null) {
+			return false;
+		}
+		
 		if(gather.criteria.isEmpty()) {
 			return true;
 		}
