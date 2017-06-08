@@ -21,6 +21,7 @@
 
 package com.sangupta.gather;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -1228,6 +1229,107 @@ abstract class GatherUtils {
 		}
 		
 		return false;
+	}
+
+	public static int compareNumbers(Number fieldValue, Number requiredValue) {
+		if(fieldValue instanceof Byte) {
+			Byte field = fieldValue.byteValue();
+			Byte required = requiredValue.byteValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof Short) {
+			Short field = fieldValue.shortValue();
+			Short required = requiredValue.shortValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof Integer) {
+			Integer field = fieldValue.intValue();
+			Integer required = requiredValue.intValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof Long) {
+			Long field = fieldValue.longValue();
+			Long required = requiredValue.longValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof Float) {
+			Float field = fieldValue.floatValue();
+			Float required = requiredValue.floatValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof Double) {
+			Double field = fieldValue.doubleValue();
+			Double required = requiredValue.doubleValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof AtomicInteger) {
+			Integer field = ((AtomicInteger) fieldValue).intValue();
+			Integer required = requiredValue.intValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof AtomicLong) {
+			Long field = ((AtomicLong) fieldValue).longValue();
+			Long required = requiredValue.longValue();
+			
+			return field.compareTo(required);
+		}
+		
+		if(fieldValue instanceof BigDecimal) {
+			BigDecimal field = (BigDecimal) fieldValue;
+			
+			if(requiredValue instanceof BigDecimal) {
+				return field.compareTo((BigDecimal) requiredValue);
+			}
+			
+			if(requiredValue instanceof Byte) {
+				return field.compareTo(new BigDecimal(requiredValue.byteValue()));
+			}
+			
+			if(requiredValue instanceof Short) {
+				return field.compareTo(new BigDecimal(requiredValue.shortValue()));
+			}
+			
+			if(requiredValue instanceof Integer) {
+				return field.compareTo(new BigDecimal(requiredValue.intValue()));
+			}
+			
+			if(requiredValue instanceof Long) {
+				return field.compareTo(new BigDecimal(requiredValue.longValue()));
+			}
+			
+			if(requiredValue instanceof Float) {
+				return field.compareTo(new BigDecimal(requiredValue.floatValue()));
+			}
+			
+			if(requiredValue instanceof Double) {
+				return field.compareTo(new BigDecimal(requiredValue.doubleValue()));
+			}
+			
+			if(requiredValue instanceof AtomicInteger) {
+				return field.compareTo(new BigDecimal(requiredValue.intValue()));
+			}
+			
+			if(requiredValue instanceof AtomicLong) {
+				return field.compareTo(new BigDecimal(requiredValue.longValue()));
+			}
+		}
+		
+		// TODO: allow adding converter for handling numbers
+		throw new RuntimeException("Cannot compare values of type " + fieldValue.getClass() + " and " + requiredValue.getClass());
 	}
 	
 }

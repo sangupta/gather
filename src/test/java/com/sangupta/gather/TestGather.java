@@ -11,7 +11,7 @@ import org.junit.Test;
 public class TestGather {
 	
 	public static void main(String[] args) {
-		Gather query = Gather.where("name").in(new Object[] { "Amit Modi", "Sandeep Gupta" }).and("salary").lessThanOrEquals(50l);
+		Gather query = Gather.where("name").in(new Object[] { "Amit Modi", "Sandeep Gupta" }).and("salary").lessThanOrEquals(20d);
 		List<Worker> result = query.find(getWorkers());
 		for(Worker worker : result) {
 			System.out.println(worker);

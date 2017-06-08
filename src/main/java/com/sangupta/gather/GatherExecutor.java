@@ -491,6 +491,19 @@ abstract class GatherExecutor {
 			return false;
 		}
 		
+		if(requiredValue == null) {
+			return false;
+		}
+		
+		if(fieldValue instanceof Number) {
+			if(!(requiredValue instanceof Number)) {
+				return false;
+			}
+			
+			int result = GatherUtils.compareNumbers((Number) fieldValue, (Number) requiredValue);
+			return compareOperation.test(result);
+		}
+		
 		if(fieldValue instanceof Comparable) {
 			@SuppressWarnings("unchecked")
 			Comparable<Object> comparable = (Comparable<Object>) fieldValue;
@@ -499,17 +512,6 @@ abstract class GatherExecutor {
 			return compareOperation.test(result);
 		}
 
-//		if(GatherUtils.isNumberType(fieldValue)) {
-//			Number field = GatherUtils.asNumber(fieldValue);
-//			Number required = GatherUtils.asNumber(requiredValue);
-//			
-//			if(field != null) {
-//				if(required == null) {
-//					return false;
-//				}
-//			}
-//		}
-		
 		// TODO: handle when comparable is not implemented
 		return false;
 	}
