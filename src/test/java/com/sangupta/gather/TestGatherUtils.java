@@ -73,6 +73,8 @@ public class TestGatherUtils {
 	
 	@Test
 	public void testContainsByteArray() {
+		Assert.assertFalse(GatherUtils.contains((byte[]) null, (Object) null));
+		
 		Assert.assertFalse(GatherUtils.contains((byte[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((byte[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new byte[] {}, null));
@@ -92,6 +94,8 @@ public class TestGatherUtils {
 	
 	@Test
 	public void testContainsShortArray() {
+		Assert.assertFalse(GatherUtils.contains((short[]) null, (Object) null));
+		
 		Assert.assertFalse(GatherUtils.contains((short[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((short[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new short[] {}, null));
@@ -111,6 +115,8 @@ public class TestGatherUtils {
 	
 	@Test
 	public void testContainsIntegerArray() {
+		Assert.assertFalse(GatherUtils.contains((int[]) null, (Object) null));
+		
 		Assert.assertFalse(GatherUtils.contains((int[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((int[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new int[] {}, null));
@@ -130,6 +136,8 @@ public class TestGatherUtils {
 	
 	@Test
 	public void testContainsLongArray() {
+		Assert.assertFalse(GatherUtils.contains((long[]) null, (Object) null));
+		
 		Assert.assertFalse(GatherUtils.contains((long[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((long[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new long[] {}, null));
@@ -149,6 +157,8 @@ public class TestGatherUtils {
 	
 	@Test
 	public void testContainsFloatArray() {
+		Assert.assertFalse(GatherUtils.contains((float[]) null, (Object) null));
+		
 		Assert.assertFalse(GatherUtils.contains((float[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((float[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new float[] {}, null));
@@ -168,6 +178,8 @@ public class TestGatherUtils {
 	
 	@Test
 	public void testContainsDoubleArray() {
+		Assert.assertFalse(GatherUtils.contains((double[]) null, (Object) null));
+		
 		Assert.assertFalse(GatherUtils.contains((double[]) null, null));
 		Assert.assertFalse(GatherUtils.contains((double[]) null, new Object()));
 		Assert.assertFalse(GatherUtils.contains(new double[] {}, null));

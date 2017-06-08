@@ -321,4 +321,15 @@ public class TestGatherExecutor {
 		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new double[] { 2, 4, 8, 16 }, new double[] { 4, 8, 16, 32 }, true));
 		Assert.assertFalse(GatherExecutor.handleCollectionHasAllOrAnyValues(new double[] { 2, 4, 8, 16 }, new double[] { 32, 64, 1 }, false));	
 	}
+	
+	@Test
+	public void testHandleNumericComparison() {
+		Assert.assertFalse(GatherExecutor.handleNumericComparison(null, 123, GatherNumericComparison.LESS_THAN));
+		Assert.assertFalse(GatherExecutor.handleNumericComparison(123, null, GatherNumericComparison.LESS_THAN));
+		
+		Assert.assertFalse(GatherExecutor.handleNumericComparison(123, new Object(), GatherNumericComparison.LESS_THAN));
+		Assert.assertTrue(GatherExecutor.handleNumericComparison('a', 'b', GatherNumericComparison.LESS_THAN));
+		Assert.assertFalse(GatherExecutor.handleNumericComparison(new Object(), new Object(), GatherNumericComparison.LESS_THAN));
+	}
+	
 }
