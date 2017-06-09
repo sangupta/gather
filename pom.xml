@@ -14,7 +14,7 @@
 
 	<groupId>com.sangupta</groupId>
 	<artifactId>gather</artifactId>
-	<version>1.0.0</version>
+	<version>1.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>gather</name>
