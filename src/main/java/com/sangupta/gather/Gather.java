@@ -207,7 +207,9 @@ public class Gather {
 	 * Check if the attribute value is equivalent to the given value.
 	 * 
 	 * @param value
-	 * @return
+	 *            the object value to compare against
+	 * 
+	 * @return this {@link Gather} instance
 	 */
 	public Gather is(Object value) {
 		if(this.key == null) {
@@ -256,7 +258,7 @@ public class Gather {
 	/**
 	 * Check if the attribute value is <code>null</code>.
 	 * 
-	 * @return
+	 * @return this {@link Gather} instance
 	 */
 	public Gather isNull() {
 		if(this.key == null) {
@@ -270,7 +272,7 @@ public class Gather {
 	/**
 	 * Check if the attribute value is <code>null</code>.
 	 * 
-	 * @return
+	 * @return this {@link Gather} instance
 	 */
 	public Gather isNotNull() {
 		if(this.key == null) {
@@ -303,7 +305,9 @@ public class Gather {
 	 * Check if the attribute value equals to the given value ignoring case.
 	 * 
 	 * @param value
-	 * @return
+	 *            {@link String} value to compare against
+	 * 
+	 * @return this {@link Gather} instance
 	 */
 	public Gather isIgnoreCase(String value) {
 		if(this.key == null) {
@@ -315,10 +319,13 @@ public class Gather {
 	}
 	
 	/**
-	 * Check if the attribute value matches the given value as a wildcard pattern.
+	 * Check if the attribute value matches the given value as a wildcard
+	 * pattern.
 	 * 
 	 * @param pattern
-	 * @return
+	 *            <code>wildcard</code> pattern to compare against
+	 * 
+	 * @return this {@link Gather} instance
 	 */
 	public Gather like(String pattern) {
 		if(this.key == null) {
@@ -330,10 +337,13 @@ public class Gather {
 	}
 	
 	/**
-	 * Check if the attribute value matches the given value as a regular-expression match.
+	 * Check if the attribute value matches the given value as a
+	 * regular-expression match.
 	 * 
 	 * @param pattern
-	 * @return
+	 *            <code>regex</code> pattern to compare against
+	 * 
+	 * @return this {@link Gather} instance
 	 */
 	public Gather regex(String pattern) {
 		if(this.key == null) {
@@ -345,10 +355,13 @@ public class Gather {
 	}
 	
 	/**
-	 * Check if the attribute value matches the given value as a regular-expression match.
+	 * Check if the attribute value matches the given value as a
+	 * regular-expression match.
 	 * 
 	 * @param pattern
-	 * @return
+	 *            regex {@link Pattern} to compare against
+	 * 
+	 * @return this {@link Gather} instance
 	 */
 	public Gather regex(Pattern pattern) {
 		if(this.key == null) {
@@ -411,8 +424,9 @@ public class Gather {
 	 * Execute the query over the given collection of objects.
 	 * 
 	 * @param collection
-	 * @param classOfT
-	 * @return
+	 *            the collection to run {@link Gather} query against
+	 * 
+	 * @return the results, if any, found after running the query
 	 */
 	public <T> List<T> find(Collection<T> collection) {
 		return GatherExecutor.getResults(collection, this, 0, 0);
