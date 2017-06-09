@@ -4,7 +4,10 @@
 [![Coveralls](https://img.shields.io/coveralls/sangupta/gather.svg)]()
 [![license](https://img.shields.io/github/license/sangupta/gather.svg)]()
 
-`Gather` is a library to fire SQL like queries on Java collections.
+`Gather` is an ultra-lightweight, 37KB, no dependencies library to fire SQL like queries on Java collections
+and arrays. The data is not inserted into any in-memory database, nor any index is created. The query is matched
+against all the objects (could be different types as well) against the provided query. Useful to run ad-hoc
+queries and aggregation functions, say on XML/JSON/CSV and more.
 
 The library is tested on the following JDK versions:
 
@@ -145,6 +148,45 @@ boolean second = evaluate("age < 50");
 boolean third = evaluate("status == 'active'");
 return first & second | third;
 ```
+## Downloads
+
+The latest stable release of the library can be downloaded via the Maven Central using the following coordinates:
+
+```xml
+<dependency>
+  <groupId>com.sangupta</groupId>
+  <artifactId>gather</artifactId>
+  <version>1.0.0</version>
+</dependency>
+```
+
+The current/latest development snapshot `JAR` can be obtained using `JitPack.io` as:
+
+Add the following repository to Maven,
+
+```xml
+<repository>
+  <id>jitpack.io</id>
+  <url>https://jitpack.io</url>
+</repository>
+```
+
+Then add the dependency as,
+
+```xml
+<dependency>
+    <groupId>com.github.sangupta</groupId>
+    <artifactId>gather</artifactId>
+    <version>-SNAPSHOT</version>
+</dependency>
+```
+
+## Release Notes
+
+**1.0.0 (9 Jun 2017)** 
+
+* First stable release
+
 
 ## Versioning
 
