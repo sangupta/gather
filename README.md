@@ -15,6 +15,16 @@ The library is tested on the following JDK versions:
 * Oracle JDK 7
 * Open JDK 7
 
+## Usecases
+
+The library is useful in the following scenarios:
+
+* Run ad-hoc queries during development to debug data-sets and tweak DB queries
+* Run ad-hoc queries on production data via some admin interface
+* Query on objects of different types in one-shot, say `List<Object>` than `List<Employee>`
+* Works with JDK 7 and legacy code
+
+
 ## Usage Examples
 
 ```java
