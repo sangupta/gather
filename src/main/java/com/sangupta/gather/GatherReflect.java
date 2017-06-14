@@ -24,9 +24,13 @@ package com.sangupta.gather;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 abstract class GatherReflect {
+	
+	static Map<String, Field> CACHE = new HashMap<>();
 	
 	static class FieldAndInstance {
 		
@@ -93,6 +97,12 @@ abstract class GatherReflect {
 			return null;
 		}
 		
+		String cachedKey = item.getClass().getName() + ":" + key;
+		Field cached = CACHE.get(cachedKey);
+		if(cached != null) {
+			return cached;
+		}
+		
 		if(key.contains(".")) {
 			// TODO: this is a composed object
 		}
@@ -106,6 +116,7 @@ abstract class GatherReflect {
 		// TODO: optimize this
 		for(Field field : fields) {
 			if(field.getName().equals(key)) {
+				CACHE.put(cachedKey, field);
 				return field;
 			}
 		}

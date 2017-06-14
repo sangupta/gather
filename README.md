@@ -161,7 +161,25 @@ return first & second | third;
 
 ## Performance
 
-**Version 1.0.0**
+All tests run on my Macbook Pro (mid-2015), 2.5GHz Intel i7, 16GB RAM, OS X 10.12.5
+running Oracle JDK 1.8.0_101. The tests were run from inside Eclipse Neon.2 (4.6.2) release.
+
+**Caveat:** Your mileage may vary.  
+
+### Current Snapshot
+
+I added some basic caching to get get attributes via reflection and that seems to have boosted the
+performance. Current numbers are:
+
+```
+Benchmark                                      Mode  Cnt  Score   Error  Units
+TestGatherPerformance.testLikePerformance     thrpt   20  5.177 ± 0.052  ops/s
+TestGatherPerformance.testNumericPerformance  thrpt   20  4.901 ± 0.039  ops/s
+```
+
+This is a 54% improvement on `like` performance and `49%` improvement on `age` performance.
+
+### Version 1.0.0
 
 I have added a JMH performance measurement class, `TestGatherPerformance`. The performance numbers are:
 
