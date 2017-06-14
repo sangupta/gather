@@ -158,6 +158,26 @@ boolean second = evaluate("age < 50");
 boolean third = evaluate("status == 'active'");
 return first & second | third;
 ```
+
+## Performance
+
+**Version 1.0.0**
+
+I have added a JMH performance measurement class, `TestGatherPerformance`. The performance numbers are:
+
+* Generate a random million records with a `String` attribute `name` and an `int` attribute `age`
+* Fire a `like` query over the `name`
+* Fire a `lessThan` query over the `age`
+
+```
+Benchmark                                      Mode  Cnt  Score   Error  Units
+TestGatherPerformance.testLikePerformance     thrpt   20  3.359 ± 0.024  ops/s
+TestGatherPerformance.testNumericPerformance  thrpt   20  3.271 ± 0.023  ops/s
+```
+
+Note that this version is NOT optimized for performance, and does not include what-so-ever caching on
+the reflection layer. 
+
 ## Downloads
 
 The latest stable release of the library can be downloaded via the Maven Central using the following coordinates:
