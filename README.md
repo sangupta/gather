@@ -136,7 +136,13 @@ public class Child {
   * `sumAsDouble` - find total sum of value of a field which has a decimal part
   * `unique` - find the number of unique objects from the result set
   * `count` - count objects in a collection/array which have a given field
-  
+
+## RoadMap
+
+* Support for `uniqueAs("someKey", String.class)` to return `Set<String>` than `Set<Object>`
+* Support for `groupBy("someKey")` to return a `Map<Object, List<Object>>`
+* Support to work on `arrays` along with `Collections`
+
 ## Clause chaining and Evaluation
 
 When more than one clause is added to the query and Boolean operations like `AND` or `OR` are used
