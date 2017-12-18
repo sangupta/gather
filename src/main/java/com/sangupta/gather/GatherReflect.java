@@ -30,7 +30,9 @@ import java.util.Map;
 
 abstract class GatherReflect {
 	
-	static Map<String, Field> CACHE = new HashMap<>();
+	static final Map<String, Field> CLASS_FIELD_KEY_CACHE = new HashMap<>();
+	
+	static final Map<Class<?>, List<Field>> FIELDS_IN_CLASS_CACHE = new HashMap<>();
 	
 	static class FieldAndInstance {
 		
@@ -98,7 +100,7 @@ abstract class GatherReflect {
 		}
 		
 		String cachedKey = item.getClass().getName() + ":" + key;
-		Field cached = CACHE.get(cachedKey);
+		Field cached = CLASS_FIELD_KEY_CACHE.get(cachedKey);
 		if(cached != null) {
 			return cached;
 		}
@@ -113,25 +115,31 @@ abstract class GatherReflect {
 			return null;
 		}
 		
-		// TODO: optimize this
 		for(Field field : fields) {
 			if(field.getName().equals(key)) {
-				CACHE.put(cachedKey, field);
+				CLASS_FIELD_KEY_CACHE.put(cachedKey, field);
 				return field;
 			}
 		}
 		
 		return null;
 	}
-
+	
 	static List<Field> getAllFields(Class<?> clazz) {
 		if(clazz == null) {
 			return null;
 		}
 		
-		// TODO: implement caching for faster retrievals
-        List<Field> fields = new ArrayList<>();
+		List<Field> fields = FIELDS_IN_CLASS_CACHE.get(clazz);
+		if(fields != null) {
+			return fields;
+		}
+		
+        fields = new ArrayList<>();
         populateAllFields(clazz, fields);
+        
+        FIELDS_IN_CLASS_CACHE.put(clazz, fields);
+        
         return fields;
     }
     
