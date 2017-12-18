@@ -115,6 +115,11 @@ abstract class GatherExecutor {
 		return resultsOrCount.count;
 	}
 	
+	static <T> int count(final Object[] array, final Gather gather) {
+		ResultsOrCount<T> resultsOrCount = getResultsInternal(array, gather, 0, 0, true);
+		return resultsOrCount.count;
+	}
+	
 	static <T> List<T> getResults(final Collection<T> collection, final Gather gather, final int numResults, final int skipCount) {
 		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, numResults, skipCount, false);
 		return resultsOrCount.list;

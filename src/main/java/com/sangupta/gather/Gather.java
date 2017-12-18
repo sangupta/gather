@@ -408,6 +408,13 @@ public class Gather {
 		return fluent();
 	}
 	
+	/**
+	 * Count the number of objects that match the given criteria
+	 * in the given collection.
+	 * 
+	 * @param collection
+	 * @return
+	 */
 	public <T> int count(Collection<T> collection) {
 		if(collection == null) {
 			return 0;
@@ -418,6 +425,18 @@ public class Gather {
 		}
 		
 		return GatherExecutor.count(collection, this);
+	}
+	
+	public <T> int count(Object[] array) {
+		if(array == null) {
+			return 0;
+		}
+		
+		if(array.length == 0) {
+			return 0;
+		}
+		
+		return GatherExecutor.count(array, this);
 	}
 	
 	/**
