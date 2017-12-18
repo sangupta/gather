@@ -115,7 +115,7 @@ abstract class GatherExecutor {
 		return resultsOrCount.count;
 	}
 	
-	static <T> int count(final Object[] array, final Gather gather) {
+	static <T> int count(final T[] array, final Gather gather) {
 		ResultsOrCount<T> resultsOrCount = getResultsInternal(array, gather, 0, 0, true);
 		return resultsOrCount.count;
 	}
@@ -142,6 +142,54 @@ abstract class GatherExecutor {
 		}
 		
 		if(collection.isEmpty()) {
+			return resultsOrCount;
+		}
+		
+		// run filtering criteria first
+		int skipped = 0;
+		for(T item : collection) {
+			if(matches(item, gather)) {
+				// skip elements asked for
+				if(skipCount > 0 && skipped < skipCount) {
+					skipped++;
+					continue;
+				}
+				
+				// add the result - we need this item
+				// either as count or as an actual result
+				if(countMode) {
+					resultsOrCount.count++;
+				} else {
+					resultsOrCount.add(item);
+				}
+				
+				// break if we have accumulated enough results
+				if(numResults > 0 && resultsOrCount.size() == numResults) {
+					return resultsOrCount;
+				}
+			}
+		}
+		
+		return resultsOrCount;
+	}
+	
+	/**
+	 * The method never returns a <code>null</code>.
+	 * 
+	 * @param collection
+	 * @param gather
+	 * @param numResults
+	 * @param skipCount
+	 * @param countMode
+	 * @return
+	 */
+	static <T> ResultsOrCount<T> getResultsInternal(final T[] collection, final Gather gather, final int numResults, final int skipCount, final boolean countMode) {
+		ResultsOrCount<T> resultsOrCount = new ResultsOrCount<T>();
+		if(collection == null) {
+			return resultsOrCount;
+		}
+		
+		if(collection.length == 0) {
 			return resultsOrCount;
 		}
 		

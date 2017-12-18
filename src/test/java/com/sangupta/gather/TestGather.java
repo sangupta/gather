@@ -111,7 +111,7 @@ public class TestGather {
 		
 		Gather query = Gather.where("name").is("sandeep");
 		
-		Assert.assertEquals(0, query.count(null));
+		Assert.assertEquals(0, query.count((Object[]) null));
 		Assert.assertEquals(0, query.count(new ArrayList<>()));
 		Assert.assertEquals(0, query.count(workers));
 		
