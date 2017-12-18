@@ -409,11 +409,13 @@ public class Gather {
 	}
 	
 	/**
-	 * Count the number of objects that match the given criteria
-	 * in the given collection.
+	 * Count the number of objects that match the given criteria in the given
+	 * collection.
 	 * 
 	 * @param collection
-	 * @return
+	 *            the {@link Collection} to count items in
+	 * 
+	 * @return the number of items that matched the criteria
 	 */
 	public <T> int count(Collection<T> collection) {
 		if(collection == null) {
