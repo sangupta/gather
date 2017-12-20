@@ -41,7 +41,7 @@ import com.sangupta.gather.TestGather.Worker;
  * @author sangupta
  *
  */
-@BenchmarkMode(Mode.All)
+@BenchmarkMode(Mode.AverageTime)
 public class TestGatherPerformance {
 	
 	static final List<Worker> workers = new ArrayList<>();
