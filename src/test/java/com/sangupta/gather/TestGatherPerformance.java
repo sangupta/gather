@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Random;
 
 import org.openjdk.jmh.annotations.Benchmark;
+import org.openjdk.jmh.annotations.BenchmarkMode;
+import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.runner.Runner;
 import org.openjdk.jmh.runner.RunnerException;
 import org.openjdk.jmh.runner.options.Options;
@@ -39,6 +41,7 @@ import com.sangupta.gather.TestGather.Worker;
  * @author sangupta
  *
  */
+@BenchmarkMode(Mode.All)
 public class TestGatherPerformance {
 	
 	static final List<Worker> workers = new ArrayList<>();
@@ -69,7 +72,12 @@ public class TestGatherPerformance {
 	}
 
 	public static void main(String[] args) throws RunnerException {
-		Options options = new OptionsBuilder().include(TestGatherPerformance.class.getSimpleName()).forks(1).build();
+		Options options = new OptionsBuilder().include(TestGatherPerformance.class.getSimpleName())
+											 .warmupIterations(5)
+											 .measurementIterations(5)
+											 .threads(5)
+										     .forks(5)
+										     .build();
 
 		new Runner(options).run();
 	}
