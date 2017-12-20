@@ -6,12 +6,6 @@
     	
 	<modelVersion>4.0.0</modelVersion>
 
-	<parent>
-        <groupId>org.sonatype.oss</groupId>
-        <artifactId>oss-parent</artifactId>
-        <version>9</version>
-    </parent>
-
 	<groupId>com.sangupta</groupId>
 	<artifactId>gather</artifactId>
 	<version>1.0.1-SNAPSHOT</version>
@@ -33,7 +27,6 @@
 	    <connection>scm:git:ssh://git@github.com/sangupta/gather.git</connection>
 	    <developerConnection>scm:git:ssh://git@github.com/sangupta/gather.git</developerConnection>
 	    <url>https://github.com/sangupta/gather</url>
-	  <tag>HEAD</tag>
   	</scm>
 	
 	<developers>
@@ -53,6 +46,17 @@
         <build.timestamp>${maven.build.timestamp}</build.timestamp>
         <build.number />
 	</properties>
+
+    <distributionManagement>
+        <snapshotRepository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+        </snapshotRepository>
+        <repository>
+            <id>ossrh</id>
+            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+        </repository>
+    </distributionManagement>
 
 	<dependencies>
 		<dependency>
@@ -82,118 +86,82 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.5.1</version>
+				<version>3.7.0</version>
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
 			</plugin>
-			
-			<!-- Report the coverage to coveralls -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>cobertura-maven-plugin</artifactId>
-                <version>2.7</version>
-                <configuration>
-                    <format>xml</format>
-                    <maxmem>256m</maxmem>
-                    <aggregate>true</aggregate>
-                    <skip>false</skip>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eluder.coveralls</groupId>
-                <artifactId>coveralls-maven-plugin</artifactId>
-                <version>4.3.0</version>
-            </plugin>
-
-            <!-- Generate the project-javadoc.jar for OSS repository -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.4</version>
-                <configuration>
-                    <detectOfflineLinks>false</detectOfflineLinks>
-                    <breakiterator>true</breakiterator>
-                    <version>false</version>
-                    <author>false</author>
-                    <keywords>true</keywords>
-                </configuration>
-            </plugin>
-
-            <!-- Generate the project-sources.jar for OSS repository -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.0.1</version>
-                <executions>
-                    <!-- ~ This workaround prevents Maven from executing the 'generate-sources' 
-                        phase twice. ~ See http://jira.codehaus.org/browse/MSOURCES-13 ~ and http://blog.peterlynch.ca/2010/05/maven-how-to-prevent-generate-sources.html -->
-                    <execution>
-                        <id>attach-sources</id>
-                        <phase>invalid</phase>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>attach-sources-no-fork</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            
-            <plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.4.0</version>
-				<configuration>
-					<executable>java</executable>
-					<arguments>
-						<argument>-classpath</argument>
-						<classpath />
-						<argument>com.sangupta.gather.TestGatherPerformance</argument>
-					</arguments>
-				</configuration>
-			</plugin>
-			<plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>exec-maven-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>run-benchmarks</id>
-                            <phase>integration-test</phase>
-                            <goals>
-                                <goal>exec</goal>
-                            </goals>
-                            <configuration>
-                                <classpathScope>test</classpathScope>
-                                <executable>java</executable>
-                                <arguments>
-                                    <argument>-classpath</argument>
-                                    <classpath />
-                                    <argument>org.openjdk.jmh.Main</argument>
-                                    <argument>.*</argument>
-                                </arguments>
-                            </configuration>
-                        </execution>
-                    </executions>
-                </plugin>
 		</plugins>
 	</build>
 	
-	<profiles>
+    <profiles>
         <profile>
-            <id>release</id>    
+            <id>release</id>
             <build>
                 <plugins>
+                    <!-- Report the coverage to coveralls -->
+                    <plugin>
+                        <groupId>org.eluder.coveralls</groupId>
+                        <artifactId>coveralls-maven-plugin</artifactId>
+                        <version>4.3.0</version>
+                    </plugin>
+
+                    <!-- Generate the project-javadoc.jar for OSS repository -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-javadoc-plugin</artifactId>
+                        <version>3.0.0</version>
+                        <executions>
+                            <execution>
+                                <id>attach-javadocs</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                        <configuration>
+                            <detectOfflineLinks>false</detectOfflineLinks>
+                            <breakiterator>true</breakiterator>
+                            <version>false</version>
+                            <author>false</author>
+                            <keywords>true</keywords>
+                        </configuration>
+                    </plugin>
+
+                    <!-- Generate the project-sources.jar for OSS repository -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-source-plugin</artifactId>
+                        <version>3.0.1</version>
+                        <executions>
+                            <execution>
+                                <id>attach-sources</id>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+
+                    <!-- run the nexus staging for deploy goals -->
+                    <plugin>
+                        <groupId>org.sonatype.plugins</groupId>
+                        <artifactId>nexus-staging-maven-plugin</artifactId>
+                        <version>1.6.8</version>
+                        <extensions>true</extensions>
+                        <configuration>
+                            <serverId>ossrh</serverId>
+                            <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                            <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                        </configuration>
+                    </plugin>
+
                     <!-- Sign the Maven artifacts -->
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
+                        <version>1.6</version>
                         <executions>
                             <execution>
                                 <id>sign-artifacts</id>
@@ -203,10 +171,24 @@
                                 </goals>
                             </execution>
                         </executions>
-                    </plugin>           
+                    </plugin>
+
+                    <!-- Allow release plugin to be used -->
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-release-plugin</artifactId>
+                        <version>2.5.3</version>
+                        <configuration>
+                            <autoVersionSubmodules>true</autoVersionSubmodules>
+                            <useReleaseProfile>false</useReleaseProfile>
+                            <releaseProfiles>release</releaseProfiles>
+                            <goals>deploy</goals>
+                        </configuration>
+                    </plugin>
                 </plugins>
             </build>
         </profile>
+
     </profiles>
 	
 </project>
