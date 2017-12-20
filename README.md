@@ -11,6 +11,7 @@ queries and aggregation functions, say on XML/JSON/CSV and more.
 
 The library is tested on the following JDK versions:
 
+* Oracle JDK 9
 * Oracle JDK 8
 * Oracle JDK 7
 * Open JDK 7
@@ -87,13 +88,13 @@ query.find(employees);
 
 public class Employee {
 
-	public List<Child> children;
+  public List<Child> children;
 
 }
 
 public class Child {
 
-	public int age;
+  public int age;
 	
 }
 ```
@@ -141,7 +142,6 @@ public class Child {
 
 * Support for `uniqueAs("someKey", String.class)` to return `Set<String>` than `Set<Object>`
 * Support for `groupBy("someKey")` to return a `Map<Object, List<Object>>`
-* Support to work on `arrays` along with `Collections`
 
 ## Clause chaining and Evaluation
 
