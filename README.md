@@ -16,6 +16,20 @@ The library is tested on the following JDK versions:
 * Oracle JDK 7
 * Open JDK 7
 
+## Table of Contents
+
+* [Usecases](#usecases)
+* [Usage Examples](#usage-examples)
+* [Composed Objects and Keys](#composed-object-and-keys)
+* [Features](#features)
+* [Roadmap](#roadmap)
+* [Clause chaining and Evaluation](#clause-chaining-and-evaluation)
+* [Performance](#performance)
+* [Downloads](#downloads)
+* [Release Notes](#release-notes)
+* [Versioning](#versioning)
+* [License](#license)
+
 ## Usecases
 
 The library is useful in the following scenarios:
@@ -23,7 +37,7 @@ The library is useful in the following scenarios:
 * Run ad-hoc queries during development to debug data-sets and tweak DB queries
 * Run ad-hoc queries on production data via some admin interface
 * Query on objects of different types in one-shot, say `List<Object>` than `List<Employee>`
-* Works with JDK 7 and legacy code
+* Works with JDK 9, 8, 7 and legacy code
 
 
 ## Usage Examples
@@ -237,7 +251,14 @@ Then add the dependency as,
 
 ## Release Notes
 
-**1.0.0 (9 Jun 2017)** 
+**1.1.0 (20 Dec 2017)**
+
+* Query on `object arrays` than just `Collections`
+* Added caching to improve performance
+* Updated for newer OSSRH release guidelines
+* Updated `javadocs` and copyright headers
+
+**1.0.0 (09 Jun 2017)** 
 
 * First stable release
 
