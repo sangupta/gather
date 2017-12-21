@@ -20,7 +20,7 @@ The library is tested on the following JDK versions:
 
 * [Usecases](#usecases)
 * [Usage Examples](#usage-examples)
-* [Composed Objects and Keys](#composed-object-and-keys)
+* [Composed Objects and Keys](#composed-objects-and-keys)
 * [Features](#features)
 * [Roadmap](#roadmap)
 * [Clause chaining and Evaluation](#clause-chaining-and-evaluation)
@@ -224,7 +224,7 @@ The latest stable release of the library can be downloaded via the Maven Central
 <dependency>
   <groupId>com.sangupta</groupId>
   <artifactId>gather</artifactId>
-  <version>1.0.0</version>
+  <version>1.1.0</version>
 </dependency>
 ```
 
