@@ -4,7 +4,7 @@
 
 	<groupId>com.sangupta</groupId>
 	<artifactId>gather</artifactId>
-	<version>1.2.0</version>
+	<version>1.2.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>gather</name>
@@ -23,7 +23,7 @@
 	    <connection>scm:git:ssh://git@github.com/sangupta/gather.git</connection>
 	    <developerConnection>scm:git:ssh://git@github.com/sangupta/gather.git</developerConnection>
 	    <url>https://github.com/sangupta/gather</url>
-  	  <tag>gather-1.2.0</tag>
+  	  <tag>HEAD</tag>
   </scm>
 	
 	<developers>
