@@ -4,7 +4,7 @@
 
 	<groupId>com.sangupta</groupId>
 	<artifactId>gather</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>gather</name>
@@ -23,7 +23,8 @@
 	    <connection>scm:git:ssh://git@github.com/sangupta/gather.git</connection>
 	    <developerConnection>scm:git:ssh://git@github.com/sangupta/gather.git</developerConnection>
 	    <url>https://github.com/sangupta/gather</url>
-  	</scm>
+  	  <tag>HEAD</tag>
+  </scm>
 	
 	<developers>
 		<developer>
@@ -106,7 +107,7 @@
                       <executable>${java.home}/bin/java</executable>
                       <arguments>
                         <argument>-classpath</argument>
-                        <classpath/>
+                        <classpath />
                         <argument>org.openjdk.jmh.Main</argument>
                         <argument>.*</argument>
                       </arguments>
