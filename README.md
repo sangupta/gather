@@ -224,7 +224,7 @@ The latest stable release of the library can be downloaded via the Maven Central
 <dependency>
   <groupId>com.sangupta</groupId>
   <artifactId>gather</artifactId>
-  <version>1.1.0</version>
+  <version>1.2.0</version>
 </dependency>
 ```
 
@@ -251,7 +251,7 @@ Then add the dependency as,
 
 ## Release Notes
 
-**1.1.0 (20 Dec 2017)**
+**1.2.0 (21 Dec 2017)**
 
 * Query on `object arrays` than just `Collections`
 * Added caching to improve performance
