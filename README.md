@@ -187,6 +187,7 @@ An operation is a query fired over a million objects created randomly for a `LIK
 clause.
 
 | Version  |   Date Run   | `LIKE` clause | %age change | Numeric `GREATER THAN` clause | %age change |
+|----------|--------------|---------------|-------------|-------------------------------|-------------|
 |  1.0.0   | 10 Jan 2018  |     3.240     |     n/a     |        3.215                  |      n/a    |
 |  1.2.0   | 10 Jan 2018  |     4.160     |     +28     |        5.792                  |      +80    |
 | Snapshot | 10 Jan 2018  |     5.322     |     +28     |        5.735                  |      +0     |
