@@ -34,7 +34,8 @@ import java.util.regex.Pattern;
  * is a valid query to be fired on a collection of objects.
  * 
  * @author sangupta
- *
+ * 
+ * @since 1.0.0
  */
 public class Gather {
 	

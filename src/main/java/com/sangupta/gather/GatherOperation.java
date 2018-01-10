@@ -21,6 +21,13 @@
 
 package com.sangupta.gather;
 
+/**
+ * 
+ * @author sangupta
+ * 
+ * @since 1.0.0
+ *
+ */
 enum GatherOperation {
 	
 	CollectionHasValue,

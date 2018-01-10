@@ -34,10 +34,25 @@ import com.sangupta.gather.GatherReflect.FieldAndInstance;
  * collection of objects.
  * 
  * @author sangupta
- *
+ * 
+ * @since 1.0.0 
  */
 abstract class GatherExecutor {
 	
+	/**
+	 * Run the given aggregator on the collection over the given key.
+	 * 
+	 * @param collection
+	 *            Object collection to run aggregation on
+	 * 
+	 * @param key
+	 *            the key to fire aggregation on
+	 * 
+	 * @param aggregator
+	 *            the {@link GatherAggregator} to use
+	 * 
+	 * @return the result of the {@link GatherAggregator} as a {@link Number}
+	 */
 	static <T> Number aggregate(Collection<T> collection, String key, GatherAggregator aggregator) {
 		if(collection == null) {
 			return null;
@@ -63,6 +78,20 @@ abstract class GatherExecutor {
 		return aggregator.getResult(found);
 	}
 	
+	/**
+	 * Run the given aggregator on the collection as array over the given key.
+	 * 
+	 * @param array
+	 *            Object collection as array to run aggregation on
+	 * 
+	 * @param key
+	 *            the key to fire aggregation on
+	 * 
+	 * @param aggregator
+	 *            the {@link GatherAggregator} to use
+	 * 
+	 * @return the result of the {@link GatherAggregator} as a {@link Number}
+	 */
 	static <T> Number aggregate(Object[] array, String key, GatherAggregator aggregator) {
 		if(array == null) {
 			return null;
@@ -88,6 +117,24 @@ abstract class GatherExecutor {
 		return aggregator.getResult(found);
 	}
 	
+	/**
+	 * Run the {@link GatherAggregator} over a single item from the collection.
+	 * 
+	 * @param item
+	 *            A single item from a collection over which we fire the aggregator
+	 * 
+	 * @param key
+	 *            the key to fire aggregator on
+	 * 
+	 * @param aggregator
+	 *            the {@link GatherAggregator} to use
+	 * 
+	 * @param found
+	 *            total number of items that have been found till now
+	 * 
+	 * @return an integer giving total number of items found. An item is called
+	 *         found if there exists an attribute on the object for the given key
+	 */
 	static <T> int aggregateOnItem(T item, String key, GatherAggregator aggregator, int found) {
 		Field field = GatherReflect.getField(item, key);
 		if(field == null) {
@@ -110,11 +157,33 @@ abstract class GatherExecutor {
 		return found;
 	}
 
+	/**
+	 * Count total number of objects that match the given {@link Gather} query.
+	 * 
+	 * @param collection
+	 *            collection of objects to fire query upon
+	 * 
+	 * @param gather
+	 *            the {@link Gather} query to fire
+	 * 
+	 * @return number of objects that matched the query
+	 */
 	static <T> int count(final Collection<T> collection, final Gather gather) {
 		ResultsOrCount<T> resultsOrCount = getResultsInternal(collection, gather, 0, 0, true);
 		return resultsOrCount.count;
 	}
 	
+	/**
+	 * Count total number of objects that match the given {@link Gather} query.
+	 * 
+	 * @param array
+	 *            array of objects to fire query upon
+	 * 
+	 * @param gather
+	 *            the {@link Gather} query to fire
+	 * 
+	 * @return number of objects that matched the query
+	 */
 	static <T> int count(final T[] array, final Gather gather) {
 		ResultsOrCount<T> resultsOrCount = getResultsInternal(array, gather, 0, 0, true);
 		return resultsOrCount.count;
@@ -573,6 +642,18 @@ abstract class GatherExecutor {
 		return false;
 	}
 
+	/**
+	 * Test if the field value is one of the values in given required values
+	 * 
+	 * @param fieldValue
+	 *            the value of the field being tested
+	 *            
+	 * @param requiredValue
+	 *            a group/collection/array of positive values
+	 *            
+	 * @return <code>true</code> if field value is present in collection,
+	 *         <code>false</code> otherwise
+	 */
 	static boolean handleValueIn(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return false;
@@ -601,6 +682,19 @@ abstract class GatherExecutor {
 		return false;
 	}
 
+	/**
+	 * Test if the field value is <code>null</code> or not.
+	 * 
+	 * @param fieldValue
+	 *            the value of the field being tested
+	 *            
+	 * @param requiredValue
+	 *            the expected value from query - in this case always
+	 *            <code>null</code>
+	 *            
+	 * @return <code>true</code> if field value is <code>null</code>,
+	 *         <code>false</code> otherwise
+	 */
 	static boolean handleNull(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return true;
@@ -609,6 +703,17 @@ abstract class GatherExecutor {
 		return false;
 	}
 
+	/**
+	 * Test if the given objects are equal or not, ignoring the case.
+	 * 
+	 * @param fieldValue
+	 *            the value of the field being tested
+	 * 
+	 * @param requiredValue
+	 *            the expected value from query
+	 * 
+	 * @return <code>true</code> if they are equal, <code>false</code> otherwise
+	 */
 	static boolean handleEqualsIgnoreCase(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return false;
@@ -625,7 +730,18 @@ abstract class GatherExecutor {
 		
 		return handleEquals(fieldValue, requiredValue);
 	}
-
+	
+	/**
+	 * Test if the given objects are equal or not.
+	 * 
+	 * @param fieldValue
+	 *            the value of the field being tested
+	 * 
+	 * @param requiredValue
+	 *            the expected value from query
+	 * 
+	 * @return <code>true</code> if they are equal, <code>false</code> otherwise
+	 */
 	static boolean handleEquals(Object fieldValue, Object requiredValue) {
 		if(fieldValue == null) {
 			return false;

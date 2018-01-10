@@ -34,7 +34,8 @@ import java.util.regex.Pattern;
  * Utility functions for the Gather library.
  *  
  * @author sangupta
- *
+ * 
+ * @since 1.0.0
  */
 abstract class GatherUtils {
 	

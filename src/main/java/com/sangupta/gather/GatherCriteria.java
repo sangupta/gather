@@ -25,7 +25,8 @@ package com.sangupta.gather;
  * A single criteria in a {@link Gather} query.
  * 
  * @author sangupta
- *
+ * 
+ * @since 1.0.0
  */
 class GatherCriteria {
 

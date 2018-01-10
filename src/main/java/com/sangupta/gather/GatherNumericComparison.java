@@ -21,6 +21,12 @@
 
 package com.sangupta.gather;
 
+/**
+ * 
+ * @author sangupta
+ * 
+ * @since 1.0.0
+ */
 interface GatherNumericComparison {
 	
 	static final GatherNumericComparison LESS_THAN = new GatherNumericComparison() {

@@ -24,6 +24,12 @@ package com.sangupta.gather;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * 
+ * @author sangupta
+ * 
+ * @since 1.0.0
+ */
 public interface GatherAggregator {
 	
 	public void aggregate(int index, Object value);

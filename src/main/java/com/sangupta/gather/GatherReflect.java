@@ -28,6 +28,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Collection of Java Reflection methods that are used within {@link Gather}
+ * framework.
+ * 
+ * @author sangupta
+ * 
+ * @since 1.0.0
+ */
 abstract class GatherReflect {
 	
 	static final Map<String, Field> CLASS_FIELD_KEY_CACHE = new HashMap<>();
