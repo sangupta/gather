@@ -39,6 +39,9 @@ import java.util.regex.Pattern;
  */
 public class Gather {
 	
+	/**
+	 * List of all {@link GatherCriteria} added to this query
+	 */
 	final List<GatherCriteria> criteria = new ArrayList<>();
 	
 	/**
@@ -51,16 +54,35 @@ public class Gather {
 	 */
 	private GatherSiblingJoin siblingJoin = GatherSiblingJoin.OR;
 	
+	/**
+	 * Is inverse (read NOT) mode on?
+	 */
 	private boolean inverse = false;
 	
 	// ***************************************
 	// STATIC METHODS FOLLOW
 	// ***************************************
 	
+	/**
+	 * Start a WHERE clause
+	 * 
+	 * @param name
+	 *            the name of the WHERE property
+	 * 
+	 * @return this very {@link Gather} instance
+	 */
 	public static Gather where(String name) {
 		return new Gather(name);
 	}
 	
+	/**
+	 * Add a WHERE clause to see if the property exists
+	 * 
+	 * @param name
+	 *            the name of the property
+	 * 
+	 * @return this very {@link Gather} instance
+	 */
 	public static Gather hasProperty(String name) {
 		Gather instance = new Gather(name);
 		instance.existsProperty();
@@ -79,6 +101,17 @@ public class Gather {
 		GatherExecutor.aggregate(array, key, aggregator);
 	}
 	
+	/**
+	 * Find unique values for the given key from collection of objects
+	 * 
+	 * @param collection
+	 *            the collection of objects
+	 * 
+	 * @param key
+	 *            the key being looked for
+	 * 
+	 * @return {@link Set} of unique objects, as <code>Set&lt;Object></code>
+	 */
 	public static <T> Set<Object> unique(Collection<T> collection, String key) {
 		GatherAggregator.UniqueAggregator aggregator = new GatherAggregator.UniqueAggregator();
 		GatherExecutor.aggregate(collection, key, aggregator);
@@ -86,6 +119,17 @@ public class Gather {
 		return aggregator.set;
 	}
 	
+	/**
+	 * Find unique values for the given key from array of objects
+	 * 
+	 * @param collection
+	 *            the collection of objects
+	 * 
+	 * @param key
+	 *            the key being looked for
+	 * 
+	 * @return {@link Set} of unique objects, as <code>Set&lt;Object></code>
+	 */
 	public static <T> Set<Object> unique(Object[] collection, String key) {
 		GatherAggregator.UniqueAggregator aggregator = new GatherAggregator.UniqueAggregator();
 		GatherExecutor.aggregate(collection, key, aggregator);
