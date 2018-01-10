@@ -3,6 +3,7 @@
 [![Travis](https://img.shields.io/travis/sangupta/gather.svg)]()
 [![Coveralls](https://img.shields.io/coveralls/sangupta/gather.svg)]()
 [![license](https://img.shields.io/github/license/sangupta/gather.svg)]()
+[![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/gather.svg)]()
 
 `Gather` is an ultra-lightweight, 37KB, no dependencies library to fire SQL like queries on Java collections
 and arrays. The data is not inserted into any in-memory database, nor any index is created. The query is matched
