@@ -53,15 +53,15 @@ abstract class GatherReflect {
 	}
 
 	static <T> FieldAndInstance getFieldAndInstance(T item, String key) {
-		if(item == null) {
+		if (item == null) {
 			return null;
 		}
 
-		if(key == null) {
+		if (key == null) {
 			return null;
 		}
 
-		if(!key.contains(".")) {
+		if (!key.contains(".")) {
 			// this is a plain request
 			return new FieldAndInstance(getField(item, key), item);
 		}
@@ -72,14 +72,14 @@ abstract class GatherReflect {
 		Object instance = item;
 		Field field = null;
 
-		for(int index = 0; index < tokens.length; index++) {
+		for (int index = 0; index < tokens.length; index++) {
 			String token = tokens[index];
 			field = getField(instance, token);
-			if(field == null) {
+			if (field == null) {
 				return null;
 			}
 
-			if(index == tokens.length - 1) {
+			if (index == tokens.length - 1) {
 				// this is the last token
 				return new FieldAndInstance(field, instance);
 			}
@@ -97,20 +97,20 @@ abstract class GatherReflect {
 	}
 
 	static <T> Field getField(T item, String key) {
-		if(item == null) {
+		if (item == null) {
 			return null;
 		}
 
-		if(key == null || key.trim().isEmpty()) {
+		if (key == null || key.trim().isEmpty()) {
 			return null;
 		}
 
 		Map<String, Field> classCache = CLASS_FIELD_KEY_CACHE.get(item.getClass());
-		if(classCache != null) {
+		if (classCache != null) {
 			return classCache.get(key);
 		}
 
-		if(key.contains(".")) {
+		if (key.contains(".")) {
 			// TODO: this is a composed object
 			return null;
 		}
@@ -121,11 +121,11 @@ abstract class GatherReflect {
 
 		Class<?> classOfT = item.getClass();
 		List<Field> fields = getAllFields(classOfT);
-		if(fields == null || fields.isEmpty()) {
+		if (fields == null || fields.isEmpty()) {
 			return null;
 		}
 
-		for(Field field : fields) {
+		for (Field field : fields) {
 			fieldCache.put(field.getName(), field);
 		}
 
@@ -133,42 +133,27 @@ abstract class GatherReflect {
 	}
 
 	static List<Field> getAllFields(Class<?> clazz) {
-		if(clazz == null) {
+		if (clazz == null) {
 			return null;
 		}
 
-		List<Field> fields = FIELDS_IN_CLASS_CACHE.get(clazz);
-		if(fields != null) {
-			return fields;
+		List<Field> fields = new ArrayList<>();
+		populateAllFields(clazz, fields);
+
+		return fields;
+	}
+
+	static void populateAllFields(Class<?> clazz, List<Field> fields) {
+		Field[] array = clazz.getDeclaredFields();
+		if (array != null && array.length > 0) {
+			fields.addAll(Arrays.asList(array));
 		}
 
-        fields = new ArrayList<>();
-        populateAllFields(clazz, fields);
+		if (clazz.getSuperclass() == null) {
+			return;
+		}
 
-        FIELDS_IN_CLASS_CACHE.put(clazz, fields);
-
-        return fields;
-    }
-
-    static void populateAllFields(Class<?> clazz, List<Field> fields) {
-        if(clazz == null) {
-            return;
-        }
-
-        if(fields == null) {
-        	throw new IllegalArgumentException("List to store fields in cannot be null");
-        }
-
-        Field[] array = clazz.getDeclaredFields();
-        if(array != null && array.length > 0) {
-            fields.addAll(Arrays.asList(array));
-        }
-
-        if(clazz.getSuperclass() == null) {
-            return;
-        }
-
-        populateAllFields(clazz.getSuperclass(), fields);
-    }
+		populateAllFields(clazz.getSuperclass(), fields);
+	}
 
 }
