@@ -144,6 +144,14 @@ abstract class GatherReflect {
 	}
 
 	static void populateAllFields(Class<?> clazz, List<Field> fields) {
+		if (clazz == null) {
+			return;
+		}
+
+		if (fields == null) {
+			throw new IllegalArgumentException("List to store fields in cannot be null");
+		}
+
 		Field[] array = clazz.getDeclaredFields();
 		if (array != null && array.length > 0) {
 			fields.addAll(Arrays.asList(array));
