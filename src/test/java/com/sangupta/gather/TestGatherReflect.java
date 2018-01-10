@@ -34,20 +34,20 @@ public class TestGatherReflect {
 		Assert.assertNull(GatherReflect.getFieldAndInstance(new Object(), null));
 		Assert.assertNull(GatherReflect.getFieldAndInstance(new TestClassB(), "tc.ta.tc.age"));
 	}
-	
+
 	@Test
 	public void testGetField() {
 		Assert.assertNull(GatherReflect.getField(null, "intField"));
 		Assert.assertNull(GatherReflect.getField(null, null));
 		Assert.assertNull(GatherReflect.getField(null, ""));
-		
+
 		Assert.assertNull(GatherReflect.getField(new Object(), "intField"));
 		Assert.assertNull(GatherReflect.getField(new Object(), null));
 		Assert.assertNull(GatherReflect.getField(new Object(), ""));
 
 		Assert.assertNotNull(GatherReflect.getField(new TestClassA(), "intField"));
 		Assert.assertNull(GatherReflect.getField(new TestClassA(), "longField"));
-		
+
 		Assert.assertNotNull(GatherReflect.getField(new TestClassB(), "intField"));
 		Assert.assertNotNull(GatherReflect.getField(new TestClassB(), "longField"));
 	}
@@ -56,53 +56,53 @@ public class TestGatherReflect {
 	public void testGetAllFields() {
 		Assert.assertNull(GatherReflect.getAllFields(null));
 	}
-	
+
 	@Test(expected = IllegalArgumentException.class)
 	public void testPopulateAllFields() {
 		GatherReflect.populateAllFields(null, null);
 		GatherReflect.populateAllFields(Object.class, null);
 	}
-	
+
 	@Test
 	public void testCompositeKey() throws IllegalArgumentException, IllegalAccessException {
 		FieldAndInstance fi = GatherReflect.getFieldAndInstance(new TestClassB(), "tc.ta.td.age");
 		Assert.assertNotNull(fi);
 		Assert.assertNotNull(fi.field);
 		Assert.assertNotNull(fi.instance);
-		
+
 		fi.field.setAccessible(true);
-		
+
 		Object value = fi.field.get(fi.instance);
 		Assert.assertEquals(53, value);
 	}
-	
+
 	private static class TestClassA {
-		
+
 		private int intField;
-		
+
 		private TestClassD td = new TestClassD();
-		
+
 	}
-	
+
 	private static class TestClassB extends TestClassA {
-		
+
 		private int longField;
-		
-		private TestClassC tc = new TestClassC(); 
-		
+
+		private TestClassC tc = new TestClassC();
+
 	}
-	
+
 	private static class TestClassC {
-		
+
 		private int size = 10;
-		
+
 		private TestClassA ta = new TestClassA();
-		
+
 	}
-	
+
 	private static class TestClassD {
-		
+
 		private int age = 53;
-		
+
 	}
 }

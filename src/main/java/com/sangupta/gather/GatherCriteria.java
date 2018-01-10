@@ -23,23 +23,23 @@ package com.sangupta.gather;
 
 /**
  * A single criteria in a {@link Gather} query.
- * 
+ *
  * @author sangupta
- * 
+ *
  * @since 1.0.0
  */
 class GatherCriteria {
 
 	public final String key;
-	
+
 	public final Object value;
-	
+
 	public final GatherOperation operation;
-	
+
 	public final GatherSiblingJoin join;
-	
+
 	public final boolean inverse;
-	
+
 	public GatherCriteria(String key, GatherOperation operation, Object value, GatherSiblingJoin siblingJoin, boolean inverse) {
 		this.key = key;
 		this.operation = operation;
@@ -47,5 +47,5 @@ class GatherCriteria {
 		this.join = siblingJoin;
 		this.inverse = inverse;
 	}
-	
+
 }

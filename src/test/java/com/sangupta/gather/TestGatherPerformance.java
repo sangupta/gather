@@ -37,35 +37,35 @@ import com.sangupta.gather.TestGather.Worker;
 
 /**
  * Check simple performance for the library.
- * 
+ *
  * @author sangupta
  *
  */
 @BenchmarkMode(Mode.Throughput)
 public class TestGatherPerformance {
-	
+
 	static final List<Worker> workers = new ArrayList<>();
-	
+
 	static final Gather nameQuery = Gather.where("name").like("san*");
-	
+
 	static final Gather ageQuery = Gather.where("age").greaterThan(50);
-	
+
 	static {
 		String[] names = new String[] { "sandeep", "sangupta", "abhishek", "sushant" };
 		Random random = new Random();
-		
+
 		for(int index = 0; index < 1000*1000; index++) {
 			int nameIndex = random.nextInt(4);
 			int age = random.nextInt(100);
 			workers.add(new Worker(names[nameIndex], age, age % 2 == 0, random.nextInt(1000000)));
 		}
 	}
-	
+
 	@Benchmark
 	public void testLikePerformance() {
 		int count = nameQuery.find(workers).size();
 	}
-	
+
 	@Benchmark
 	public void testNumericPerformance() {
 		int count = ageQuery.find(workers).size();
@@ -82,5 +82,5 @@ public class TestGatherPerformance {
 
 		new Runner(options).run();
 	}
-	
+
 }

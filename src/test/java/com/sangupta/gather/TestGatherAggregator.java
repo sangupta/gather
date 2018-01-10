@@ -38,29 +38,29 @@ import com.sangupta.gather.GatherAggregator.LongSumAggregator;
 import com.sangupta.gather.GatherAggregator.UniqueAggregator;
 
 public class TestGatherAggregator {
-	
+
 	@Test
 	public void testUniqueAggregator() {
 		UniqueAggregator aggregator = new UniqueAggregator();
-		
+
 		Object instance = new Object();
 		Assert.assertEquals(0, aggregator.getResult(0));
 		Assert.assertEquals(0, aggregator.getUniqueSet().size());
-		
+
 		aggregator.aggregate(0, instance);
 		Assert.assertEquals(1, aggregator.getResult(0));
 		Assert.assertEquals(1, aggregator.getUniqueSet().size());
-		
+
 		aggregator.aggregate(0, instance);
 		aggregator.aggregate(0, instance);
 		aggregator.aggregate(0, instance);
 		Assert.assertEquals(1, aggregator.getResult(0));
 		Assert.assertEquals(1, aggregator.getUniqueSet().size());
-		
+
 		aggregator.aggregate(0, new Object());
 		Assert.assertEquals(2, aggregator.getResult(0));
 		Assert.assertEquals(2, aggregator.getUniqueSet().size());
-		
+
 		aggregator.aggregate(0, new Object());
 		aggregator.aggregate(0, null);
 		aggregator.aggregate(0, new Object());
@@ -74,22 +74,22 @@ public class TestGatherAggregator {
 	@Test
 	public void testCountingAggregator() {
 		CountingAggregator aggregator = new CountingAggregator();
-		
+
 		Assert.assertEquals(0, aggregator.getResult(0));
-		
+
 		aggregator.aggregate(0, null);
 		Assert.assertEquals(1, aggregator.getResult(0));
-		
+
 		aggregator.aggregate(0, null);
 		aggregator.aggregate(0, null);
 		aggregator.aggregate(0, null);
 		Assert.assertEquals(4, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testDoubleMinAggregator() {
 		DoubleMinAggregator aggregator = new DoubleMinAggregator();
-		
+
 		Random random = new Random();
 		double result = Double.MAX_VALUE;
 		for(int index = 0; index < 100000; index++) {
@@ -97,17 +97,17 @@ public class TestGatherAggregator {
 			if(result > value) {
 				result = value;
 			}
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testDoubleMaxAggregator() {
 		DoubleMaxAggregator aggregator = new DoubleMaxAggregator();
-		
+
 		Random random = new Random();
 		double result = Double.MIN_VALUE;
 		for(int index = 0; index < 100000; index++) {
@@ -115,33 +115,33 @@ public class TestGatherAggregator {
 			if(result < value) {
 				result = value;
 			}
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testDoubleSumAggregator() {
 		DoubleSumAggregator aggregator = new DoubleSumAggregator();
-		
+
 		Random random = new Random();
 		double result = 0;
 		for(int index = 0; index < 100000; index++) {
 			double value = random.nextDouble();
 			result += value;
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testDoubleAverageAggregator() {
 		DoubleAverageAggregator aggregator = new DoubleAverageAggregator();
-		
+
 		Random random = new Random();
 		double result = 0;
 		int counted = 0;
@@ -149,18 +149,18 @@ public class TestGatherAggregator {
 			double value = random.nextDouble();
 			result += value;
 			counted++;
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result / counted, aggregator.getResult(counted));
 		Assert.assertEquals(0d, new DoubleAverageAggregator().getResult(0));
 	}
-	
+
 	@Test
 	public void testLongMinAggregator() {
 		LongMinAggregator aggregator = new LongMinAggregator();
-		
+
 		Random random = new Random();
 		long result = Long.MAX_VALUE;
 		for(int index = 0; index < 100000; index++) {
@@ -168,17 +168,17 @@ public class TestGatherAggregator {
 			if(result > value) {
 				result = value;
 			}
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testLongMaxAggregator() {
 		LongMaxAggregator aggregator = new LongMaxAggregator();
-		
+
 		Random random = new Random();
 		long result = Long.MIN_VALUE;
 		for(int index = 0; index < 100000; index++) {
@@ -186,33 +186,33 @@ public class TestGatherAggregator {
 			if(result < value) {
 				result = value;
 			}
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testLongSumAggregator() {
 		LongSumAggregator aggregator = new LongSumAggregator();
-		
+
 		Random random = new Random();
 		long result = 0;
 		for(int index = 0; index < 100000; index++) {
 			long value = random.nextLong();
 			result += value;
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result, aggregator.getResult(0));
 	}
-	
+
 	@Test
 	public void testLongAverageAggregator() {
 		LongAverageAggregator aggregator = new LongAverageAggregator();
-		
+
 		Random random = new Random();
 		long result = 0;
 		int counted = 0;
@@ -220,13 +220,13 @@ public class TestGatherAggregator {
 			long value = random.nextLong();
 			result += value;
 			counted++;
-			
+
 			aggregator.aggregate(index, value);
 		}
-		
+
 		Assert.assertEquals(result / counted, aggregator.getResult(counted));
 		Assert.assertEquals(0d, new LongAverageAggregator().getResult(0));
-		
+
 		try { new LongAverageAggregator().aggregate(1, new Object()); Assert.assertTrue(false); } catch(IllegalArgumentException e) { Assert.assertTrue(true); }
 	}
 }

@@ -22,15 +22,15 @@
 package com.sangupta.gather;
 
 /**
- * 
+ *
  * @author sangupta
  *
  * @since 1.0.0
  */
 enum GatherSiblingJoin {
-	
+
 	AND,
-	
+
 	OR;
 
 }

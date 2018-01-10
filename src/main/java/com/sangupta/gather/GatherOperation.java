@@ -22,40 +22,40 @@
 package com.sangupta.gather;
 
 /**
- * 
+ *
  * @author sangupta
- * 
+ *
  * @since 1.0.0
  *
  */
 enum GatherOperation {
-	
+
 	CollectionHasValue,
-	
+
 	CollectionHasAllValues,
-	
+
 	CollectionHasAnyValue,
-	
+
 	HasProperty,
-	
+
 	IsNull,
 
 	Equals,
-	
+
 	EqualsIgnoreCase,
-	
+
 	WildcardMatch,
-	
+
 	RegexMatch,
-	
+
 	LessThan,
-	
+
 	LessThanOrEquals,
-	
+
 	GreaterThan,
-	
+
 	GreaterThanOrEquals,
-	
+
 	In;
-	
+
 }
