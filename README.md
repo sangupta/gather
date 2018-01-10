@@ -182,7 +182,16 @@ return first & second | third;
 
 ## Performance
 
-All tests were re-run using the specific versions on the following machine:
+Performance numbers and percentage changes (compared to previous run). Values are operations-per-second.
+An operation is a query fired over a million objects created randomly for a `LIKE` clause and a `GREATER THAN` 
+clause.
+
+| Version  |   Date Run   | `LIKE` clause | %age change | Numeric `GREATER THAN` clause | %age change |
+|  1.0.0   | 10 Jan 2018  |     3.240     |     n/a     |        3.215                  |      n/a    |
+|  1.2.0   | 10 Jan 2018  |     4.160     |     +28     |        5.792                  |      +80    |
+| Snapshot | 10 Jan 2018  |     5.322     |     +28     |        5.735                  |      +0     |
+
+Test Machine specs:
 
 ```
 Macbook Pro (2017)
@@ -209,53 +218,6 @@ JMH options used were:
 ```
 
 **Caveat:** Your mileage may vary.
-
-### Snapshot Version
-
-Improved performance for `wildcard` matches which improves the **LIKE** performance in test
-method: `testLikePerformance`. Note the change in throughput could be due to change in test
-machine specifications. 
-
-Below are the latest results:
-
-```
-Benchmark                                      Mode  Cnt  Score   Error  Units
-TestGatherPerformance.testLikePerformance     thrpt   20  5.322 ± 0.106  ops/s
-TestGatherPerformance.testNumericPerformance  thrpt   20  5.735 ± 0.073  ops/s
-```
-
-* A **28% performance boost** over `LIKE` clause. 
- 
-Test Machine:
-
-
-### Version 1.2.0
-
-I added some basic caching to get get attributes via reflection and that seems to have boosted the
-performance. Current numbers are:
-
-```
-Benchmark                                      Mode  Cnt  Score   Error  Units
-TestGatherPerformance.testLikePerformance     thrpt   20  4.160 ± 0.020  ops/s
-TestGatherPerformance.testNumericPerformance  thrpt   20  5.792 ± 0.066  ops/s
-```
-
-* A **28% performance boost** over `LIKE` clause.
-* A **80% performance boost** over numeric `GREATER THAN` clause.
-
-### Version 1.0.0
-
-I have added a JMH performance measurement class, `TestGatherPerformance`. The performance numbers are:
-
-* Generate a random million records with a `String` attribute `name` and an `int` attribute `age`
-* Fire a `like` query over the `name`
-* Fire a `lessThan` query over the `age`
-
-```
-Benchmark                                      Mode  Cnt  Score   Error  Units
-TestGatherPerformance.testLikePerformance     thrpt   20  3.240 ± 0.075  ops/s
-TestGatherPerformance.testNumericPerformance  thrpt   20  3.215 ± 0.105  ops/s
-```
 
 ## Downloads
 
