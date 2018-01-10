@@ -186,7 +186,7 @@ running Oracle JDK 1.8.0_101. The tests were run from inside Eclipse Neon.2 (4.6
 
 **Caveat:** Your mileage may vary.  
 
-### Current Snapshot
+### Version 1.2.0
 
 I added some basic caching to get get attributes via reflection and that seems to have boosted the
 performance. Current numbers are:
@@ -287,7 +287,7 @@ For more information on SemVer, please visit http://semver.org/.
 
 ```
  gather: SQL queries for Java collections
- Copyright (c) 2017, Sandeep Gupta
+ Copyright (c) 2017-2018, Sandeep Gupta
  
  https://sangupta.com/projects/gather
  
