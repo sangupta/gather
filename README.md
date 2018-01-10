@@ -110,7 +110,7 @@ public class Employee {
 public class Child {
 
   public int age;
-	
+
 }
 ```
 
@@ -183,7 +183,7 @@ return first & second | third;
 ## Performance
 
 Performance numbers and percentage changes (compared to previous run). Values are operations-per-second.
-An operation is a query fired over a million objects created randomly for a `LIKE` clause and a `GREATER THAN` 
+An operation is a query fired over a million objects created randomly for a `LIKE` clause and a `GREATER THAN`
 clause.
 
 | Version  |   Date Run   | `LIKE` clause | %age change | Numeric `GREATER THAN` clause | %age change |
@@ -265,15 +265,15 @@ Then add the dependency as,
 * Updated for newer OSSRH release guidelines
 * Updated `javadocs` and copyright headers
 
-**1.0.0 (09 Jun 2017)** 
+**1.0.0 (09 Jun 2017)**
 
 * First stable release
 
 
 ## Versioning
 
-For transparency and insight into our release cycle, and for striving to maintain 
-backward compatibility, `gather` will be maintained under the Semantic 
+For transparency and insight into our release cycle, and for striving to maintain
+backward compatibility, `gather` will be maintained under the Semantic
 Versioning guidelines as much as possible.
 
 Releases will be numbered with the follow format:
@@ -295,15 +295,15 @@ For more information on SemVer, please visit http://semver.org/.
 ```
  gather: SQL queries for Java collections
  Copyright (c) 2017-2018, Sandeep Gupta
- 
+
  https://sangupta.com/projects/gather
- 
+
  Licensed under the Apache License, Version 2.0 (the "License");
  you may not use this file except in compliance with the License.
  You may obtain a copy of the License at
- 
+
       http://www.apache.org/licenses/LICENSE-2.0
- 
+
  Unless required by applicable law or agreed to in writing, software
  distributed under the License is distributed on an "AS IS" BASIS,
  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
