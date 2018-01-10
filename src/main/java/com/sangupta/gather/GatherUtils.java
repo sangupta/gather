@@ -295,17 +295,23 @@ abstract class GatherUtils {
 		return false;
 	}
 
-	static boolean wildcardMatch(String string, String pattern) {
+	static boolean wildcardMatch(final String string, final String pattern) {
 		int i = 0;
 		int j = 0;
 		int starIndex = -1;
 		int iIndex = -1;
 
-		while (i < string.length()) {
-			if (j < pattern.length() && (pattern.charAt(j) == '?' || pattern.charAt(j) == string.charAt(i))) {
+		final int stringLength = string.length();
+		final int patternLength = pattern.length();
+		
+		final char[] stringArray = string.toCharArray();
+		final char[] patternArray = pattern.toCharArray();
+		
+		while (i < stringLength) {
+			if (j < patternLength && (patternArray[j] == '?' || patternArray[j] == stringArray[i])) {
 				++i;
 				++j;
-			} else if (j < pattern.length() && pattern.charAt(j) == '*') {
+			} else if (j < patternLength && patternArray[j] == '*') {
 				starIndex = j;
 				iIndex = i;
 				j++;
@@ -318,11 +324,11 @@ abstract class GatherUtils {
 			}
 		}
 
-		while (j < pattern.length() && pattern.charAt(j) == '*') {
+		while (j < patternLength && patternArray[j] == '*') {
 			++j;
 		}
 
-		return j == pattern.length();
+		return j == patternLength;
 	}
 	
 	public static boolean regexMatch(String value, Pattern pattern) {
