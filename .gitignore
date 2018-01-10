@@ -38,3 +38,4 @@ target/*
 */.gitignore
 .settings/*
 /target
+java.hprof*.txt
