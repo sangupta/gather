@@ -182,6 +182,32 @@ return first & second | third;
 
 ## Performance
 
+All tests were re-run using the specific versions on the following machine:
+
+```
+Macbook Pro (2017)
+2.9GHz Intel i7
+16GB RAM
+OS X 10.12.6
+Oracle JDK 1.8.0_131
+Tests run from inside Eclipse Oxygen.2 (4.7.2) release
+```
+
+JMH options used were:
+
+```
+# JMH version: 1.19
+# VM version: JDK 1.8.0_131, VM 25.131-b11
+# VM invoker: /Library/Java/JavaVirtualMachines/jdk1.8.0_131.jdk/Contents/Home/jre/bin/java
+# VM options: -Dfile.encoding=UTF-8
+# Warmup: 5 iterations, 1 s each
+# Measurement: 20 iterations, 1 s each
+# Timeout: 10 min per iteration
+# Forks: 5
+# Threads: 1 thread, will synchronize iterations
+# Benchmark mode: Throughput, ops/time
+```
+
 **Caveat:** Your mileage may vary.
 
 ### Snapshot Version
@@ -193,21 +219,15 @@ machine specifications.
 Below are the latest results:
 
 ```
-Benchmark                                      Mode  Cnt   Score   Error  Units
-TestGatherPerformance.testLikePerformance     thrpt   25  13.671 ± 0.827  ops/s
-TestGatherPerformance.testNumericPerformance  thrpt   25  15.345 ± 0.762  ops/s
+Benchmark                                      Mode  Cnt  Score   Error  Units
+TestGatherPerformance.testLikePerformance     thrpt   20  5.322 ± 0.106  ops/s
+TestGatherPerformance.testNumericPerformance  thrpt   20  5.735 ± 0.073  ops/s
 ```
+
+* A **28% performance boost** over `LIKE` clause. 
  
 Test Machine:
 
-```
-Macbook Pro (2017)
-2.9GHz Intel i7
-16GB RAM
-OS X 10.12.6
-Oracle JDK 1.8.0_131
-Tests run from inside Eclipse Oxygen.2 (4.7.2) release
-```
 
 ### Version 1.2.0
 
@@ -216,22 +236,12 @@ performance. Current numbers are:
 
 ```
 Benchmark                                      Mode  Cnt  Score   Error  Units
-TestGatherPerformance.testLikePerformance     thrpt   20  5.177 ± 0.052  ops/s
-TestGatherPerformance.testNumericPerformance  thrpt   20  4.901 ± 0.039  ops/s
+TestGatherPerformance.testLikePerformance     thrpt   20  4.160 ± 0.020  ops/s
+TestGatherPerformance.testNumericPerformance  thrpt   20  5.792 ± 0.066  ops/s
 ```
 
-This is a 54% improvement on `like` performance and `49%` improvement on `age` performance.
-
-Test Machine:
-
-```
-Macbook Pro (mid-2015)
-2.5GHz Intel i7
-16GB RAM
-OS X 10.12.5
-Oracle JDK 1.8.0_101
-Tests run from inside Eclipse Neon.2 (4.6.2) release
-```
+* A **28% performance boost** over `LIKE` clause.
+* A **80% performance boost** over numeric `GREATER THAN` clause.
 
 ### Version 1.0.0
 
@@ -243,22 +253,8 @@ I have added a JMH performance measurement class, `TestGatherPerformance`. The p
 
 ```
 Benchmark                                      Mode  Cnt  Score   Error  Units
-TestGatherPerformance.testLikePerformance     thrpt   20  3.359 ± 0.024  ops/s
-TestGatherPerformance.testNumericPerformance  thrpt   20  3.271 ± 0.023  ops/s
-```
-
-Note that this version is NOT optimized for performance, and does not include what-so-ever caching on
-the reflection layer. 
-
-Test Machine:
-
-```
-Macbook Pro (mid-2015)
-2.5GHz Intel i7
-16GB RAM
-OS X 10.12.5
-Oracle JDK 1.8.0_101
-Tests run from inside Eclipse Neon.2 (4.6.2) release
+TestGatherPerformance.testLikePerformance     thrpt   20  3.240 ± 0.075  ops/s
+TestGatherPerformance.testNumericPerformance  thrpt   20  3.215 ± 0.105  ops/s
 ```
 
 ## Downloads
