@@ -41,7 +41,7 @@ import com.sangupta.gather.TestGather.Worker;
  * @author sangupta
  *
  */
-@BenchmarkMode(Mode.AverageTime)
+@BenchmarkMode(Mode.Throughput)
 public class TestGatherPerformance {
 	
 	static final List<Worker> workers = new ArrayList<>();
@@ -74,9 +74,10 @@ public class TestGatherPerformance {
 	public static void main(String[] args) throws RunnerException {
 		Options options = new OptionsBuilder().include(TestGatherPerformance.class.getSimpleName())
 											 .warmupIterations(5)
-											 .measurementIterations(5)
-											 .threads(5)
-										     .forks(5)
+											 .measurementIterations(20)
+											 .threads(1)
+										     .forks(1)
+										     .mode(Mode.Throughput)
 										     .build();
 
 		new Runner(options).run();

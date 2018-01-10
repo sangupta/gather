@@ -182,10 +182,32 @@ return first & second | third;
 
 ## Performance
 
-All tests run on my Macbook Pro (mid-2015), 2.5GHz Intel i7, 16GB RAM, OS X 10.12.5
-running Oracle JDK 1.8.0_101. The tests were run from inside Eclipse Neon.2 (4.6.2) release.
+**Caveat:** Your mileage may vary.
 
-**Caveat:** Your mileage may vary.  
+### Snapshot Version
+
+Improved performance for `wildcard` matches which improves the **LIKE** performance in test
+method: `testLikePerformance`. Note the change in throughput could be due to change in test
+machine specifications. 
+
+Below are the latest results:
+
+```
+Benchmark                                      Mode  Cnt   Score   Error  Units
+TestGatherPerformance.testLikePerformance     thrpt   25  13.671 ± 0.827  ops/s
+TestGatherPerformance.testNumericPerformance  thrpt   25  15.345 ± 0.762  ops/s
+```
+ 
+Test Machine:
+
+```
+Macbook Pro (2017)
+2.9GHz Intel i7
+16GB RAM
+OS X 10.12.6
+Oracle JDK 1.8.0_131
+Tests run from inside Eclipse Oxygen.2 (4.7.2) release
+```
 
 ### Version 1.2.0
 
@@ -199,6 +221,17 @@ TestGatherPerformance.testNumericPerformance  thrpt   20  4.901 ± 0.039  ops/s
 ```
 
 This is a 54% improvement on `like` performance and `49%` improvement on `age` performance.
+
+Test Machine:
+
+```
+Macbook Pro (mid-2015)
+2.5GHz Intel i7
+16GB RAM
+OS X 10.12.5
+Oracle JDK 1.8.0_101
+Tests run from inside Eclipse Neon.2 (4.6.2) release
+```
 
 ### Version 1.0.0
 
@@ -216,6 +249,17 @@ TestGatherPerformance.testNumericPerformance  thrpt   20  3.271 ± 0.023  ops/s
 
 Note that this version is NOT optimized for performance, and does not include what-so-ever caching on
 the reflection layer. 
+
+Test Machine:
+
+```
+Macbook Pro (mid-2015)
+2.5GHz Intel i7
+16GB RAM
+OS X 10.12.5
+Oracle JDK 1.8.0_101
+Tests run from inside Eclipse Neon.2 (4.6.2) release
+```
 
 ## Downloads
 
@@ -251,6 +295,10 @@ Then add the dependency as,
 ```
 
 ## Release Notes
+
+**Snapshot**
+
+* Improve performance of `wildcard` matches
 
 **1.2.0 (21 Dec 2017)**
 
