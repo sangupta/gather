@@ -111,36 +111,42 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>4.3.0</version>
             </plugin>
-
-            <!-- execute performance tests -->
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>exec-maven-plugin</artifactId>
-                <version>1.6.0</version>
-                <executions>
-                  <execution>
-                    <id>run-benchmarks</id>
-                    <phase>integration-test</phase>
-                    <goals>
-                      <goal>exec</goal>
-                    </goals>
-                    <configuration>
-                      <classpathScope>test</classpathScope>
-                      <executable>${java.home}/bin/java</executable>
-                      <arguments>
-                        <argument>-classpath</argument>
-                        <classpath />
-                        <argument>org.openjdk.jmh.Main</argument>
-                        <argument>.*</argument>
-                      </arguments>
-                    </configuration>
-                  </execution>
-                </executions>
-              </plugin>
 		</plugins>
 	</build>
 	
     <profiles>
+        <profile>
+            <id>performance</id>
+            <build>
+                <plugins>
+                    <!-- execute performance tests -->
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>exec-maven-plugin</artifactId>
+                        <version>1.6.0</version>
+                        <executions>
+                          <execution>
+                            <id>run-benchmarks</id>
+                            <phase>integration-test</phase>
+                            <goals>
+                              <goal>exec</goal>
+                            </goals>
+                            <configuration>
+                              <classpathScope>test</classpathScope>
+                              <executable>${java.home}/bin/java</executable>
+                              <arguments>
+                                <argument>-classpath</argument>
+                                <classpath />
+                                <argument>org.openjdk.jmh.Main</argument>
+                                <argument>.*</argument>
+                              </arguments>
+                            </configuration>
+                          </execution>
+                        </executions>
+                      </plugin>
+                </plugins>
+            </build>
+        </profile>
         <profile>
             <id>release</id>
             <build>
