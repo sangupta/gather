@@ -1,9 +1,9 @@
 # Gather
 
-[![Travis](https://img.shields.io/travis/sangupta/gather.svg)]()
-[![Coveralls](https://img.shields.io/coveralls/sangupta/gather.svg)]()
-[![license](https://img.shields.io/github/license/sangupta/gather.svg)]()
-[![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/gather.svg)]()
+[![Build Status](https://img.shields.io/travis/sangupta/gather.svg)](https://travis-ci.org/sangupta/gather)
+[![Coverage Status](https://img.shields.io/coveralls/sangupta/gather.svg)](https://coveralls.io/github/sangupta/gather?branch=master)
+[![License](https://img.shields.io/github/license/sangupta/gather.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Maven Central](https://img.shields.io/maven-central/v/com.sangupta/gather.svg)](https://maven-badges.herokuapp.com/maven-central/com.sangupta/gather)
 
 `Gather` is an ultra-lightweight, 37KB, no dependencies library to fire SQL like queries on Java collections
 and arrays. The data is not inserted into any in-memory database, nor any index is created. The query is matched
